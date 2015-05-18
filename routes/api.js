@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('express-jwt');
 
 var mongoose = require('mongoose');
 var Case = mongoose.model('Case');
 var CasePart = mongoose.model('CasePart');
 
-router.get('/cases', function(req, res, next) {
+var auth = jwt({secret: 'Secret', userProperty: 'payload'});
+
+router.get('/cases', auth, function(req, res, next) {
   Case.find(function(err, cases){
     if(err){ return next(err); }
     res.json(cases);
@@ -34,7 +37,7 @@ router.param('case', function(req, res, next, id) {
   });
 });
 
-router.get('/cases/:case', function(req, res) {
+router.get('/cases/:case', auth, function(req, res) {
   res.json(req.case);
 });
 

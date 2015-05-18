@@ -5,9 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+
+//connect to database
+mongoose.connect('mongodb://localhost/task2_5');
+require('./models/Cases');
+require('./models/CaseParts');
+require('./models/Users');
+require('./config/passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var apis = require('./routes/api');
 
 var app = express();
 
@@ -22,14 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', routes);
+app.use('/api', apis);
 app.use('/users', users);
-
-// connect to database
-mongoose.connect('mongodb://localhost/task2_5');
-require.model('./models/Cases');
-require.model('./models/CaseParts');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
