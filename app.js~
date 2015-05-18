@@ -28,8 +28,6 @@ app.use('/users', users);
 
 // connect to database
 mongoose.connect('mongodb://localhost/task2_5');
-require.model('./models/Cases');
-require.model('./models/CaseParts');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
