@@ -7,7 +7,7 @@ var jwt = require('express-jwt');
 var User = mongoose.model('User');
 
 
-var auth = jwt({secret: 'Secret', userProperty: 'payload'});
+var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

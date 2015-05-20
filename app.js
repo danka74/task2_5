@@ -11,6 +11,7 @@ var passport = require('passport');
 mongoose.connect('mongodb://localhost/task2_5');
 require('./models/Cases');
 require('./models/CaseParts');
+require('./models/Bindings');
 require('./models/Users');
 require('./config/passport');
 

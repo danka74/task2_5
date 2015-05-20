@@ -3,20 +3,21 @@ var router = express.Router();
 var jwt = require('express-jwt');
 
 var mongoose = require('mongoose');
-var Case = mongoose.model('Case');
-var CasePart = mongoose.model('CasePart');
+var CaseTemplate = mongoose.model('CaseTemplate');
+var CaseTemplatePart = mongoose.model('CaseTemplatePart');
+var Binding = mongoose.model('Binding');
 
-var auth = jwt({secret: 'Secret', userProperty: 'payload'});
+var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
 
-router.get('/cases', auth, function(req, res, next) {
-  Case.find(function(err, cases){
+router.get('/case_templates', auth, function(req, res, next) {
+	CaseTemplate.find(function(err, cases){
     if(err){ return next(err); }
     res.json(cases);
   });
 });
 
-router.post('/cases', function(req, res, next) {
-  var _case = new Case(req.body);
+router.post('/case_templates', function(req, res, next) {
+  var _case = new CaseTemplate(req.body);
 
   _case.save(function(err, post){
     if(err){ return next(err); }
@@ -25,8 +26,8 @@ router.post('/cases', function(req, res, next) {
   });
 });
 
-router.param('case', function(req, res, next, id) {
-  var query = Case.findById(id);
+router.param('case_template', function(req, res, next, id) {
+  var query = CaseTemplate.findById(id);
 
   query.exec(function (err, _case){
     if (err) { return next(err); }
@@ -37,8 +38,10 @@ router.param('case', function(req, res, next, id) {
   });
 });
 
-router.get('/cases/:case', auth, function(req, res) {
-  res.json(req.case);
+router.get('/case_templates/:case_template', auth, function(req, res) {
+  res.json(req.case_template);
 });
+
+
 
 module.exports = router;
