@@ -4,12 +4,9 @@ var jwt = require('express-jwt');
 
 var mongoose = require('mongoose');
 var CaseTemplate = mongoose.model('CaseTemplate');
-var CaseTemplatePart = mongoose.model('CaseTemplatePart');
-var Binding = mongoose.model('Binding');
+var Binding = mongoose.model('CaseBinding');
 
-var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
-
-router.get('/case_templates', auth, function(req, res, next) {
+router.get('/case_templates', function(req, res, next) {
 	CaseTemplate.find(function(err, cases){
     if(err){ return next(err); }
     res.json(cases);
@@ -38,8 +35,15 @@ router.param('template', function(req, res, next, id) {
   });
 });
 
-router.get('/case_templates/:template', auth, function(req, res) {
+router.get('/case_templates/:template', function(req, res) {
   res.json(req.case_template);
+});
+
+router.get('/bindings', function(req, res, next) {
+	Binding.find({user: req.user}, function(err, bindings){
+	    if(err){ return next(err); }
+	    res.json(bindings);
+	  });
 });
 
 

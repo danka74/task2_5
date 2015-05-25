@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var passport = require('passport');
 var jwt = require('express-jwt');
+var passwordless = require('passwordless');
 
-var User = mongoose.model('User');
-
-
-var auth = jwt({secret: process.env.SECRET, userProperty: 'payload'});
+var auth = jwt({
+	secret : process.env.SECRET,
+	userProperty : 'payload'
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,50 +16,27 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.post('/register', function(req, res, next) {
-	if (!req.body.username || !req.body.password) {
-		return res.status(400).json({
-			message : 'Please fill out all fields'
-		});
-	}
-
-	var user = new User();
-
-	user.username = req.body.username;
-
-	user.setPassword(req.body.password)
-
-	user.save(function(err) {
-		if (err) {
-			return next(err);
-		}
-
-		return res.json({
-			token : user.generateJWT()
-		})
-	});
+router.get('/login', function(req, res) {
+	res.render('login', { user: req.user });
 });
 
-router.post('/login', function(req, res, next) {
-	if (!req.body.username || !req.body.password) {
-		return res.status(400).json({
-			message : 'Please fill out all fields'
-		});
-	}
+router.get('/logout', passwordless.logout(), function(req, res) {
+	res.redirect('/');
+});
 
-	passport.authenticate('local', function(err, user, info) {
-		if (err) {
-			return next(err);
-		}
-
-		if (user) {
-			return res.json({
-				token : user.generateJWT()
-			});
-		} else {
-			return res.status(401).json(info);
-		}
-	})(req, res, next);
+router.post('/sendtoken', passwordless.requestToken(
+// Simply accept every user
+function(user, delivery, callback) {
+	callback(null, user);
+	// usually you would want something like:
+	// User.find({email: user}, callback(ret) {
+	// if(ret)
+	// callback(null, ret.id)
+	// else
+	// callback(null, null)
+	// })
+}), function(req, res) {
+	res.render('sent');
 });
 
 module.exports = router;
