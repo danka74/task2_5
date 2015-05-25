@@ -63,6 +63,26 @@ router.get('/bindings', function(req, res, next) {
 	});
 });
 
+router.param('binding', function(req, res, next, id) {
+	var query = Binding.findById(id);
+
+	query.exec(function(err, binding) {
+		if (err) {
+			return next(err);
+		}
+		if (!binding) {
+			return next(new Error('can\'t find case'));
+		}
+
+		req.binding = binding;
+		return next();
+	});
+});
+
+router.get('/bindings/:binding', function(req, res) {
+	res.json(req.binding);
+});
+
 router.post('/bindings', function(req, res, next) {
 	var binding = new Binding(req.body);
 

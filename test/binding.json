@@ -1,0 +1,10 @@
+{
+  "template": "556399d9bd8baaff7ba1c945",
+  "bindings": {
+	  "target": "123456789",
+	  "part": "556399d9bd8baaff7ba1c947",
+	  "comments": [{"text": "Kommentar!!"} ]
+	}],
+	"comments": [{"text": "Kommentar!!"} ],
+  "user": "foo@bar.com"
+}
