@@ -9,10 +9,12 @@ var passport = require('passport');
 
 //connect to database
 mongoose.connect('mongodb://localhost/task2_5');
-require('./models/Cases');
-require('./models/CaseParts');
-require('./models/Bindings');
+require('./models/Comment');
+require('./models/CaseTemplate');
+require('./models/CaseTemplatePart');
+require('./models/Binding');
 require('./models/Users');
+require('./models/Case');
 require('./config/passport');
 
 var routes = require('./routes/index');

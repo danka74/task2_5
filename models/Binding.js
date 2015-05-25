@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 
 var BindingSchema = new mongoose.Schema({
-  type: String,
   target: String,
-  part: {type: mongoose.Schema.Types.ObjectId, ref: 'CaseTemplatePart'}
-  comment: String;
+  part: {type: mongoose.Schema.Types.ObjectId, ref: 'CaseTemplatePart'},
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 mongoose.model('Binding', BindingSchema);

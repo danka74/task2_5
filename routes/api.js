@@ -26,19 +26,19 @@ router.post('/case_templates', function(req, res, next) {
   });
 });
 
-router.param('case_template', function(req, res, next, id) {
+router.param('template', function(req, res, next, id) {
   var query = CaseTemplate.findById(id);
 
-  query.exec(function (err, _case){
+  query.exec(function (err, template){
     if (err) { return next(err); }
-    if (!_case) { return next(new Error('can\'t find case')); }
+    if (!template) { return next(new Error('can\'t find case')); }
 
-    req.case = _case;
+    req.template = template;
     return next();
   });
 });
 
-router.get('/case_templates/:case_template', auth, function(req, res) {
+router.get('/case_templates/:template', auth, function(req, res) {
   res.json(req.case_template);
 });
 
