@@ -6,46 +6,73 @@ var mongoose = require('mongoose');
 var CaseTemplate = mongoose.model('CaseTemplate');
 var Binding = mongoose.model('CaseBinding');
 
+router.get('/ping', function(req, res, next) {
+	res.json(req.user);
+});
+
 router.get('/case_templates', function(req, res, next) {
-	CaseTemplate.find(function(err, cases){
-    if(err){ return next(err); }
-    res.json(cases);
-  });
+	CaseTemplate.find(function(err, cases) {
+		if (err) {
+			return next(err);
+		}
+		res.json(cases);
+	});
 });
 
 router.post('/case_templates', function(req, res, next) {
-  var _case = new CaseTemplate(req.body);
+	console.log(req.body);
+	var _case = new CaseTemplate(req.body);
 
-  _case.save(function(err, post){
-    if(err){ return next(err); }
+	_case.save(function(err, post) {
+		if (err) {
+			return next(err);
+		}
 
-    res.json(_case);
-  });
+		res.json(_case);
+	});
 });
 
 router.param('template', function(req, res, next, id) {
-  var query = CaseTemplate.findById(id);
+	var query = CaseTemplate.findById(id);
 
-  query.exec(function (err, template){
-    if (err) { return next(err); }
-    if (!template) { return next(new Error('can\'t find case')); }
+	query.exec(function(err, template) {
+		if (err) {
+			return next(err);
+		}
+		if (!template) {
+			return next(new Error('can\'t find case'));
+		}
 
-    req.template = template;
-    return next();
-  });
+		req.case_template = template;
+		return next();
+	});
 });
 
 router.get('/case_templates/:template', function(req, res) {
-  res.json(req.case_template);
+	res.json(req.case_template);
 });
 
 router.get('/bindings', function(req, res, next) {
-	Binding.find({user: req.user}, function(err, bindings){
-	    if(err){ return next(err); }
-	    res.json(bindings);
-	  });
+	Binding.find({
+		user : req.user
+	}, function(err, bindings) {
+		if (err) {
+			return next(err);
+		}
+		res.json(bindings);
+	});
 });
 
+router.post('/bindings', function(req, res, next) {
+	var binding = new Binding(req.body);
 
+	binding.save(function(err, post) {
+		if (err) {
+			return next(err);
+		}
+
+		res.json(binding);
+	});
+});
 
 module.exports = router;

@@ -1,0 +1,12 @@
+{
+  "title": "Smoking status", 
+  "url": "/static/smoking_status.html", 
+  "parts": [{
+	  "ref": "smoking_lhs", 
+	  "type": "tb"
+	},
+	{
+		"ref": "smoker",
+		"type": "tb"
+	}]
+}
