@@ -4,11 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+//var session = require('express-session');
 var mongoose = require('mongoose');
-var passwordless = require('passwordless');
-var mongoStore = require('passwordless-mongostore');
-var email = require("emailjs");
+//var passwordless = require('passwordless');
+//var mongoStore = require('passwordless-mongostore');
+//var email = require("emailjs");
 
 // connect to database
 mongoose.connect('mongodb://localhost/task2_5');
@@ -16,14 +16,14 @@ require('./models/CaseTemplate');
 require('./models/CaseBinding');
 require('./models/Users');
 
-var pathToMongoDb = 'mongodb://localhost/passwordless-simple-mail';
-passwordless.init(new mongoStore(pathToMongoDb));
-// Set up a delivery service
-passwordless.addDelivery(function(tokenToSend, uidToSend, recipient, callback) {
-	var host = 'localhost:3000';
-	console.info('http://' + host + '?token=' + tokenToSend + '&uid='
-			+ encodeURIComponent(uidToSend));
-});
+//var pathToMongoDb = 'mongodb://localhost/passwordless-simple-mail';
+//passwordless.init(new mongoStore(pathToMongoDb));
+//// Set up a delivery service
+//passwordless.addDelivery(function(tokenToSend, uidToSend, recipient, callback) {
+//	var host = 'localhost:3000';
+//	console.info('http://' + host + '/?token=' + tokenToSend + '&uid='
+//			+ encodeURIComponent(uidToSend));
+//});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -44,16 +44,18 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-	  secret: process.env.SECRET,
-	  resave: false,
-	  saveUninitialized: true
-	}))
-app.use(passwordless.sessionSupport());
-app.use(passwordless.acceptToken({ successRedirect: '/'}));
+//app.use(session({
+//    name:       "sid",
+//    secret:     "adsbanno34uina8unudncvlkdsfvadjisnc",
+//    resave:     false,
+//    saveUninitialized: false
+//}));
+//app.use(passwordless.sessionSupport());
+//app.use(passwordless.acceptToken({ successRedirect: '/', allowPost: true }));
 
+// passwordless.restricted(),
 app.use('/', routes);
-app.use('/api', passwordless.restricted({ failureRedirect: '/login' }), apis);
+app.use('/api', apis);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

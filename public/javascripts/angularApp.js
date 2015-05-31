@@ -1,7 +1,2 @@
-var app = angular.module('flapperNews', []);
+angular.module('BindingApp', ['ngRoute', 'MainControllerModule', 'TemplateServiceModule', 'BindingServiceModule']);
 
-app.controller('MainCtrl', [
-'$scope',
-function($scope){
-  $scope.test = 'Hello world!';
-}]);

@@ -17,7 +17,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res) {
-	res.render('login', { user: req.user });
+	res.render('login', {
+		user : req.user
+	});
 });
 
 router.get('/logout', passwordless.logout(), function(req, res) {

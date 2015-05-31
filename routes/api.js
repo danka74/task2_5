@@ -52,7 +52,12 @@ router.get('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
-router.get('/bindings', function(req, res, next) {
+router.param('user', function(req, res, next, id) {
+	req.user = id;
+	return next();
+});
+
+router.get('/bindings/:user', function(req, res, next) {
 	Binding.find({
 		user : req.user
 	}, function(err, bindings) {

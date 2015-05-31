@@ -1,0 +1,27 @@
+<div id="{{'case-' + currentCaseTemplate._id}}" >
+	<div class="row-fluid">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Left hand side</div>
+				<div class="panel-body">{{currentCaseTemplate.lhs.name}} <input type="text" class="pull-right" ng-model="currentCaseBinding.lhsBinding.target"/></div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="panel panel-default">
+				<div class="panel-heading">Right hand side</div>
+				<ul class="list-group">
+					<li class="list-group-item"
+						ng-repeat="part in currentCaseTemplate.rhs">{{part.name}} <input type="text" class="pull-right" ng-model="currentCaseBinding.rhsBindings[$index].target"/></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">Description</div>
+				<div class="panel-body">{{currentCaseTemplate.description}}</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,12 +1,27 @@
 {
   "title": "Smoking status", 
-  "url": "/static/smoking_status.html", 
-  "parts": [{
-	  "ref": "smoking_lhs", 
+  "templateURL": "default_template.html",
+  "lhs": [ {
+	  "name": "Smoking Status",
 	  "type": "tb"
+  } ],
+  "rhs": [
+	{
+		"name": "Current Smoker",
+		"type": "tb"
 	},
 	{
-		"ref": "smoker",
+		"name": "Quitting",
 		"type": "tb"
-	}]
+	},
+	{
+		"name": "Ex-smoker",
+		"type": "tb"
+	},
+	{
+		"name": "Never Smoked",
+		"type": "tb"
+	}
+	],
+  "description": "From SHN Heart Failure summary"
 }
