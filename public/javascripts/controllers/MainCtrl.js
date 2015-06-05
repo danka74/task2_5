@@ -23,10 +23,10 @@ angular
 
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
-							$scope.caseBindings = [];
 							$scope.selectedCase = null;
 							$scope.terminologies = [ {
-								name : "SNOMED CT"
+								name : "SNOMED CT",
+								regexp : "/[1-9]\d*(|[^|]|)?/"
 							}, {
 								name : "ICD10"
 							}, {
@@ -44,25 +44,27 @@ angular
 								$scope.caseTemplates = data;
 							});
 
-							bindingService.get($scope.user).success(
-									function(data) {
-										$scope.caseBindings = data;
-									});
+							// bindingService.get($scope.user).success( // TODO:
+							// load each binding as needed??
+							// function(data) {
+							// $scope.caseBindings = data;
+							// });
 
 							$scope.showCase = function($index) {
-								if($scope.bindingForm.$dirty) {
+								if ($scope.bindingForm.$dirty) {
 									$scope.save(); // TODO: a modal?
 								}
-								
-								var caseTemplate = $scope.caseTemplates[$index];
-
-								console.log($index);
-								console.log($scope.caseBindings);
 
 								$scope.selectedCase = $index;
 
+								var caseTemplate = $scope.caseTemplates[$scope.selectedCase];
 								$scope.currentCaseTemplate = caseTemplate;
+
+								console.log("selected case = "
+										+ $scope.selectedCase);
+
 								$scope.cancel();
+
 								templateService.getTemplateHTML(caseTemplate)
 										.success(function(data) {
 											$scope.caseHtml = data;
@@ -70,26 +72,49 @@ angular
 							}
 
 							$scope.save = function() {
-								$scope.caseBindings[$scope.selectedCase] = angular
-										.copy($scope.currentCaseBinding);
-								bindingService.save($scope.currentCaseBinding).success(function() {
-									$scope.bindingForm.$setPristine();
-								});
+								if ($scope.currentCaseBinding._id) {
+									bindingService
+											.update(
+													$scope.currentCaseBinding._id,
+													$scope.currentCaseBinding)
+											.success(
+													function(data) {
+														$scope.currentCaseBinding = data;
+														$scope.bindingForm
+																.$setPristine();
+													});
+								} else {
+									bindingService
+											.save($scope.currentCaseBinding)
+											.success(
+													function(data) {
+														$scope.currentCaseBinding = data;
+														$scope.bindingForm
+																.$setPristine();
+													});
+								}
+								// $scope.currentCaseBinding._id = data._id;
+
 							}
 
 							$scope.cancel = function() {
-								if (!$scope.caseBindings[$scope.selectedCase]) {
-									$scope.currentCaseBinding = {};
-									$scope.currentCaseBinding.rhsBindings = [];
-								}
-								else {
-									console.log($scope.selectedCase);
-									$scope.currentCaseBinding = {};
-									$scope.currentCaseBinding = $scope.caseBindings[$scope.selectedCase];
-								}
+								bindingService
+										.get($scope.currentCaseTemplate._id,
+												$scope.user)
+										.success(function(data) {
+											if(data) {
+												console.log("Found binding");
+												$scope.currentCaseBinding = data;
+											} else {
+												console.log("Did not find binding");
+												$scope.currentCaseBinding = {};
+												$scope.currentCaseBinding.user = $scope.user;
+												$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
+											}
+										});
+
 								$scope.bindingForm.$setPristine();
-								$scope.currentCaseBinding.user = $scope.user;
-								$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
+
 							}
 
 						} ]);

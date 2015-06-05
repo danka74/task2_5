@@ -4,15 +4,20 @@
 	"description" : "From SHN Heart Failure summary",
 	"rhs" : [ {
 		"name" : "Current Smoker",
+		"_type":  "tb"
 	}, {
 		"name" : "Quitting",
+		"_type":  "tb"
 	}, {
 		"name" : "Ex-smoker",
+		"_type":  "tb"
 	}, {
 		"name" : "Never Smoked",
+		"_type":  "tb"
 	} ],
 	"lhs" : {
-		"name" : "Smoking Status"
+		"name" : "Smoking Status",
+		"_type":  "tb"
 	}
 },
 {
@@ -21,33 +26,34 @@
 	"description" : "From epSOS patient summary, R5.1",
 	"rhs" : [ {
 		"name" : "Anaphylaxis",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Atopic dermatitis and related conditions",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Bronchospasm",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Conjonctivite",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Eczema",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Pruritus NOS",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Rhinite",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Weal",
-		"type":  "tb"
+		"_type":  "tb"
 	}, {
 		"name" : "Angio-oedema",
-		"type":  "tb"
+		"_type":  "tb"
 	} ],
 	"lhs" : {
-		"name" : "Allergy Display Name"
+		"name" : "Allergy Display Name",
+		"_type":  "tb"
 	}
 }]

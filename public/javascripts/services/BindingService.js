@@ -5,15 +5,20 @@ angular.module('BindingServiceModule', []).factory(
 				function($http) {
 
 					return {
-						// call to get all templates
-						get: function(user) {
+						// get binding for template and user
+						get: function(template, user) {
 							console.log("user = " + user.uid)
-							return $http.get('/api/bindings/' + user.uid );
+							return $http.get('/api/bindings/' + template + '/' + user.uid);
 						},
 						
 						// save binding
 						save: function(binding) {
 							return $http.post('/api/bindings/', binding);
+						},
+						
+						// update binding
+						update: function(id, binding) {
+							return $http.put('/api/bindings/' + id, binding);
 						}
 					}
 

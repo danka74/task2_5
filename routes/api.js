@@ -52,14 +52,14 @@ router.get('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
-router.param('user', function(req, res, next, id) {
-	req.user = id;
-	return next();
-});
-
-router.get('/bindings/:user', function(req, res, next) {
-	Binding.find({
-		user : req.user
+router.get('/bindings/:template/:user', function(req, res, next) {
+	console.log("user = " + req.params.user);
+	console.log("template = " + req.params.template);
+	Binding.findOne({
+		user : {
+			uid : req.params.user
+		},
+		template : req.params.template
 	}, function(err, bindings) {
 		if (err) {
 			return next(err);
@@ -68,28 +68,48 @@ router.get('/bindings/:user', function(req, res, next) {
 	});
 });
 
-router.param('binding', function(req, res, next, id) {
-	var query = Binding.findById(id);
-
-	query.exec(function(err, binding) {
+router.get('/bindings/:id', function(req, res, next) {
+	console.log("binding id = " + req.params.id);
+	Binding.findById(req.params.id, function(err, data) {
 		if (err) {
 			return next(err);
 		}
-		if (!binding) {
-			return next(new Error('can\'t find case'));
-		}
-
-		req.binding = binding;
-		return next();
-	});
+		res.json(data);
+	})
 });
 
-router.get('/bindings/:binding', function(req, res) {
-	res.json(req.binding);
+router.put('/bindings/:id', function(req, res, next) {
+
+	Binding.findById(req.params.id, function(err, persistBinding) {
+		if (err) {
+			return next(err);
+		}
+				
+		console.log("in = " + req.body);
+
+		for (prop in req.body) {
+			console.log(prop + " = " + req.body[prop]);
+
+			persistBinding[prop] = req.body[prop];
+		}
+
+		console.log("out = " + persistBinding);
+
+		persistBinding.save(function(err, post) {
+			if (err) {
+				return next(err);
+			}
+
+			res.json(persistBinding);
+		});
+	})
+
 });
 
 router.post('/bindings', function(req, res, next) {
 	var binding = new Binding(req.body);
+
+	console.log(binding);
 
 	binding.save(function(err, post) {
 		if (err) {

@@ -18,7 +18,7 @@ var CaseBindingSchema = new mongoose.Schema({
 	  comments: [ {text: String, date: {type: Date, default: Date.now() }} ]
   } ],
   comments: [ {text: String, date: {type: Date, default: Date.now() }} ],
-  user: {type: String, index: true}
+  user: { uid: {type: String, index: true} }
 });
 
 //var CaseBindingSchema = new mongoose.Schema({
