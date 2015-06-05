@@ -1,27 +1,53 @@
-{
-  "title": "Smoking status", 
-  "templateURL": "default_template.html",
-  "lhs": [ {
-	  "name": "Smoking Status",
-	  "type": "tb"
-  } ],
-  "rhs": [
-	{
-		"name": "Current Smoker",
-		"type": "tb"
-	},
-	{
-		"name": "Quitting",
-		"type": "tb"
-	},
-	{
-		"name": "Ex-smoker",
-		"type": "tb"
-	},
-	{
-		"name": "Never Smoked",
-		"type": "tb"
+[ {
+	"title" : "Smoking status",
+	"templateURL" : "default_template.html",
+	"description" : "From SHN Heart Failure summary",
+	"rhs" : [ {
+		"name" : "Current Smoker",
+	}, {
+		"name" : "Quitting",
+	}, {
+		"name" : "Ex-smoker",
+	}, {
+		"name" : "Never Smoked",
+	} ],
+	"lhs" : {
+		"name" : "Smoking Status"
 	}
-	],
-  "description": "From SHN Heart Failure summary"
-}
+},
+{
+	"title" : "Allergy display name (Allergy description)",
+	"templateURL" : "default_template.html",
+	"description" : "From epSOS patient summary, R5.1",
+	"rhs" : [ {
+		"name" : "Anaphylaxis",
+		"type":  "tb"
+	}, {
+		"name" : "Atopic dermatitis and related conditions",
+		"type":  "tb"
+	}, {
+		"name" : "Bronchospasm",
+		"type":  "tb"
+	}, {
+		"name" : "Conjonctivite",
+		"type":  "tb"
+	}, {
+		"name" : "Eczema",
+		"type":  "tb"
+	}, {
+		"name" : "Pruritus NOS",
+		"type":  "tb"
+	}, {
+		"name" : "Rhinite",
+		"type":  "tb"
+	}, {
+		"name" : "Weal",
+		"type":  "tb"
+	}, {
+		"name" : "Angio-oedema",
+		"type":  "tb"
+	} ],
+	"lhs" : {
+		"name" : "Allergy Display Name"
+	}
+}]

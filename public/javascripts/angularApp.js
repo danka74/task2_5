@@ -1,2 +1,2 @@
-angular.module('BindingApp', ['ngRoute', 'MainControllerModule', 'TemplateServiceModule', 'BindingServiceModule']);
+angular.module('BindingApp', ['ngRoute', 'ui.bootstrap', 'MainControllerModule', 'TemplateServiceModule', 'BindingServiceModule']);
 

@@ -1,23 +1,50 @@
-<div id="{{'case-' + currentCaseTemplate._id}}" >
+<div id="{{'case-' + currentCaseTemplate._id}}">
 	<div class="row-fluid">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">Left hand side</div>
-				<div class="panel-body">{{currentCaseTemplate.lhs.name}} <input type="text" class="pull-right" ng-model="currentCaseBinding.lhsBinding.target"/></div>
+				<div class="panel-body">
+					{{currentCaseTemplate.lhs.name}}
+					<div class="pull-right">
+						<select ng-model="currentCaseBinding.lhsBinding.codeSystem">
+							<option ng-repeat="t in terminologies">{{t.name}}</option>
+						</select> <input type="text" placeholder="Code"
+							ng-model="currentCaseBinding.lhsBinding.target" /> <span
+							class="glyphicon glyphicon-comment" />
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">Right hand side</div>
 				<ul class="list-group">
+					<li class="list-group-item">Overall meaning
+						<div class="pull-right">
+							<select ng-model="currentCaseBinding.rhsOverall.codeSystem">
+								<option ng-repeat="t in terminologies">{{t.name}}</option>
+							</select> <input type="text" placeholder="Code"
+								ng-model="currentCaseBinding.rhsOverall.target" /> <span
+								class="glyphicon glyphicon-comment" />
+						</div>
+					</li>
 					<li class="list-group-item"
-						ng-repeat="part in currentCaseTemplate.rhs">{{part.name}} <input type="text" class="pull-right" ng-model="currentCaseBinding.rhsBindings[$index].target"/></li>
+						ng-repeat="part in currentCaseTemplate.rhs">
+						<label>{{part.name}}</label>
+							<select
+								ng-model="currentCaseBinding.rhsBindings[$index].codeSystem">
+								<option ng-repeat="t in terminologies">{{t.name}}</option>
+							</select> <input type="text" placeholder="Code"
+								ng-model="currentCaseBinding.rhsBindings[$index].target" /> <span
+								class="glyphicon glyphicon-comment" />
+						
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="col-md-9">
+		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Description</div>
 				<div class="panel-body">{{currentCaseTemplate.description}}</div>

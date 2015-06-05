@@ -14,7 +14,9 @@
 	type="text/javascript"></script>
 <script src="libs/angular-resource/angular-resource.min.js"
 	type="text/javascript"></script>
-
+<script src="libs/angular-bootstrap/ui-bootstrap.min.js"
+	type="text/javascript"></script>
+	
 <!-- ANGULAR CUSTOM -->
 <script src="javascripts/services/BindingService.js"
 	type="text/javascript"></script>
@@ -28,7 +30,7 @@
 </head>
 <body ng-app="BindingApp" ng-controller="MainController">
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">ASSESS CT terminology binding
@@ -72,25 +74,18 @@
 			</div>
 			<div class="col-md-10">
 				<div class="row">
-					<div class="panel panel-default">
-						<div class="panel-heading">Current case</div>
-						<div class="panel-body">
-							<form name="bindingForm">
-								<div bind-html-compile="caseHtml" />
-							</form>
 
-						</div>
-						<div class="row">
-							<div class="col-md-2">
-								<button type="button" class="btn btn-default"
-									ng-class="{ 'disabled': bindingForm.$pristine }"
-									ng-click="cancel()">Cancel</button>
-								<button type="button" class="btn btn-primary"
-									ng-class="{ 'disabled': bindingForm.$pristine }"
-									ng-click="save()">Save</button>
-							</div>
-						</div>
-					</div>
+					<form class="form-horizontal" name="bindingForm">
+						<div bind-html-compile="caseHtml" />
+					</form>
+
+				</div>
+				<div class="col-md-2">
+					<button type="button" class="btn btn-default"
+						ng-class="{ 'disabled': bindingForm.$pristine }"
+						ng-click="cancel()">Cancel</button>
+					<button type="button" class="btn btn-primary"
+						ng-class="{ 'disabled': bindingForm.$pristine }" ng-click="save()">Save</button>
 				</div>
 
 			</div>
