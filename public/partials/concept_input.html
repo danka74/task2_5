@@ -1,0 +1,17 @@
+<div class="form-group">
+	<label class="control-label col-sm-5">{{name}}</label>
+	<div class="col-sm-2">
+		<select class="form-control" ng-model="partBinding.codeSystem">
+			<option ng-repeat="t in terminologies">{{t.name}}</option>
+		</select>
+	</div>
+	<div class="col-sm-4">
+		<input class="form-control col-sm-3" type="text" placeholder="Code"
+			ng-model="partBinding.target" ng-pattern="[1-9]\d*(|[^|]|)?"/>
+	</div>
+	<div class="col-sm-1">
+		<span class="glyphicon glyphicon-comment"
+			ng-class="{'blue': partBinding.comments.length > 0}"
+			/>
+	</div>
+</div>

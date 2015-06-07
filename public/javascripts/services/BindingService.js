@@ -13,6 +13,7 @@ angular.module('BindingServiceModule', []).factory(
 						
 						// save binding
 						save: function(binding) {
+							console.log("save: " + binding);
 							return $http.post('/api/bindings/', binding);
 						},
 						

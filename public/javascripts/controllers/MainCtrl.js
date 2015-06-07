@@ -13,6 +13,21 @@ angular
 				}
 			};
 		} ])
+		.directive('conceptInput', function() {
+			return {
+				restrict: 'EA',
+				replace: true,
+				scope: {
+					name: '@',
+					partBinding: '=',
+					terminologies: '='
+				},
+				templateUrl: 'partials/concept_input.html',
+				link: function(scope, element, attrs) {
+					console.log(scope);
+				}
+			}
+		})
 		.controller(
 				'MainController',
 				[
