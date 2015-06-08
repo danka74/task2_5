@@ -13,36 +13,53 @@ angular
 				}
 			};
 		} ])
-		.directive('conceptInput', function() {
-			return {
-				restrict : 'EA',
-				replace : true,
-				scope : {
-					name : '@',
-					partBinding : '=',
-					terminologies : '='
-				},
-				templateUrl : 'partials/concept_input.html',
-				controller : function($scope, $element) {
-					$scope.toggle = function() {
-						console.log("click!");
-						var commentArea = angular.element($element.querySelector(".comment"));
-						console.log(commaneArea)
+		.directive(
+				'conceptInput',
+				function() {
+					return {
+						restrict : 'EA',
+						replace : true,
+						scope : {
+							name : '@',
+							partBinding : '=',
+							terminologies : '='
+						},
+						templateUrl : 'partials/concept_input.html',
+						controller : function($scope) {
+							$scope.commentText = "";
+							$scope.addComment = function(commentText) {
+								console.log($scope);
+								if ($scope.partBinding.comments)
+									$scope.partBinding.comments.push({
+										text : commentText,
+										date : Date.now()
+									});
+								else {
+									$scope.partBinding.comments = [ {
+										text : commentText,
+										date : Date.now()
+									} ];
+								}
+								$scope.commentText = "";
+							};
+						},
+						link : function(scope, element, attrs) {
+							if(scope.partBinding === undefined) {
+								scope.partBinding = {};
+							}
+							var commentButton = angular.element(element[0]
+									.querySelector('.glyphicon-comment'));
+							commentButton.bind('click', function() {
+								var commentArea = angular.element(element[0]
+										.querySelector('.commentXXX'));
+								if (commentArea.hasClass("collapse"))
+									commentArea.removeClass("collapse");
+								else
+									commentArea.addClass("collapse");
+							});
+						}
 					}
-				}
-			// link: function(scope, element, attrs) {
-			// var commentButton = angular.element(element[0]
-			// .querySelector('.glyphicon-comment'));
-			// console.log(commentButton);
-			// commentButton.bind('click', function() {
-			// var commentArea = angular.element(element[0]
-			// .querySelector('.comment'));
-			// console.log(commentArea);
-			// });
-			// console.log(commentButton);
-			// }
-			}
-		})
+				})
 		.controller(
 				'MainController',
 				[

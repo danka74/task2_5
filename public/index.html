@@ -64,12 +64,12 @@
 			<div class="col-md-2">
 				<div class="panel panel-default" id="templates">
 					<div class="panel-heading">Cases</div>
-					<ul class="list-group">
-						<li class="list-group-item"
+					<div class="list-group">
+						<a href="#" class="list-group-item"
 							ng-class="{ 'active': $index == selectedCase }"
 							ng-repeat="caseTemplate in caseTemplates"
-							ng-click="showCase($index)">{{caseTemplate.title}}</span></li>
-					</ul>
+							ng-click="showCase($index)">{{caseTemplate.title}}</a>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-10">
