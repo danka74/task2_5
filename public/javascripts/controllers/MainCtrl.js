@@ -15,17 +15,32 @@ angular
 		} ])
 		.directive('conceptInput', function() {
 			return {
-				restrict: 'EA',
-				replace: true,
-				scope: {
-					name: '@',
-					partBinding: '=',
-					terminologies: '='
+				restrict : 'EA',
+				replace : true,
+				scope : {
+					name : '@',
+					partBinding : '=',
+					terminologies : '='
 				},
-				templateUrl: 'partials/concept_input.html',
-				link: function(scope, element, attrs) {
-					console.log(scope);
+				templateUrl : 'partials/concept_input.html',
+				controller : function($scope, $element) {
+					$scope.toggle = function() {
+						console.log("click!");
+						var commentArea = angular.element($element.querySelector(".comment"));
+						console.log(commaneArea)
+					}
 				}
+			// link: function(scope, element, attrs) {
+			// var commentButton = angular.element(element[0]
+			// .querySelector('.glyphicon-comment'));
+			// console.log(commentButton);
+			// commentButton.bind('click', function() {
+			// var commentArea = angular.element(element[0]
+			// .querySelector('.comment'));
+			// console.log(commentArea);
+			// });
+			// console.log(commentButton);
+			// }
 			}
 		})
 		.controller(
@@ -116,17 +131,20 @@ angular
 								bindingService
 										.get($scope.currentCaseTemplate._id,
 												$scope.user)
-										.success(function(data) {
-											if(data) {
-												console.log("Found binding");
-												$scope.currentCaseBinding = data;
-											} else {
-												console.log("Did not find binding");
-												$scope.currentCaseBinding = {};
-												$scope.currentCaseBinding.user = $scope.user;
-												$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
-											}
-										});
+										.success(
+												function(data) {
+													if (data) {
+														console
+																.log("Found binding");
+														$scope.currentCaseBinding = data;
+													} else {
+														console
+																.log("Did not find binding");
+														$scope.currentCaseBinding = {};
+														$scope.currentCaseBinding.user = $scope.user;
+														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
+													}
+												});
 
 								$scope.bindingForm.$setPristine();
 

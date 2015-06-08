@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -9,4 +9,13 @@ a {
 
 .blue {
     color: blue;
+}
+
+.well{
+  margin-bottom:0px;
+  margin-top:10px;
+}
+
+.form-group {
+	margin-bottom:0px;
 }
