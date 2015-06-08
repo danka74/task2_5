@@ -1,5 +1,5 @@
 <div class="form-group">
-	<div class="row-fluid">
+	<div class="row-fluid row-centered">
 		<label class="control-label col-sm-4">{{name}}</label>
 		<div class="col-sm-2">
 			<select class="form-control" ng-model="partBinding.codeSystem">
@@ -20,22 +20,29 @@
 				ng-model="partBinding.target" />
 		</div>
 		<div class="col-sm-1">
-			<span class="glyphicon glyphicon-comment" style="padding:5px"
-				ng-class="{'bg-primary': partBinding.comments.length > 0}"
-				 />
+			<span class="glyphicon glyphicon-comment" style="padding: 5px"
+				ng-class="{'bg-primary': partBinding.comments.length > 0}" />
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="col-sm-10 col-sm-offset-1 commentXXX well collapse" >
+		<div class="col-sm-10 col-sm-offset-1 commentXXX well collapse">
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="comment in partBinding.comments">
-					<h6 class="list-group-item-heading">{{comment.date | date:'short'}}</h6>
-					<p class="list-group-item-text">{{comment.text}}</p></li>
+				<li class="list-group-item"
+					ng-repeat="comment in partBinding.comments">
+					<h6 class="list-group-item-heading">{{comment.date |
+						date:'short'}}</h6>
+					<p class="list-group-item-text">{{comment.text}}</p>
+				</li>
 			</ul>
-			<textarea class="form-control" ng-model="commentText"
-				placeholder="New comment"/>
-			<button class="btn btn-primary"
-				ng-click="addComment(commentText)">Add</button>
+			<div class="row-fluid row-centered">
+				<div class="col-sm-10">
+					<textarea class="form-control" ng-model="commentText"
+						placeholder="New comment" />
+				</div>
+				<div class="col-sm-2">
+					<button class="btn btn-primary" ng-click="addComment(commentText)">Add</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -19,3 +19,18 @@ a {
 .form-group {
 	margin-bottom:0px;
 }
+
+.row-centered {
+	float:none;	
+    vertical-align:middle;
+}
+
+.commentXXX {
+/*     display: inline-block; */
+/*     overflow: hidden; */
+/*     height: 0; */
+    transition: height 2s;
+    -moz-transition: height 2s; /* Firefox 4 */
+    -webkit-transition: height 2s; /* Safari and Chrome */
+    -o-transition: height 2s; /* Opera */
+}
