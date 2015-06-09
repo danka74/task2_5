@@ -76,9 +76,11 @@ angular
 				'MainController',
 				[
 						'$scope',
+						'$location',
+						'$window',
 						'TemplateService',
 						'BindingService',
-						function($scope, templateService, bindingService) {
+						function($scope, $location, $window, templateService, bindingService) {
 
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
@@ -96,21 +98,40 @@ angular
 								name : "LOINC"
 							} ]; // add regexp for validation?
 
-							// for testing
-							$scope.user = {
-								uid : 'foo@bar.com'
-							};
+							var url = $location.$$absUrl;
+							var token = url.substring(url.indexOf("?token=") + 7, url.length);
+							$window.sessionStorage.token = token;
 
 							templateService.get().success(function(data) {
 								$scope.caseTemplates = data;
+							}).error(function(data, status) {
+								$scope.caseTemplates = [];
+								if(status == 401)
+									$scope.caseHtml = "<h3>Cannot authenticate user</h3>";
 							});
 
-							// bindingService.get($scope.user).success( // TODO:
-							// load each binding as needed??
-							// function(data) {
-							// $scope.caseBindings = data;
-							// });
-
+							$scope.addComment = function(commentText) {
+								if ($scope.currentCaseBinding.comments)
+									$scope.currentCaseBinding.comments.push({
+										text : commentText,
+										date : Date.now()
+									});
+								else {
+									$scope.currentCaseBinding.comments = [ {
+										text : commentText,
+										date : Date.now()
+									} ];
+								}
+								$scope.caseCommentText = "";
+							};
+							
+							$scope._delete = function(comment) {
+								console.log(comment);
+								var index = $scope.currentCaseBinding.comments.indexOf(comment.comment);
+								console.log("index = " + index);
+								$scope.currentCaseBinding.comments.splice(index, 1);
+							}
+							
 							$scope.showCase = function($index) {
 								if ($scope.bindingForm.$dirty) {
 									$scope.save(); // TODO: a modal?
@@ -140,6 +161,7 @@ angular
 													$scope.currentCaseBinding)
 											.success(
 													function(data) {
+														console.log("updated!");
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
@@ -149,6 +171,7 @@ angular
 											.save($scope.currentCaseBinding)
 											.success(
 													function(data) {
+														console.log("saved!");
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
@@ -160,8 +183,7 @@ angular
 
 							$scope.cancel = function() {
 								bindingService
-										.get($scope.currentCaseTemplate._id,
-												$scope.user)
+										.get($scope.currentCaseTemplate._id)
 										.success(
 												function(data) {
 													if (data) {
@@ -172,7 +194,6 @@ angular
 														console
 																.log("Did not find binding");
 														$scope.currentCaseBinding = {};
-														$scope.currentCaseBinding.user = $scope.user;
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
 													}
 												});

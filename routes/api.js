@@ -52,13 +52,11 @@ router.get('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
-router.get('/bindings/:template/:user', function(req, res, next) {
-	console.log("user = " + req.params.user);
+router.get('/bindings/:template', function(req, res, next) {
+	console.log("get, user = " + JSON.stringify(req.user));
 	console.log("template = " + req.params.template);
 	Binding.findOne({
-		user : {
-			uid : req.params.user
-		},
+		user : { uid: req.user.uid },
 		template : req.params.template
 	}, function(err, bindings) {
 		if (err) {
@@ -68,15 +66,15 @@ router.get('/bindings/:template/:user', function(req, res, next) {
 	});
 });
 
-router.get('/bindings/:id', function(req, res, next) {
-	console.log("binding id = " + req.params.id);
-	Binding.findById(req.params.id, function(err, data) {
-		if (err) {
-			return next(err);
-		}
-		res.json(data);
-	})
-});
+//router.get('/bindings/:id', function(req, res, next) {
+//	console.log("binding id = " + req.params.id);
+//	Binding.findById(req.params.id, function(err, data) {
+//		if (err) {
+//			return next(err);
+//		}
+//		res.json(data);
+//	})
+//});
 
 router.put('/bindings/:id', function(req, res, next) {
 
@@ -108,8 +106,14 @@ router.put('/bindings/:id', function(req, res, next) {
 
 router.post('/bindings', function(req, res, next) {
 	var binding = new Binding(req.body);
+	
+	console.log(JSON.stringify(binding));
 
-	console.log(binding);
+	console.log("post, user = " + JSON.stringify(req.user));
+
+	binding.user = { uid: req.user.uid };
+	
+	console.log(JSON.stringify(binding));
 
 	binding.save(function(err, post) {
 		if (err) {

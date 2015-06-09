@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var jwt = require('express-jwt');
+var eJWT = require('express-jwt');
 
 // connect to database
 mongoose.connect('mongodb://localhost/task2_5');
@@ -43,9 +43,22 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(jwt({
+//app.use(jwt({
+//	secret : process.env.SECRET,
+//	getToken : function fromHeaderOrQuerystring(req) {
+//		if (req.headers.authorization
+//				&& req.headers.authorization.split(' ')[0] === 'Bearer') {
+//			return req.headers.authorization.split(' ')[1];
+//		} else if (req.query && req.query.token) {
+//			return req.query.token;
+//		}
+//		return null;
+//	}
+//}));
+
+app.use('/', routes);
+app.use('/api', eJWT({
 	secret : process.env.SECRET,
-	credentialsRequired : false,
 	getToken : function fromHeaderOrQuerystring(req) {
 		if (req.headers.authorization
 				&& req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -55,11 +68,8 @@ app.use(jwt({
 		}
 		return null;
 	}
-}));
-
-app.use('/', routes);
-app.use('/api', apis);
-app.use('/users', users);
+}), apis);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,16 +1,17 @@
 <div id="{{'case-' + currentCaseTemplate._id}}">
-	<div class="row-fluid">
-		<div class="col-md-12">
+	<div class="row">
+		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Description</div>
 				<div class="panel-body">
-					<div ng-bind-html="currentCaseTemplate.description | toTrusted" />
+					<div ng-bind-html="currentCaseTemplate.description | toTrusted">
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="col-md-12">
+	<div class="row">
+		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Left hand side</div>
 				<div class="panel-body">
@@ -23,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-12">
+		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Right hand side</div>
 				<ul class="list-group">
@@ -41,20 +42,32 @@
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="col-sm-10 commentXXX well">
-			<ul class="list-group">
-				<li class="list-group-item"
-					ng-repeat="comment in currentCaseBinding.comments">
-					<h6 class="list-group-item-heading">{{comment.date |
-						date:'short'}}</h6>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Case comments</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li class="list-group-item"
+							ng-repeat="comment in currentCaseBinding.comments">
+							<h6 class="list-group-item-heading">{{comment.date |
+						date:'short'}}<button class="close pull-right" type="button" ng-click="_delete(this)">&times;</button></h6>
 					<p class="list-group-item-text">{{comment.text}}</p>
-				</li>
-			</ul>
-			<textarea class="form-control" ng-model="commentText"
-				placeholder="New case comment" />
-			<button class="btn btn-primary" ng-click="addComment(commentText)">Add</button>
+						</li>
+					</ul>
+					<div class="row">
+						<div class="col-sm-10">
+							<textarea class="form-control" ng-model="caseCommentText"
+								placeholder="New case comment"></textarea>
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-primary"
+								ng-click="addComment(caseCommentText)">Add</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
 		</div>
 	</div>
-
 </div>
