@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/gentoken/:uid', function(req, res, next) {
+router.get('/gentoken', function(req, res, next) {
 	var token = jwt.sign({
-		uid : req.params.uid
+		uid : req.query.uid
 	}, process.env.SECRET);
 	res.send('<a href="/?token='+token+'">'+token+'</a>');
 });
