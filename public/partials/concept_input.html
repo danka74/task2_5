@@ -1,6 +1,6 @@
 <div class="form-group">
 	<div class="row-fluid row-centered">
-		<label class="control-label col-sm-4">{{name}}</label>
+		<label class="control-label col-sm-4" popover="{{partDescription}}" popover-trigger="mouseenter" >{{name}}</label>
 		<div class="col-sm-2">
 			<select class="form-control" ng-model="partBinding.codeSystem">
 				<option ng-repeat="t in terminologies">{{t.name}}</option>
@@ -8,16 +8,16 @@
 		</div>
 		<div class="col-sm-2">
 			<select class="form-control" ng-model="partBinding.assessment">
-				<option value="1">Full</option>
-				<option value="2">Inf.</option>
-				<option value="3">Part.</option>
-				<option value="4">No</option>
-				<option value="5">-Scope</option>
+				<option value="1">1 Full coverage</option>
+				<option value="2">2 Inferred coverage</option>
+				<option value="3">3 Partial coverage</option>
+				<option value="4">4 No coverage</option>
+				<option value="5">5 Out of scope</option>
 			</select>
 		</div>
 		<div class="col-sm-3">
 			<input class="form-control col-sm-3" type="text" placeholder="Code"
-				ng-model="partBinding.target" />
+				ng-model="partBinding.target" ng-pattern="/[1-9]\d*(|[^|]|)?/" />
 		</div>
 		<div class="col-sm-1">
 			<span class="glyphicon glyphicon-comment" style="padding: 5px"
@@ -30,7 +30,7 @@
 				<li class="list-group-item"
 					ng-repeat="comment in partBinding.comments">
 					<h6 class="list-group-item-heading">{{comment.date |
-						date:'short'}}</h6>
+						date:'short'}}<button class="close pull-right" type="button" ng-click="_delete(this)">&times;</button></h6>
 					<p class="list-group-item-text">{{comment.text}}</p>
 				</li>
 			</ul>
