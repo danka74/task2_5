@@ -1,5 +1,10 @@
 angular
 		.module('MainControllerModule', [])
+		.filter('toTrusted', [ '$sce', function($sce) {
+			return function(text) {
+				return $sce.trustAsHtml(text);
+			};
+		} ])
 		.directive('bindHtmlCompile', [ '$compile', function($compile) {
 			return {
 				restrict : 'A',
@@ -21,6 +26,7 @@ angular
 						replace : true,
 						scope : {
 							name : '@',
+							partDescription : '@',
 							partBinding : '=',
 							terminologies : '='
 						},
@@ -42,9 +48,15 @@ angular
 								}
 								$scope.commentText = "";
 							};
+							$scope._delete = function(comment) {
+								console.log(comment);
+								var index = $scope.partBinding.comments.indexOf(comment.comment);
+								console.log("index = " + index);
+								$scope.partBinding.comments.splice(index, 1);
+							}
 						},
 						link : function(scope, element, attrs) {
-							if(scope.partBinding === undefined) {
+							if (scope.partBinding === undefined) {
 								scope.partBinding = {};
 							}
 							var commentButton = angular.element(element[0]
@@ -72,8 +84,10 @@ angular
 							$scope.currentCaseBinding = null;
 							$scope.selectedCase = null;
 							$scope.terminologies = [ {
-								name : "SNOMED CT",
+								name : "SNOMED CT - precoordinated",
 								regexp : "/[1-9]\d*(|[^|]|)?/"
+							}, {
+								name : "SNOMED CT - postcoordinated"
 							}, {
 								name : "ICD10"
 							}, {

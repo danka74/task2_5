@@ -56,4 +56,27 @@
 		"name" : "Allergy Display Name",
 		"_type":  "tb"
 	}
-}]
+},
+{
+	"title" : "Heart Failure registry",
+	"templateURL" : "default_template.html",
+	"description" : "From Swedish quality registry RiksSvikt, www.rikssvikt.se",
+	"rhs" : [ {
+		"name" : "No",
+		"_type":  "tb"
+	}, {
+		"name" : "Yes, less than 30 days ago",
+		"_type":  "tb"
+	}, {
+		"name" : "No, more than 30 days ago",
+		"_type":  "tb"
+	}, {
+		"name" : "Unknown",
+		"_type":  "tb"
+	} ],
+	"lhs" : {
+		"name" : "Previous encounters related to heart failure",
+		"_type":  "tb"
+	}
+}
+]

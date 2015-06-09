@@ -3,7 +3,9 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Description</div>
-				<div class="panel-body">{{currentCaseTemplate.description}}</div>
+				<div class="panel-body">
+					<div ng-bind-html="currentCaseTemplate.description | toTrusted" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -14,6 +16,7 @@
 				<div class="panel-body">
 
 					<concept-input name="{{currentCaseTemplate.lhs.name}}"
+						part-description="{{currentCaseTemplate.lhs.description}}"
 						part-binding="currentCaseBinding.lhsBinding"
 						terminologies="terminologies" />
 
@@ -24,34 +27,33 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Right hand side</div>
 				<ul class="list-group">
-					<li class="list-group-item">
-						<concept-input
+					<li class="list-group-item"><concept-input
 							name="Overall meaning"
+							part-description="One meaning covering all of the value set"
 							part-binding="currentCaseBinding.rhsOverall"
 							terminologies="terminologies" /></li>
 					<li class="list-group-item"
-						ng-repeat="part in currentCaseTemplate.rhs">
-						<concept-input
-							name="{{part.name}}"
+						ng-repeat="part in currentCaseTemplate.rhs"><concept-input
+							name="{{part.name}}" part-description="{{part.description}}"
 							part-binding="currentCaseBinding.rhsBindings[$index]"
-							terminologies="terminologies" />
-
-					</li>
+							terminologies="terminologies" /></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="col-sm-10 commentXXX well" >
+		<div class="col-sm-10 commentXXX well">
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="comment in currentCaseBinding.comments">
-					<h6 class="list-group-item-heading">{{comment.date | date:'short'}}</h6>
-					<p class="list-group-item-text">{{comment.text}}</p></li>
+				<li class="list-group-item"
+					ng-repeat="comment in currentCaseBinding.comments">
+					<h6 class="list-group-item-heading">{{comment.date |
+						date:'short'}}</h6>
+					<p class="list-group-item-text">{{comment.text}}</p>
+				</li>
 			</ul>
 			<textarea class="form-control" ng-model="commentText"
-				placeholder="New case comment"/>
-			<button class="btn btn-primary"
-				ng-click="addComment(commentText)">Add</button>
+				placeholder="New case comment" />
+			<button class="btn btn-primary" ng-click="addComment(commentText)">Add</button>
 		</div>
 	</div>
 
