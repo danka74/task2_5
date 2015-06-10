@@ -34,3 +34,19 @@ a {
     -webkit-transition: height 2s; /* Safari and Chrome */
     -o-transition: height 2s; /* Opera */
 }
+
+.switch {
+	height:20px;
+}
+.switch small {
+  height:20px;
+  width:20px;
+  background: #eee;
+}
+.switch.checked {
+  background: rgb(100, 189, 99);
+  border-color: rgb(100, 189, 99);
+}
+.switch.checked small {
+  left:32px;
+}

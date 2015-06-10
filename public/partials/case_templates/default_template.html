@@ -19,7 +19,7 @@
 					<concept-input name="{{currentCaseTemplate.lhs.name}}"
 						part-description="{{currentCaseTemplate.lhs.description}}"
 						part-binding="currentCaseBinding.lhsBinding"
-						terminologies="terminologies" />
+						terminologies="terminologies[scenario]" />
 
 				</div>
 			</div>
@@ -32,12 +32,12 @@
 							name="Overall meaning"
 							part-description="One meaning covering all of the value set"
 							part-binding="currentCaseBinding.rhsOverall"
-							terminologies="terminologies" /></li>
+							terminologies="terminologies[scenario]" /></li>
 					<li class="list-group-item"
 						ng-repeat="part in currentCaseTemplate.rhs"><concept-input
 							name="{{part.name}}" part-description="{{part.description}}"
 							part-binding="currentCaseBinding.rhsBindings[$index]"
-							terminologies="terminologies" /></li>
+							terminologies="terminologies[scenario]" /></li>
 				</ul>
 			</div>
 		</div>

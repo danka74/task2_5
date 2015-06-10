@@ -11,7 +11,7 @@ var eJWT = require('express-jwt');
 mongoose.connect('mongodb://localhost/task2_5');
 require('./models/CaseTemplate');
 require('./models/CaseBinding');
-require('./models/Users');
+require('./models/User');
 
 // var pathToMongoDb = 'mongodb://localhost/passwordless-simple-mail';
 // passwordless.init(new mongoStore(pathToMongoDb));

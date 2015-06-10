@@ -2,10 +2,12 @@ var mongoose = require('mongoose');
 
 var CaseBindingSchema = new mongoose.Schema({
   template: {type: mongoose.Schema.Types.ObjectId, ref: 'CaseTemplate'},
+  scenario: {type: Number },
   lhsBinding: {
 	  codeSystem: { type: String },
 	  target: { type: String },
 	  assessment: { type: String },
+	  source: {type: String },
 	  comments: [ {text: String, date: {type: Date, default: Date.now() }} ]
   },
   rhsOverall: {
@@ -18,6 +20,8 @@ var CaseBindingSchema = new mongoose.Schema({
 	  codeSystem: { type: String },
 	  target: { type: String },
 	  assessment: { type: String },
+	  source: {type: String },
+	  sourceTemplatePart: mongoose.Schema.Types.ObjectId ,
 	  comments: [ {text: String, date: {type: Date, default: Date.now() }} ]
   } ],
   comments: [ {text: String, date: {type: Date, default: Date.now() }} ],

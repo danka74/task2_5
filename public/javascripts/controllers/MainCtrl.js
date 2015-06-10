@@ -50,7 +50,8 @@ angular
 							};
 							$scope._delete = function(comment) {
 								console.log(comment);
-								var index = $scope.partBinding.comments.indexOf(comment.comment);
+								var index = $scope.partBinding.comments
+										.indexOf(comment.comment);
 								console.log("index = " + index);
 								$scope.partBinding.comments.splice(index, 1);
 							}
@@ -80,35 +81,53 @@ angular
 						'$window',
 						'TemplateService',
 						'BindingService',
-						function($scope, $location, $window, templateService, bindingService) {
+						function($scope, $location, $window, templateService,
+								bindingService) {
 
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
 							$scope.selectedCase = null;
-							$scope.terminologies = [ {
+							$scope.terminologies = [ [ {
 								name : "SNOMED CT - precoordinated",
 								regexp : "/[1-9]\d*(|[^|]|)?/"
 							}, {
 								name : "SNOMED CT - postcoordinated"
-							}, {
+							} ], [ {
 								name : "ICD10"
 							}, {
 								name : "ATC"
 							}, {
 								name : "LOINC"
-							} ]; // add regexp for validation?
+							} ] ]; // add regexp for validation?
+
+							$scope.scenario = 0;
+							$scope.$watch('scenarioSwitch', function() {
+							       if($scope.scenarioSwitch) {
+							    	   // alternative scenario
+							    	   $scope.scenario = 1;
+							       } else {
+							    	   // snomed ct only scenario
+							    	   $scope.scenario = 0;
+							       }
+							       $scope.showCase($scope.selectedCase);
+							   });
 
 							var url = $location.$$absUrl;
-							var token = url.substring(url.indexOf("?token=") + 7, url.length);
+							var token = url.substring(
+									url.indexOf("?token=") + 7, url.length);
 							$window.sessionStorage.token = token;
 
-							templateService.get().success(function(data) {
-								$scope.caseTemplates = data;
-							}).error(function(data, status) {
-								$scope.caseTemplates = [];
-								if(status == 401)
-									$scope.caseHtml = "<h3>Cannot authenticate user</h3>";
-							});
+							templateService
+									.get()
+									.success(function(data) {
+										$scope.caseTemplates = data;
+									})
+									.error(
+											function(data, status) {
+												$scope.caseTemplates = [];
+												if (status == 401)
+													$scope.caseHtml = "<h3>Cannot authenticate user</h3>";
+											});
 
 							$scope.addComment = function(commentText) {
 								if ($scope.currentCaseBinding.comments)
@@ -124,14 +143,16 @@ angular
 								}
 								$scope.caseCommentText = "";
 							};
-							
+
 							$scope._delete = function(comment) {
 								console.log(comment);
-								var index = $scope.currentCaseBinding.comments.indexOf(comment.comment);
+								var index = $scope.currentCaseBinding.comments
+										.indexOf(comment.comment);
 								console.log("index = " + index);
-								$scope.currentCaseBinding.comments.splice(index, 1);
+								$scope.currentCaseBinding.comments.splice(
+										index, 1);
 							}
-							
+
 							$scope.showCase = function($index) {
 								if ($scope.bindingForm.$dirty) {
 									$scope.save(); // TODO: a modal?
@@ -151,10 +172,30 @@ angular
 										.success(function(data) {
 											$scope.caseHtml = data;
 										});
+								//$scope.scenarioSwitch = $scope.scenario ? 1 : 0;
+							}
+
+							$scope.createBasicStructure = function() {
+								$scope.currentCaseBinding.scenario = $scope.scenario;
+								if ($scope.currentCaseBinding.lhsBinding === undefined)
+									$scope.currentCaseBinding.lhsBinding = {};
+								$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
+								if ($scope.currentCaseBinding.rhsBindings === undefined)
+									$scope.currentCaseBinding.rhsBindings = [];
+
+								for (var i = 0; i < $scope.currentCaseTemplate.rhs.length; i++) {
+									if ($scope.currentCaseBinding.rhsBindings[i] === undefined)
+										$scope.currentCaseBinding.rhsBindings[i] = {};
+									$scope.currentCaseBinding.rhsBindings[i].source = $scope.currentCaseTemplate.rhs[i].name;
+									$scope.currentCaseBinding.rhsBindings[i].sourceTemplatePart = $scope.currentCaseTemplate.rhs[i]._id;
+								}
 							}
 
 							$scope.save = function() {
 								if ($scope.currentCaseBinding._id) {
+									// recreate it just in case not all fields
+									// are filled in
+									$scope.createBasicStructure();
 									bindingService
 											.update(
 													$scope.currentCaseBinding._id,
@@ -167,6 +208,7 @@ angular
 																.$setPristine();
 													});
 								} else {
+									$scope.createBasicStructure();
 									bindingService
 											.save($scope.currentCaseBinding)
 											.success(
@@ -183,7 +225,7 @@ angular
 
 							$scope.cancel = function() {
 								bindingService
-										.get($scope.currentCaseTemplate._id)
+										.get($scope.currentCaseTemplate._id, $scope.scenario)
 										.success(
 												function(data) {
 													if (data) {
@@ -195,6 +237,7 @@ angular
 																.log("Did not find binding");
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
+														$scope.currentCaseBinding.scenario = $scope.scenario;
 													}
 												});
 

@@ -6,8 +6,8 @@ angular.module('BindingServiceModule', []).factory(
 
 					return {
 						// get bindings for template (and user provided by JWT)
-						get: function(template) {
-							return $http.get('/api/bindings/' + template);
+						get: function(template, scenario) {
+							return $http.get('/api/bindings/' + template + '/' + scenario);
 						},
 						
 						// save binding

@@ -52,12 +52,13 @@ router.get('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
-router.get('/bindings/:template', function(req, res, next) {
+router.get('/bindings/:template/:scenario', function(req, res, next) {
 	console.log("get, user = " + JSON.stringify(req.user));
 	console.log("template = " + req.params.template);
 	Binding.findOne({
 		user : { uid: req.user.uid },
-		template : req.params.template
+		template : req.params.template,
+		scenario : req.params.scenario
 	}, function(err, bindings) {
 		if (err) {
 			return next(err);
