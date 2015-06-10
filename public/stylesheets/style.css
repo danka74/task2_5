@@ -41,11 +41,12 @@ a {
 .switch small {
   height:20px;
   width:20px;
-  background: #eee;
+  background: #428bca;;
 }
 .switch.checked {
-  background: rgb(100, 189, 99);
-  border-color: rgb(100, 189, 99);
+  height:20px;
+  background:#fff;
+  border-color:#fff; 
 }
 .switch.checked small {
   left:32px;

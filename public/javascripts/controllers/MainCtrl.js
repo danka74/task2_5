@@ -79,9 +79,10 @@ angular
 						'$scope',
 						'$location',
 						'$window',
+						'jwtHelper',
 						'TemplateService',
 						'BindingService',
-						function($scope, $location, $window, templateService,
+						function($scope, $location, $window, jwtHelper, templateService,
 								bindingService) {
 
 							$scope.currentCaseTemplate = null;
@@ -109,13 +110,16 @@ angular
 							    	   // snomed ct only scenario
 							    	   $scope.scenario = 0;
 							       }
-							       $scope.showCase($scope.selectedCase);
+							       console.log($scope.selectedCase);
+							       if($scope.selectedCase != null)
+							    	   $scope.showCase($scope.selectedCase);
 							   });
 
 							var url = $location.$$absUrl;
 							var token = url.substring(
 									url.indexOf("?token=") + 7, url.length);
 							$window.sessionStorage.token = token;
+							$scope.user = jwtHelper.decodeToken(token);
 
 							templateService
 									.get()
