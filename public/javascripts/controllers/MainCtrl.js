@@ -180,8 +180,7 @@ angular
 										.success(function(data) {
 											$scope.caseHtml = data;
 										});
-								// $scope.scenarioSwitch = $scope.scenario ? 1 :
-								// 0;
+
 							}
 
 							$scope.createBasicStructure = function() {
@@ -191,7 +190,6 @@ angular
 								$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
 								if ($scope.currentCaseBinding.rhsBindings === undefined)
 									$scope.currentCaseBinding.rhsBindings = [];
-
 								for (var i = 0; i < $scope.currentCaseTemplate.rhs.length; i++) {
 									if ($scope.currentCaseBinding.rhsBindings[i] === undefined)
 										$scope.currentCaseBinding.rhsBindings[i] = {};
@@ -248,6 +246,8 @@ angular
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
 														$scope.currentCaseBinding.scenario = $scope.scenario;
+														$scope.createBasicStructure();
+														console.log($scope.currentCaseBinding);
 													}
 												});
 

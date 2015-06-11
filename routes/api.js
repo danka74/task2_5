@@ -106,6 +106,8 @@ router.put('/bindings/:id', function(req, res, next) {
 });
 
 router.post('/bindings', function(req, res, next) {
+	console.log(JSON.stringify(req.body));
+
 	var binding = new Binding(req.body);
 	
 	console.log(JSON.stringify(binding));
@@ -116,11 +118,11 @@ router.post('/bindings', function(req, res, next) {
 	
 	console.log(JSON.stringify(binding));
 
-	binding.save(function(err, post) {
+	binding.save(function(err) {
 		if (err) {
 			return next(err);
 		}
-
+		
 		res.json(binding);
 	});
 });

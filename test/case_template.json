@@ -1,82 +1,149 @@
-[ {
-	"title" : "Smoking status",
-	"templateURL" : "default_template.html",
-	"description" : "From SHN Heart Failure summary",
-	"rhs" : [ {
-		"name" : "Current Smoker",
-		"_type":  "tb"
-	}, {
-		"name" : "Quitting",
-		"_type":  "tb"
-	}, {
-		"name" : "Ex-smoker",
-		"_type":  "tb"
-	}, {
-		"name" : "Never Smoked",
-		"_type":  "tb"
-	} ],
-	"lhs" : {
-		"name" : "Smoking Status",
-		"_type":  "tb"
+[
+	{
+		"title": "Allergy display name (Allergy description)",
+		"templateURL": "default_template.html",
+		"description": "From epSOS patient summary, R5.1",
+		"_id": ObjectId("557153ef7af9c8e11739e47e"),
+		"rhs": 
+		[
+			{
+				"name": "Anaphylaxis",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e487")
+			},
+
+			{
+				"name": "Atopic dermatitis and related conditions",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e486")
+			},
+
+			{
+				"name": "Bronchospasm",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e485")
+			},
+
+			{
+				"name": "Conjunctivite",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e484")
+			},
+
+			{
+				"name": "Eczema",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e483")
+			},
+
+			{
+				"name": "Pruritus NOS",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e482")
+			},
+
+			{
+				"name": "Rhinite",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e481")
+			},
+
+			{
+				"name": "Weal",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e480")
+			},
+
+			{
+				"name": "Angio-oedema",
+				"_type": "tb",
+				"_id": ObjectId("557153ef7af9c8e11739e47f")
+			}
+		],
+
+		"lhs": 
+		{
+			"name": "Allergy Display Name",
+			"_type": "tb"
+		},
+
+		"__v": 0
+	},
+
+	{
+		"_id": ObjectId("5576da62f0be1d0305f36a56"),
+		"title": "Heart Failure registry",
+		"templateURL": "default_template.html",
+		"description": "From Swedish quality registry RiksSvikt, www.rikssvikt.se",
+		"rhs": 
+		[
+			{
+				"name": "No",
+				"_type": "tb"
+			},
+
+			{
+				"name": "Yes, less than 30 days ago",
+				"_type": "tb"
+			},
+
+			{
+				"name": "No, more than 30 days ago",
+				"_type": "tb"
+			},
+
+			{
+				"name": "Unknown",
+				"_type": "tb"
+			}
+		],
+
+		"lhs": 
+		{
+			"name": "Previous encounters related to heart failure",
+			"_type": "tb"
+		}
+	},
+
+	{
+		"__v": 0,
+		"_id": ObjectId("557153f97af9c8e11739e488"),
+		"description": "From SHN Heart Failure summary <a href=\"http://openehr.org/ckm/#showTemplate_1013.26.14\">link</a>\n",
+		"lhs": 
+		{
+			"name": "Smoking Status",
+			"description": "Statement about the individual's current tobacco smoking activity",
+			"_type": "tb"
+		},
+
+		"rhs": 
+		[
+			{
+				"name": "Current Smoker",
+				"_type": "tb",
+				"_id": ObjectId("557153f97af9c8e11739e48c")
+			},
+
+			{
+				"name": "Quitting",
+				"_type": "tb",
+				"_id": ObjectId("557153f97af9c8e11739e48b")
+			},
+
+			{
+				"name": "Ex-smoker",
+				"_type": "tb",
+				"_id": ObjectId("557153f97af9c8e11739e48a")
+			},
+
+			{
+				"name": "Never Smoked",
+				"_type": "tb",
+				"_id": ObjectId("557153f97af9c8e11739e489")
+			}
+		],
+
+		"templateURL": "default_template.html",
+		"title": "Smoking status"
 	}
-},
-{
-	"title" : "Allergy display name (Allergy description)",
-	"templateURL" : "default_template.html",
-	"description" : "From epSOS patient summary, R5.1",
-	"rhs" : [ {
-		"name" : "Anaphylaxis",
-		"_type":  "tb"
-	}, {
-		"name" : "Atopic dermatitis and related conditions",
-		"_type":  "tb"
-	}, {
-		"name" : "Bronchospasm",
-		"_type":  "tb"
-	}, {
-		"name" : "Conjonctivite",
-		"_type":  "tb"
-	}, {
-		"name" : "Eczema",
-		"_type":  "tb"
-	}, {
-		"name" : "Pruritus NOS",
-		"_type":  "tb"
-	}, {
-		"name" : "Rhinite",
-		"_type":  "tb"
-	}, {
-		"name" : "Weal",
-		"_type":  "tb"
-	}, {
-		"name" : "Angio-oedema",
-		"_type":  "tb"
-	} ],
-	"lhs" : {
-		"name" : "Allergy Display Name",
-		"_type":  "tb"
-	}
-},
-{
-	"title" : "Heart Failure registry",
-	"templateURL" : "default_template.html",
-	"description" : "From Swedish quality registry RiksSvikt, www.rikssvikt.se",
-	"rhs" : [ {
-		"name" : "No",
-		"_type":  "tb"
-	}, {
-		"name" : "Yes, less than 30 days ago",
-		"_type":  "tb"
-	}, {
-		"name" : "No, more than 30 days ago",
-		"_type":  "tb"
-	}, {
-		"name" : "Unknown",
-		"_type":  "tb"
-	} ],
-	"lhs" : {
-		"name" : "Previous encounters related to heart failure",
-		"_type":  "tb"
-	}
-}
 ]

@@ -1,10 +1,48 @@
 {
-  "template": "556399d9bd8baaff7ba1c945",
-  "bindings": {
-	  "target": "123456789",
-	  "part": "556399d9bd8baaff7ba1c947",
-	  "comments": [{"text": "Kommentar!!"} ]
-	}],
-	"comments": [{"text": "Kommentar!!"} ],
-  "user": "foo@bar.com"
+	"template": "557153f97af9c8e11739e488",
+	"scenario": 0,
+	"lhsBinding": 
+	{
+		"codeSystem": "SNOMED CT - postcoordinated",
+		"assessment": "3",
+		"target": "123",
+		"source": "Smoking Status"
+	},
+
+	"rhsOverall": 
+	{
+		"codeSystem": "SNOMED CT - postcoordinated",
+		"assessment": "2",
+		"target": "1231233"
+	},
+
+	"rhsBindings": 
+	{
+		"0": 
+		{
+			"codeSystem": "SNOMED CT - postcoordinated",
+			"assessment": "2",
+			"target": "1321233",
+			"source": "Current Smoker",
+			"sourceTemplatePart": "557153f97af9c8e11739e48c"
+		},
+
+		"1": 
+		{
+			"source": "Quitting",
+			"sourceTemplatePart": "557153f97af9c8e11739e48b"
+		},
+
+		"2": 
+		{
+			"source": "Ex-smoker",
+			"sourceTemplatePart": "557153f97af9c8e11739e48a"
+		},
+
+		"3": 
+		{
+			"source": "Never Smoked",
+			"sourceTemplatePart": "557153f97af9c8e11739e489"
+		}
+	}
 }
