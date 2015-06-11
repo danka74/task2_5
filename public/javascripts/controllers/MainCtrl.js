@@ -82,8 +82,8 @@ angular
 						'jwtHelper',
 						'TemplateService',
 						'BindingService',
-						function($scope, $location, $window, jwtHelper, templateService,
-								bindingService) {
+						function($scope, $location, $window, jwtHelper,
+								templateService, bindingService) {
 
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
@@ -103,23 +103,27 @@ angular
 
 							$scope.scenario = 0;
 							$scope.$watch('scenarioSwitch', function() {
-							       if($scope.scenarioSwitch) {
-							    	   // alternative scenario
-							    	   $scope.scenario = 1;
-							       } else {
-							    	   // snomed ct only scenario
-							    	   $scope.scenario = 0;
-							       }
-							       console.log($scope.selectedCase);
-							       if($scope.selectedCase != null)
-							    	   $scope.showCase($scope.selectedCase);
-							   });
+								if ($scope.scenarioSwitch) {
+									// alternative scenario
+									$scope.scenario = 1;
+								} else {
+									// snomed ct only scenario
+									$scope.scenario = 0;
+								}
+								console.log($scope.selectedCase);
+								if ($scope.selectedCase != null)
+									$scope.showCase($scope.selectedCase);
+							});
 
 							var url = $location.$$absUrl;
-							var token = url.substring(
-									url.indexOf("?token=") + 7, url.length);
-							$window.sessionStorage.token = token;
-							$scope.user = jwtHelper.decodeToken(token);
+							var tokenIndex = url.indexOf("?token=");
+							if (tokenIndex != -1) {
+								var token = url.substring(url
+										.indexOf("?token=") + 7, url.length);
+								console.log(token);
+								$window.sessionStorage.token = token;
+								$scope.user = jwtHelper.decodeToken(token);
+							}
 
 							templateService
 									.get()
@@ -176,7 +180,8 @@ angular
 										.success(function(data) {
 											$scope.caseHtml = data;
 										});
-								//$scope.scenarioSwitch = $scope.scenario ? 1 : 0;
+								// $scope.scenarioSwitch = $scope.scenario ? 1 :
+								// 0;
 							}
 
 							$scope.createBasicStructure = function() {
@@ -229,7 +234,8 @@ angular
 
 							$scope.cancel = function() {
 								bindingService
-										.get($scope.currentCaseTemplate._id, $scope.scenario)
+										.get($scope.currentCaseTemplate._id,
+												$scope.scenario)
 										.success(
 												function(data) {
 													if (data) {

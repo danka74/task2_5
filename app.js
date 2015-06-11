@@ -43,8 +43,23 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use(jwt({
-//	secret : process.env.SECRET,
+// app.use(jwt({
+// secret : process.env.SECRET,
+// getToken : function fromHeaderOrQuerystring(req) {
+// if (req.headers.authorization
+// && req.headers.authorization.split(' ')[0] === 'Bearer') {
+// return req.headers.authorization.split(' ')[1];
+// } else if (req.query && req.query.token) {
+// return req.query.token;
+// }
+// return null;
+// }
+// }));
+
+app.use('/', routes);
+var User = mongoose.model('User');
+app.use('/api', eJWT({
+	secret : process.env.SECRET
 //	getToken : function fromHeaderOrQuerystring(req) {
 //		if (req.headers.authorization
 //				&& req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -54,22 +69,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 //		}
 //		return null;
 //	}
-//}));
-
-app.use('/', routes);
-app.use('/api', eJWT({
-	secret : process.env.SECRET,
-	getToken : function fromHeaderOrQuerystring(req) {
-		if (req.headers.authorization
-				&& req.headers.authorization.split(' ')[0] === 'Bearer') {
-			return req.headers.authorization.split(' ')[1];
-		} else if (req.query && req.query.token) {
-			return req.query.token;
+}),
+function(req, res, next) {
+	console.log(req.user);
+	User.find({uid: req.user.uid}, function(err) {
+		if(err) {
+			res.send(401);
+			return next(err);
 		}
-		return null;
-	}
-}), apis);
-//app.use('/users', users);
+	});
+	return next();
+}, 
+apis);
+// app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -54,13 +54,15 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-							{{user.uid}}</a></li>
+							{{user === undefined ? "Not logged in" : user.uid}}</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	<div ng-show="user === undefined"><h1>Cannot authenticate user</h1></div>
 
-	<div class="container-fluid">
+	<div ng-show="user" class="container-fluid">
 		<div class="row">
 			<div class="col-sm-2">
 				<div class="panel panel-default" id="templates">
