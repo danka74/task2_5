@@ -1,53 +1,65 @@
 body {
-  padding: 10px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding: 10px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+	color: #00B7FF;
 }
 
 .blue {
-    color: blue;
+	color: blue;
 }
 
-.well{
-  margin-bottom:0px;
-  margin-top:10px;
+.well {
+	margin-bottom: 0px;
+	margin-top: 10px;
 }
 
 .form-group {
-	margin-bottom:0px;
+	margin-bottom: 0px;
 }
 
 .row-centered {
-	float:none;	
-    vertical-align:middle;
+	float: none;
+	vertical-align: middle;
+}
+
+html, body, .full-height {
+    height: 100%;
 }
 
 .commentXXX {
-/*     display: inline-block; */
-/*     overflow: hidden; */
-/*     height: 0; */
-    transition: height 2s;
-    -moz-transition: height 2s; /* Firefox 4 */
-    -webkit-transition: height 2s; /* Safari and Chrome */
-    -o-transition: height 2s; /* Opera */
+	/*     display: inline-block; */
+	/*     overflow: hidden; */
+	/*     height: 0; */
+	transition: height 2s;
+	-moz-transition: height 2s; /* Firefox 4 */
+	-webkit-transition: height 2s; /* Safari and Chrome */
+	-o-transition: height 2s; /* Opera */
+}
+
+.scrollable {
+	height: 90%;
+    margin-bottom: 5px;
+    overflow-y: scroll;
 }
 
 .switch {
-	height:20px;
+	height: 20px;
 }
+
 .switch small {
-  height:20px;
-  width:20px;
-  background: #428bca;;
+	height: 20px;
+	width: 20px;
+	background: #428bca;;
 }
+
 .switch.checked {
-  height:20px;
-  background:#fff;
-  border-color:#fff; 
+	background: #fff;
+	border-color: #fff;
 }
+
 .switch.checked small {
-  left:32px;
+	left: 32px;
 }

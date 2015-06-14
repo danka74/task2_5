@@ -231,6 +231,7 @@ angular
 							}
 
 							$scope.cancel = function() {
+								// fetch the last saved version of the binding, if possible
 								bindingService
 										.get($scope.currentCaseTemplate._id,
 												$scope.scenario)
@@ -239,10 +240,13 @@ angular
 													if (data) {
 														console
 																.log("Found binding");
+														// if last saved is available
 														$scope.currentCaseBinding = data;
 													} else {
+														// no previous binding saved in database
 														console
 																.log("Did not find binding");
+														// clear entry fields and assign basic structure
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
 														$scope.currentCaseBinding.scenario = $scope.scenario;
