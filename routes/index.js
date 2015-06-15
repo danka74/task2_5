@@ -34,39 +34,35 @@ router.get('/gentoken', function(req, res, next) {
 });
 
 router.get('/stats', function(req, res, next) {
-	User.find(function(err, users) {
-		if (err) {
-			return next(err);
-		}
-		res.set('Content-Type', 'text/plain');
-		var result = "";
-		for (u in users) {
-			Binding.find({
-				user : {
-					uid : users[u].uid
+    res.writeHead(200, {'Content-Type': 'text/csv'});
+	Binding.find().exec(
+			function(err, bindings) {
+				if (err) {
+					return err;
 				}
-			}).exec(
-					function(err, bindings) {
-						if (err) {
-							return next(err);
-						}
-						for (b in bindings) {
-							console.log(b);
-							console.log(users[u]);
-							console.log(users[u].uid + '\t'
-									+ bindings[b].lhsBinding.source + '\t'
-									+ bindings[b].lhsBinding.target + '\n');
-
-							result += (users[u].uid + '\t'
-									+ bindings[b].lhsBinding.source + '\t'
-									+ bindings[b].lhsBinding.target + '\n');
-						}
-
-					});
-		}
-		console.log(result);
-		res.send(result);
-	});
+				res.write('user\tscenario\tsource\tassessment\ttarget\n')
+				for (b in bindings) {
+					var binding = bindings[b];
+					var user = binding.user.uid;
+					var scenario = binding.scenario;
+					res.write(user + '\t' + scenario + '\t'
+							+ binding.lhsBinding.source + '\t'
+							+ binding.lhsBinding.assessment + '\t'
+							+ binding.lhsBinding.target + '\n');
+					res.write(user + '\t' + scenario + '\t'
+							+ binding.lhsBinding.source + '-overall\t'
+							+ binding.rhsOverall.assessment + '\t'
+							+ binding.rhsOverall.target + '\n');
+					for (var r = 0; r < binding.rhsBindings.length; r++) {
+						res.write(user + '\t' + scenario + '\t'
+								+ binding.rhsBindings[r].source + '\t'
+								+ binding.rhsBindings[r].assessment + '\t'
+								+ binding.rhsBindings[r].target + '\n');
+					}
+				}
+				res.end();
+			});
+	//res.end();
 
 });
 
