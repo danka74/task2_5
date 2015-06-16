@@ -13,16 +13,6 @@ require('./models/CaseTemplate');
 require('./models/CaseBinding');
 require('./models/User');
 
-// var pathToMongoDb = 'mongodb://localhost/passwordless-simple-mail';
-// passwordless.init(new mongoStore(pathToMongoDb));
-// // Set up a delivery service
-// passwordless.addDelivery(function(tokenToSend, uidToSend, recipient,
-// callback) {
-// var host = 'localhost:3000';
-// console.info('http://' + host + '/?token=' + tokenToSend + '&uid='
-// + encodeURIComponent(uidToSend));
-// });
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var apis = require('./routes/api');
@@ -34,7 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-// app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -43,45 +33,22 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(jwt({
-// secret : process.env.SECRET,
-// getToken : function fromHeaderOrQuerystring(req) {
-// if (req.headers.authorization
-// && req.headers.authorization.split(' ')[0] === 'Bearer') {
-// return req.headers.authorization.split(' ')[1];
-// } else if (req.query && req.query.token) {
-// return req.query.token;
-// }
-// return null;
-// }
-// }));
-
 app.use('/', routes);
 var User = mongoose.model('User');
 app.use('/api', eJWT({
 	secret : process.env.SECRET
-//	getToken : function fromHeaderOrQuerystring(req) {
-//		if (req.headers.authorization
-//				&& req.headers.authorization.split(' ')[0] === 'Bearer') {
-//			return req.headers.authorization.split(' ')[1];
-//		} else if (req.query && req.query.token) {
-//			return req.query.token;
-//		}
-//		return null;
-//	}
-}),
-function(req, res, next) {
+}), function(req, res, next) {
 	console.log(req.user);
-	User.find({uid: req.user.uid}, function(err) {
-		if(err) {
+	User.find({
+		uid : req.user.uid
+	}, function(err) {
+		if (err) {
 			res.send(401);
 			return next(err);
 		}
 	});
 	return next();
-}, 
-apis);
-// app.use('/users', users);
+}, apis);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

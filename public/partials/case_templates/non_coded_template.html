@@ -1,0 +1,55 @@
+<div id="{{'case-' + currentCaseTemplate._id}}">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Description</div>
+				<div class="panel-body">
+					<div ng-bind-html="currentCaseTemplate.description | toTrusted">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Information model attributes</div>
+				<ul class="list-group">
+					<li class="list-group-item"
+						ng-repeat="part in currentCaseTemplate.rhs"><concept-input
+							name="{{part.name}}" part-description="{{part.description}}"
+							part-binding="currentCaseBinding.rhsBindings[$index]"
+							terminologies="terminologies[scenario]" /></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Case comments</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li class="list-group-item"
+							ng-repeat="comment in currentCaseBinding.comments">
+							<h6 class="list-group-item-heading">{{comment.date |
+						date:'short'}}<button class="close pull-right" type="button" ng-click="_delete(this)">&times;</button></h6>
+					<p class="list-group-item-text">{{comment.text}}</p>
+						</li>
+					</ul>
+					<div class="row">
+						<div class="col-sm-10">
+							<textarea class="form-control" ng-model="caseCommentText"
+								placeholder="New case comment"></textarea>
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-primary"
+								ng-click="addComment(caseCommentText)">Add</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

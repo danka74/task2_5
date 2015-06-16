@@ -1,9 +1,14 @@
 [
 	{
-		"title": "Allergy display name (Allergy description)",
-		"templateURL": "default_template.html",
-		"description": "From epSOS patient summary, R5.1",
+		"__v": 0,
 		"_id": ObjectId("557153ef7af9c8e11739e47e"),
+		"description": "From epSOS patient summary, R5.1",
+		"lhs": 
+		{
+			"name": "Allergy Display Name",
+			"_type": "tb"
+		},
+
 		"rhs": 
 		[
 			{
@@ -25,9 +30,9 @@
 			},
 
 			{
-				"name": "Conjunctivite",
+				"_id": ObjectId("557153ef7af9c8e11739e484"),
 				"_type": "tb",
-				"_id": ObjectId("557153ef7af9c8e11739e484")
+				"name": "Conjunctivitis"
 			},
 
 			{
@@ -37,15 +42,15 @@
 			},
 
 			{
-				"name": "Pruritus NOS",
+				"_id": ObjectId("557153ef7af9c8e11739e482"),
 				"_type": "tb",
-				"_id": ObjectId("557153ef7af9c8e11739e482")
+				"name": "Pruritus"
 			},
 
 			{
-				"name": "Rhinite",
+				"_id": ObjectId("557153ef7af9c8e11739e481"),
 				"_type": "tb",
-				"_id": ObjectId("557153ef7af9c8e11739e481")
+				"name": "Rhinitis"
 			},
 
 			{
@@ -61,13 +66,8 @@
 			}
 		],
 
-		"lhs": 
-		{
-			"name": "Allergy Display Name",
-			"_type": "tb"
-		},
-
-		"__v": 0
+		"templateURL": "default_template.html",
+		"title": "Allergy display name (Allergy description)"
 	},
 
 	{
@@ -145,5 +145,63 @@
 
 		"templateURL": "default_template.html",
 		"title": "Smoking status"
+	},
+		{
+		"description": "Official Emergency room protocol Germany (DGAI, DIVI) and Trauma registry",
+		"rhs": 
+		[
+			{
+				"name": "Respiratory frequency ",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Oxygen saturation",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Systolic blood pressure",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Heart rate",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Glasgow Coma Scale eye opening",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Glasgow Coma Scale verbal response",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Glasgow Coma Scale motor response",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Glasgow Coma Scale sum",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Pupil width",
+				"_type": "tb",
+			},
+
+			{
+				"name": "Pupil light reaction",
+				"_type": "tb",
+			}
+		],
+
+		"templateURL": "non_coded_template.html",
+		"title": "Emergency room protocol nad Trauma registry"
 	}
 ]

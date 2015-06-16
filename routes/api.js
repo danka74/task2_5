@@ -67,16 +67,6 @@ router.get('/bindings/:template/:scenario', function(req, res, next) {
 	});
 });
 
-//router.get('/bindings/:id', function(req, res, next) {
-//	console.log("binding id = " + req.params.id);
-//	Binding.findById(req.params.id, function(err, data) {
-//		if (err) {
-//			return next(err);
-//		}
-//		res.json(data);
-//	})
-//});
-
 router.put('/bindings/:id', function(req, res, next) {
 
 	Binding.findById(req.params.id, function(err, persistBinding) {
