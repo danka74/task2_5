@@ -187,7 +187,8 @@ angular
 								$scope.currentCaseBinding.scenario = $scope.scenario;
 								if ($scope.currentCaseBinding.lhsBinding === undefined)
 									$scope.currentCaseBinding.lhsBinding = {};
-								$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
+								if(!$scope.currentCaseTemplate.lhs === undefined)
+									$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
 								if ($scope.currentCaseBinding.rhsBindings === undefined)
 									$scope.currentCaseBinding.rhsBindings = [];
 								for (var i = 0; i < $scope.currentCaseTemplate.rhs.length; i++) {
