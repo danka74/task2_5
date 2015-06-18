@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CaseBindingSchema = new mongoose.Schema({
   template: {type: mongoose.Schema.Types.ObjectId, ref: 'CaseTemplate'},
-  scenario: {type: Number },
+  scenario: {type: Boolean },
   lhsBinding: {
 	  codeSystem: { type: String },
 	  target: { type: String },

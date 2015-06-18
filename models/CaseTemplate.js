@@ -11,7 +11,7 @@ var CaseTemplateSchema = new mongoose.Schema({
 			name : String,
 			_type : String
 		} ], // right hand side
-	description : String // case template description
+	description : String // case template description, markdown is used to format description
 });
 
 mongoose.model('CaseTemplate', CaseTemplateSchema);

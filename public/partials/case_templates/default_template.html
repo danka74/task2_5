@@ -4,7 +4,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Description</div>
 				<div class="panel-body">
-					<div ng-bind-html="currentCaseTemplate.description | toTrusted">
+					<div marked="currentCaseTemplate.description">
 					</div>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 					<concept-input name="{{currentCaseTemplate.lhs.name}}"
 						part-description="{{currentCaseTemplate.lhs.description}}"
 						part-binding="currentCaseBinding.lhsBinding"
-						terminologies="terminologies[scenario]" />
+						terminologies="terminologies[scenario?1:0]" />
 
 				</div>
 			</div>
@@ -32,12 +32,12 @@
 							name="Overall meaning of value set"
 							part-description="One meaning covering all of the value set"
 							part-binding="currentCaseBinding.rhsOverall"
-							terminologies="terminologies[scenario]" /></li>
+							terminologies="terminologies[scenario?1:0]" /></li>
 					<li class="list-group-item"
 						ng-repeat="part in currentCaseTemplate.rhs"><concept-input
 							name="{{part.name}}" part-description="{{part.description}}"
 							part-binding="currentCaseBinding.rhsBindings[$index]"
-							terminologies="terminologies[scenario]" /></li>
+							terminologies="terminologies[scenario?1:0]" /></li>
 				</ul>
 			</div>
 		</div>

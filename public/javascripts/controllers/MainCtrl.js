@@ -1,10 +1,11 @@
 angular
 		.module('MainControllerModule', [])
-		.filter('toTrusted', [ '$sce', function($sce) {
-			return function(text) {
-				return $sce.trustAsHtml(text);
-			};
-		} ])
+//		.filter('toTrusted', [ '$sce', function($sce) {
+//			return function(text) {
+//				return $sce.trustAsHtml(text);
+//			};
+//		} ])
+		// directive to allow AngularJS HTML in the cases
 		.directive('bindHtmlCompile', [ '$compile', function($compile) {
 			return {
 				restrict : 'A',
@@ -101,16 +102,10 @@ angular
 								name : "LOINC"
 							} ] ]; // add regexp for validation?
 
-							$scope.scenario = 0;
-							$scope.$watch('scenarioSwitch', function() {
-								if ($scope.scenarioSwitch) {
-									// alternative scenario
-									$scope.scenario = 1;
-								} else {
-									// snomed ct only scenario
-									$scope.scenario = 0;
-								}
-								console.log($scope.selectedCase);
+							// SCT only or Alternative study arm, false=SCT,
+							// true=Alternative
+							$scope.scenario = false;
+							$scope.$watch('scenario', function() {
 								if ($scope.selectedCase != null)
 									$scope.showCase($scope.selectedCase);
 							});
@@ -187,7 +182,7 @@ angular
 								$scope.currentCaseBinding.scenario = $scope.scenario;
 								if ($scope.currentCaseBinding.lhsBinding === undefined)
 									$scope.currentCaseBinding.lhsBinding = {};
-								if(!$scope.currentCaseTemplate.lhs === undefined)
+								if (!$scope.currentCaseTemplate.lhs === undefined)
 									$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
 								if ($scope.currentCaseBinding.rhsBindings === undefined)
 									$scope.currentCaseBinding.rhsBindings = [];
@@ -227,12 +222,11 @@ angular
 																.$setPristine();
 													});
 								}
-								// $scope.currentCaseBinding._id = data._id;
-
 							}
 
 							$scope.cancel = function() {
-								// fetch the last saved version of the binding, if possible
+								// fetch the last saved version of the binding,
+								// if possible
 								bindingService
 										.get($scope.currentCaseTemplate._id,
 												$scope.scenario)
@@ -241,18 +235,24 @@ angular
 													if (data) {
 														console
 																.log("Found binding");
-														// if last saved is available
+														// if last saved is
+														// available
 														$scope.currentCaseBinding = data;
 													} else {
-														// no previous binding saved in database
+														// no previous binding
+														// saved in database
 														console
 																.log("Did not find binding");
-														// clear entry fields and assign basic structure
+														// clear entry fields
+														// and assign basic
+														// structure
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
 														$scope.currentCaseBinding.scenario = $scope.scenario;
-														$scope.createBasicStructure();
-														console.log($scope.currentCaseBinding);
+														$scope
+																.createBasicStructure();
+														console
+																.log($scope.currentCaseBinding);
 													}
 												});
 
