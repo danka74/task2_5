@@ -203,5 +203,68 @@
 
 		"templateURL": "non_coded_template.html",
 		"title": "Emergency room protocol and Trauma registry"
+	},
+
+	{
+		"title": "Heart Failure registry medications",
+		"templateURL": "non_coded_template.html",
+		"description": "Extract with all medication terms from Swedish heart-failure quality registry [RiksSvikt](www.rikssvikt.se).",
+		"rhs": 
+		[
+			{
+				"name": "ACE inhibitor",
+			},
+			{
+				"name": "A2 blocker/ARB",
+			},
+			{
+				"name": "RAS blocker",
+			},
+			{
+				"name": "Beta blocker",
+			},
+			{
+				"name": "Mineralocorticoid receptor blocker",
+			},
+			{
+				"name": "Spironolactone",
+			},
+			{
+				"name": "Eplerenone",
+			},
+			{
+				"name": "Diuretic",
+			},
+			{
+				"name": "Loop diuretic",
+			},
+			{
+				"name": "Thiazide",
+			},
+			{
+				"name": "Digitalis",
+			},
+			{
+				"name": "Statine",
+			},
+			{
+				"name": "Dobutamine",
+			},
+			{
+				"name": "Levosimendan",
+			},
+			{
+				"name": "Milirone",
+			},
+			{
+				"name": "Long-acting nitrates",
+			},
+			{
+				"name": "Anticoagulant",
+			},
+			{
+				"name": "ASA",
+			}
+		]
 	}
 ]

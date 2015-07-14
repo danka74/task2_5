@@ -1,0 +1,748 @@
+[
+	{
+		"__v": 1,
+		"_id": ObjectId("5579750a0149ecf4323c1bb6"),
+		"comments": 
+		[
+			
+		],
+
+		"lhsBinding": 
+		{
+			"codeSystem": "SNOMED CT - precoordinated",
+			"assessment": "3",
+			"target": "229819007|Tobacco use and exposure (observable entity)",
+			"source": "Smoking Status",
+			"comments": 
+			[
+				{
+					"text": "Concept too generic, post-coordination not possible",
+					"_id": ObjectId("5579750a0149ecf4323c1bb8"),
+					"date": ISODate("2015-06-11T11:45:32.587Z")
+				}
+			]
+		},
+
+		"rhsBindings": 
+		[
+			{
+				"target": "77176002|Smoker (finding)",
+				"assessment": "1",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"source": "Current Smoker",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d08"),
+				"_id": ObjectId("5579750a0149ecf4323c1bb7"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"target": "160616005|Trying to give up smoking (finding)",
+				"assessment": "1",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"source": "Quitting",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d07"),
+				"_id": ObjectId("557a81070149ecf4323c1bbb"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"target": "8517006|Ex-smoker (finding)",
+				"assessment": "1",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"source": "Ex-smoker",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d06"),
+				"_id": ObjectId("557a81070149ecf4323c1bba"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"target": "266919005|Never smoked tobacco (finding)",
+				"assessment": "1",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"source": "Never Smoked",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d05"),
+				"_id": ObjectId("557a81070149ecf4323c1bb9"),
+				"comments": 
+				[
+					
+				]
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"target": "365980008|Finding of tobacco use and exposure (finding)",
+			"codeSystem": "SNOMED CT - precoordinated",
+			"assessment": "1",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"scenario": 0,
+		"template": ObjectId("556a33c2f0387656034a3d04"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		}
+	},
+
+	{
+		"__v": 0,
+		"_id": ObjectId("557a812f0149ecf4323c1bbc"),
+		"comments": 
+		[
+			
+		],
+
+		"lhsBinding": 
+		{
+			"source": "Smoking Status",
+			"codeSystem": "LOINC",
+			"assessment": "1",
+			"target": "63638-1",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"rhsBindings": 
+		[
+			{
+				"source": "Current Smoker",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d08"),
+				"assessment": "4",
+				"_id": ObjectId("557a812f0149ecf4323c1bc0"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Quitting",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d07"),
+				"assessment": "4",
+				"_id": ObjectId("557a812f0149ecf4323c1bbf"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Ex-smoker",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d06"),
+				"target": "LA15920-4",
+				"codeSystem": "LOINC",
+				"assessment": "1",
+				"_id": ObjectId("557a812f0149ecf4323c1bbe"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Never Smoked",
+				"sourceTemplatePart": ObjectId("556a33c2f0387656034a3d05"),
+				"assessment": "4",
+				"_id": ObjectId("557a812f0149ecf4323c1bbd"),
+				"comments": 
+				[
+					
+				]
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"assessment": "4",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"scenario": 0,
+		"template": ObjectId("556a33c2f0387656034a3d04"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		}
+	},
+
+	{
+		"__v": 0,
+		"_id": ObjectId("557a82df0149ecf4323c1bc1"),
+		"comments": 
+		[
+			
+		],
+
+		"lhsBinding": 
+		{
+			"source": "Allergy Display Name",
+			"assessment": "4",
+			"target": "",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"rhsBindings": 
+		[
+			{
+				"source": "Anaphylaxis",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed6"),
+				"target": "39579001|Anaphylaxis",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bcc"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Atopic dermatitis and related conditions",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed5"),
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "3",
+				"target": "24079001|Atopic dermatitis",
+				"_id": ObjectId("557a82df0149ecf4323c1bca"),
+				"comments": 
+				[
+					{
+						"text": "Concept too generic, includes disjunction",
+						"_id": ObjectId("557a82df0149ecf4323c1bcb"),
+						"date": ISODate("2015-06-12T06:55:35.990Z")
+					}
+				]
+			},
+
+			{
+				"source": "Bronchospasm",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed4"),
+				"target": "4386001|Bronchospasm",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc9"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Conjunctivite",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed3"),
+				"target": "9826008|Conjunctivitis",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc8"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Eczema",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed2"),
+				"target": "43116000|Eczema",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc7"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Pruritus NOS",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed1"),
+				"target": "418363000|Pruritus",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc6"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Rhinite",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed0"),
+				"target": "70076002|Rhinitis",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc5"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Weal",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ecf"),
+				"target": "247472004|Weal (disorder)",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc4"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Angio-oedema",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ece"),
+				"target": "41291007|Angioneurotic oedema",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"assessment": "1",
+				"_id": ObjectId("557a82df0149ecf4323c1bc3"),
+				"comments": 
+				[
+					
+				]
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"codeSystem": "SNOMED CT - precoordinated",
+			"assessment": "3",
+			"target": "419076005|Allergic reaction (disorder)",
+			"comments": 
+			[
+				{
+					"text": "Concept does not cover all items list below",
+					"_id": ObjectId("557a82df0149ecf4323c1bc2"),
+					"date": ISODate("2015-06-12T06:54:50.668Z")
+				}
+			]
+		},
+
+		"scenario": 1,
+		"template": ObjectId("556ebed58b517f2b339d4ecd"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		}
+	},
+
+	{
+		"template": ObjectId("556ebed58b517f2b339d4ecd"),
+		"scenario": 1,
+		"_id": ObjectId("557a83700149ecf4323c1bcd"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		},
+
+		"comments": 
+		[
+			
+		],
+
+		"rhsBindings": 
+		[
+			{
+				"source": "Anaphylaxis",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed6"),
+				"target": "T78.2",
+				"codeSystem": "ICD10",
+				"assessment": "1",
+				"_id": ObjectId("557a83710149ecf4323c1bd9"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Atopic dermatitis and related conditions",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed5"),
+				"codeSystem": "ICD10",
+				"assessment": "1",
+				"target": "L20",
+				"_id": ObjectId("557a83710149ecf4323c1bd8"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Bronchospasm",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed4"),
+				"codeSystem": "ICD10",
+				"assessment": "3",
+				"target": "J98.0",
+				"_id": ObjectId("557a83710149ecf4323c1bd7"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Conjunctivite",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed3"),
+				"codeSystem": "ICD10",
+				"assessment": "1",
+				"target": "H10",
+				"_id": ObjectId("557a83700149ecf4323c1bd6"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Eczema",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed2"),
+				"codeSystem": "ICD10",
+				"assessment": "3",
+				"target": "L30.9",
+				"_id": ObjectId("557a83700149ecf4323c1bd4"),
+				"comments": 
+				[
+					{
+						"text": "Does not cover all kinds of eczema",
+						"_id": ObjectId("557a83700149ecf4323c1bd5"),
+						"date": ISODate("2015-06-12T06:58:32.313Z")
+					}
+				]
+			},
+
+			{
+				"source": "Pruritus NOS",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed1"),
+				"codeSystem": "ICD10",
+				"assessment": "1",
+				"target": "L29",
+				"_id": ObjectId("557a83700149ecf4323c1bd3"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Rhinite",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ed0"),
+				"codeSystem": "ICD10",
+				"assessment": "3",
+				"target": "J30",
+				"_id": ObjectId("557a83700149ecf4323c1bd1"),
+				"comments": 
+				[
+					{
+						"text": "Too generic",
+						"_id": ObjectId("557a83700149ecf4323c1bd2"),
+						"date": ISODate("2015-06-12T06:58:43.852Z")
+					}
+				]
+			},
+
+			{
+				"source": "Weal",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ecf"),
+				"codeSystem": "ICD10",
+				"assessment": "3",
+				"target": "L50",
+				"_id": ObjectId("557a83700149ecf4323c1bcf"),
+				"comments": 
+				[
+					{
+						"text": "Too generic",
+						"_id": ObjectId("557a83700149ecf4323c1bd0"),
+						"date": ISODate("2015-06-12T06:58:59.866Z")
+					}
+				]
+			},
+
+			{
+				"source": "Angio-oedema",
+				"sourceTemplatePart": ObjectId("556ebed58b517f2b339d4ece"),
+				"codeSystem": "ICD10",
+				"assessment": "1",
+				"target": "T78.3",
+				"_id": ObjectId("557a83700149ecf4323c1bce"),
+				"comments": 
+				[
+					
+				]
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"assessment": "4",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"lhsBinding": 
+		{
+			"source": "Allergy Display Name",
+			"assessment": "4",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"__v": 0
+	},
+
+	{
+		"__v": 2,
+		"_id": ObjectId("557aa6600149ecf4323c1bda"),
+		"comments": 
+		[
+			{
+				"text": "Unsuitable for use in study?",
+				"_id": ObjectId("557c256b0149ecf4323c1be1"),
+				"date": ISODate("2015-06-13T12:42:19.581Z")
+			}
+		],
+
+		"lhsBinding": 
+		{
+			"source": "Previous encounters related to heart failure",
+			"assessment": "4",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"rhsBindings": 
+		[
+			{
+				"_id": ObjectId("557aa6600149ecf4323c1bde"),
+				"assessment": "3",
+				"codeSystem": "SNOMED CT - postcoordinated",
+				"comments": 
+				[
+					
+				],
+
+				"source": "No"
+			},
+
+			{
+				"_id": ObjectId("557aa6600149ecf4323c1bdd"),
+				"assessment": "3",
+				"codeSystem": "SNOMED CT - postcoordinated",
+				"comments": 
+				[
+					{
+						"text": "Shouldn't be expressed using terminology",
+						"_id": ObjectId("557ac2a10149ecf4323c1be0"),
+						"date": ISODate("2015-06-12T11:25:51.574Z")
+					}
+				],
+
+				"source": "Yes, less than 30 days ago",
+				"target": "308335008|Patient encounter procedure|:363702006|Has focus|=84114007|Heart failure|"
+			},
+
+			{
+				"_id": ObjectId("557aa6600149ecf4323c1bdc"),
+				"assessment": "3",
+				"codeSystem": "SNOMED CT - postcoordinated",
+				"comments": 
+				[
+					{
+						"text": "Shouldn't be expressed using terminology",
+						"_id": ObjectId("557ac2a10149ecf4323c1bdf"),
+						"date": ISODate("2015-06-12T11:25:55.308Z")
+					}
+				],
+
+				"source": "Yes, more than 30 days ago",
+				"target": "308335008|Patient encounter procedure|:363702006|Has focus|=84114007|Heart failure|"
+			},
+
+			{
+				"_id": ObjectId("557aa6600149ecf4323c1bdb"),
+				"assessment": "3",
+				"codeSystem": "SNOMED CT - postcoordinated",
+				"comments": 
+				[
+					
+				],
+
+				"source": "Unknown"
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"assessment": "4",
+			"comments": 
+			[
+				
+			]
+		},
+
+		"scenario": 0,
+		"template": ObjectId("5576da62f0be1d0305f36a56"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		}
+	},
+
+	{
+		"__v": 0,
+		"_id": ObjectId("55812c5e4cb070c53474916b"),
+		"comments": 
+		[
+			
+		],
+
+		"lhsBinding": 
+		{
+			"comments": 
+			[
+				
+			]
+		},
+
+		"rhsBindings": 
+		[
+			{
+				"_id": ObjectId("55812c5e4cb070c534749175"),
+				"assessment": "1",
+				"codeSystem": "SNOMED CT - precoordinated",
+				"comments": 
+				[
+					
+				],
+
+				"source": "Respiratory frequency ",
+				"target": "86290005|Respiratory rate"
+			},
+
+			{
+				"source": "Oxygen saturation",
+				"_id": ObjectId("55812c5e4cb070c534749174"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Systolic blood pressure",
+				"_id": ObjectId("55812c5e4cb070c534749173"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Heart rate",
+				"_id": ObjectId("55812c5e4cb070c534749172"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Glasgow Coma Scale eye opening",
+				"_id": ObjectId("55812c5e4cb070c534749171"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Glasgow Coma Scale verbal response",
+				"_id": ObjectId("55812c5e4cb070c534749170"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Glasgow Coma Scale motor response",
+				"_id": ObjectId("55812c5e4cb070c53474916f"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Glasgow Coma Scale sum",
+				"_id": ObjectId("55812c5e4cb070c53474916e"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Pupil width",
+				"_id": ObjectId("55812c5e4cb070c53474916d"),
+				"comments": 
+				[
+					
+				]
+			},
+
+			{
+				"source": "Pupil light reaction",
+				"_id": ObjectId("55812c5e4cb070c53474916c"),
+				"comments": 
+				[
+					
+				]
+			}
+		],
+
+		"rhsOverall": 
+		{
+			"comments": 
+			[
+				
+			]
+		},
+
+		"scenario": 0,
+		"template": ObjectId("55812934cb98639ff89ea6e7"),
+		"user": 
+		{
+			"uid": "daniel.karlsson@liu.se"
+		}
+	}
+]
