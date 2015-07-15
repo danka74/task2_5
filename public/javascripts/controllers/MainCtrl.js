@@ -1,12 +1,12 @@
 angular
 		.module('MainControllerModule', [])
-//		.filter('toTrusted', [ '$sce', function($sce) {
-//			return function(text) {
-//				return $sce.trustAsHtml(text);
-//			};
-//		} ])
+		// .filter('toTrusted', [ '$sce', function($sce) {
+		// return function(text) {
+		// return $sce.trustAsHtml(text);
+		// };
+		// } ])
 		// directive to allow AngularJS HTML in the cases
-		.directive('bindHtmlCompile', [ '$compile', function($compile) {
+		 .directive('bindHtmlCompile', [ '$compile', function($compile) {
 			return {
 				restrict : 'A',
 				link : function(scope, element, attrs) {

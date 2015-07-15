@@ -13,6 +13,7 @@
     "angular-bootstrap": "~0.13.0",
     "angular-ui-switch": "~0.1.0",
     "angular-jwt": "~0.0.9",
-    "angular-marked": "~0.0.15"
+    "angular-marked": "~0.0.15",
+    "ngSticky": "~1.7.9"
   }
 }
