@@ -180,10 +180,10 @@ angular
 
 							$scope.createBasicStructure = function() {
 								$scope.currentCaseBinding.scenario = $scope.scenario;
-								if ($scope.currentCaseBinding.lhsBinding === undefined)
+								if ($scope.currentCaseTemplate.lhs) {
 									$scope.currentCaseBinding.lhsBinding = {};
-								if (!$scope.currentCaseTemplate.lhs === undefined)
 									$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
+								}
 								if ($scope.currentCaseBinding.rhsBindings === undefined)
 									$scope.currentCaseBinding.rhsBindings = [];
 								for (var i = 0; i < $scope.currentCaseTemplate.rhs.length; i++) {
@@ -248,7 +248,7 @@ angular
 														// structure
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
-														$scope.currentCaseBinding.scenario = $scope.scenario;
+														//$scope.currentCaseBinding.scenario = $scope.scenario;
 														$scope
 																.createBasicStructure();
 														console
