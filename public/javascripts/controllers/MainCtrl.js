@@ -180,7 +180,7 @@ angular
 
 							$scope.createBasicStructure = function() {
 								$scope.currentCaseBinding.scenario = $scope.scenario;
-								if ($scope.currentCaseTemplate.lhs) {
+								if ($scope.currentCaseTemplate.lhs && $scope.currentCaseBinding.lhsBinding === undefined) {
 									$scope.currentCaseBinding.lhsBinding = {};
 									$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
 								}
@@ -198,6 +198,7 @@ angular
 								if ($scope.currentCaseBinding._id) {
 									// recreate it just in case not all fields
 									// are filled in
+									console.log($scope.currentCaseBinding.lhsBinding);
 									$scope.createBasicStructure();
 									bindingService
 											.update(
@@ -205,7 +206,7 @@ angular
 													$scope.currentCaseBinding)
 											.success(
 													function(data) {
-														console.log("updated!");
+														console.log("updated!!!");
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
