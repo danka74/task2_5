@@ -52,6 +52,15 @@ router.get('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
+router.delete('/case_templates/:template', function(req, res) {
+	CaseTemplate.remove(req.case_template, function(err) {
+		if(err) {
+			return next(err);
+		}
+	})
+	res.json(req.case_template);
+});
+
 router.get('/bindings/:template/:scenario', function(req, res, next) {
 	console.log("get, user = " + JSON.stringify(req.user));
 	console.log("template = " + req.params.template);
@@ -73,7 +82,7 @@ router.put('/bindings/:id', function(req, res, next) {
 		if (err) {
 			return next(err);
 		}
-				
+
 		console.log("in = " + req.body);
 
 		for (prop in req.body) {
@@ -99,20 +108,20 @@ router.post('/bindings', function(req, res, next) {
 	console.log(JSON.stringify(req.body));
 
 	var binding = new Binding(req.body);
-	
+
 	console.log(JSON.stringify(binding));
 
 	console.log("post, user = " + JSON.stringify(req.user));
 
 	binding.user = { uid: req.user.uid };
-	
+
 	console.log(JSON.stringify(binding));
 
 	binding.save(function(err) {
 		if (err) {
 			return next(err);
 		}
-		
+
 		res.json(binding);
 	});
 });
