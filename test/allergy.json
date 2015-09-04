@@ -1,0 +1,72 @@
+{
+	"templateURL": "default_template.html",
+	"title": "Adverse Reaction Summary Category",
+	"description": "Allergens from Intermountain Healthcare AdverseReactionSummaryCategory CEM",
+	"lhs":
+	{
+		"name": "Adverse Reaction Summary Category"
+	},
+
+	"rhs":
+	[
+		{
+			"name": "Black pepper"
+		},
+
+		{
+			"name": "Pollen extract"
+		},
+
+		{
+			"name": "Casein"
+		},
+
+		{
+			"name": "Weed pollen"
+		},
+
+		{
+			"name": "Ficus sp pollen"
+		},
+
+		{
+			"name": "Camembert Cheese"
+		},
+
+		{
+			"name": "Australian parrot serum proteins"
+		},
+
+		{
+			"name": "White Bean"
+		},
+
+		{
+			"name": "Ethyl alcohol"
+		},
+
+		{
+			"name": "Fusarium culmorum"
+		},
+
+		{
+			"name": "Birch pollen"
+		},
+
+		{
+			"name": "Rough pigweed pollen"
+		},
+
+		{
+			"name": "Bell Pepper"
+		},
+
+		{
+			"name": "Animal Food Product"
+		},
+
+		{
+			"name": "Ascaris"
+		}
+	]
+}
