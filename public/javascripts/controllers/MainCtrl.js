@@ -175,6 +175,11 @@ angular
 							}
 
 							$scope.showCase = function($index) {
+
+								if($scope.bindingForm.$dirty) {
+									alert("Save or cancel before switching");
+									return;
+								}
 								// if ($scope.bindingForm.$dirty) {
 								// $scope.save(); // TODO: a modal?
 								// }
