@@ -6,7 +6,7 @@ angular
 		// };
 		// } ])
 		// directive to allow AngularJS HTML in the cases
-		 .directive('bindHtmlCompile', [ '$compile', function($compile) {
+		.directive('bindHtmlCompile', [ '$compile', function($compile) {
 			return {
 				restrict : 'A',
 				link : function(scope, element, attrs) {
@@ -100,15 +100,33 @@ angular
 								name : "ATC"
 							}, {
 								name : "LOINC"
+							}, {
+								name : "MeSH"
 							} ] ]; // add regexp for validation?
 
 							// SCT only or Alternative study arm, false=SCT,
 							// true=Alternative
 							$scope.scenario = false;
-							$scope.$watch('scenario', function() {
-								if ($scope.selectedCase != null)
-									$scope.showCase($scope.selectedCase);
-							});
+							$scope.scenarioSwitch = false;
+							$scope.changeScenario = function(switchTo) {
+								console.log("changeScenario " + switchTo)
+								if($scope.bindingForm.$dirty) {
+									alert("Save or cancel before switching");
+									return;
+								}
+								if(switchTo == null)
+									$scope.scenario = ! $scope.scenario;
+								else if(switchTo == true)
+									$scope.scenario = true;
+								else
+									$scope.scenario = false;
+								$scope.scenarioSwitch = $scope.scenario;
+								$scope.showCase($scope.selectedCase);
+							};
+							// $scope.$watch('scenario', function() {
+							// if ($scope.selectedCase != null)
+							// $scope.showCase($scope.selectedCase);
+							// });
 
 							var url = $location.$$absUrl;
 							var tokenIndex = url.indexOf("?token=");
@@ -157,9 +175,9 @@ angular
 							}
 
 							$scope.showCase = function($index) {
-								if ($scope.bindingForm.$dirty) {
-									$scope.save(); // TODO: a modal?
-								}
+								// if ($scope.bindingForm.$dirty) {
+								// $scope.save(); // TODO: a modal?
+								// }
 
 								$scope.selectedCase = $index;
 
@@ -180,7 +198,8 @@ angular
 
 							$scope.createBasicStructure = function() {
 								$scope.currentCaseBinding.scenario = $scope.scenario;
-								if ($scope.currentCaseTemplate.lhs && $scope.currentCaseBinding.lhsBinding === undefined) {
+								if ($scope.currentCaseTemplate.lhs
+										&& $scope.currentCaseBinding.lhsBinding === undefined) {
 									$scope.currentCaseBinding.lhsBinding = {};
 									$scope.currentCaseBinding.lhsBinding.source = $scope.currentCaseTemplate.lhs.name;
 								}
@@ -198,7 +217,8 @@ angular
 								if ($scope.currentCaseBinding._id) {
 									// recreate it just in case not all fields
 									// are filled in
-									console.log($scope.currentCaseBinding.lhsBinding);
+									console
+											.log($scope.currentCaseBinding.lhsBinding);
 									$scope.createBasicStructure();
 									bindingService
 											.update(
@@ -206,7 +226,8 @@ angular
 													$scope.currentCaseBinding)
 											.success(
 													function(data) {
-														console.log("updated!!!");
+														console
+																.log("updated!!!");
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
@@ -249,7 +270,8 @@ angular
 														// structure
 														$scope.currentCaseBinding = {};
 														$scope.currentCaseBinding.template = $scope.caseTemplates[$scope.selectedCase]._id;
-														//$scope.currentCaseBinding.scenario = $scope.scenario;
+														// $scope.currentCaseBinding.scenario
+														// = $scope.scenario;
 														$scope
 																.createBasicStructure();
 														console

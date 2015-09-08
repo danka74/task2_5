@@ -1,7 +1,7 @@
 angular.module(
 		'BindingApp',
 		[ 'ngRoute', 'ui.bootstrap', 'MainControllerModule',
-				'TemplateServiceModule', 'BindingServiceModule', 'uiSwitch', 'angular-jwt', 'hc.marked', 'sticky' ]).factory(
+				'TemplateServiceModule', 'BindingServiceModule', /*'uiSwitch',*/ 'angular-jwt', 'hc.marked', 'sticky' ]).factory(
 		'authInterceptor',
 		function($rootScope, $q, $window) {
 			return {
