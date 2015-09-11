@@ -19,6 +19,12 @@ angular
 				}
 			};
 		} ])
+		.controller('ModalInstanceCtrl', function($scope, $modalInstance) {
+
+			$scope.ok = function() {
+				$modalInstance.close();
+			};
+		})
 		.directive(
 				'conceptInput',
 				function() {
@@ -78,13 +84,15 @@ angular
 				'MainController',
 				[
 						'$scope',
+						'$q',
 						'$location',
 						'$window',
+						'$modal',
 						'jwtHelper',
 						'TemplateService',
 						'BindingService',
-						function($scope, $location, $window, jwtHelper,
-								templateService, bindingService) {
+						function($scope, $q, $location, $window, $modal,
+								jwtHelper, templateService, bindingService) {
 
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
@@ -104,19 +112,51 @@ angular
 								name : "MeSH"
 							} ] ]; // add regexp for validation?
 
+							// Save unsaved changes modal
+							$scope.saveModal = function() {
+								var deferred = $q.defer();
+
+								var modalInstance = $modal.open({
+									animation : true,
+									templateUrl : 'saveModalContent.html',
+									controller : 'ModalInstanceCtrl',
+									resolve : {
+										items : function() {
+											return $scope.items;
+										}
+									}
+								});
+
+								modalInstance.result.then(
+										function(selectedItem) {
+											deferred.resolve('save');
+										}, function() {
+											deferred.reject('cancel');
+										});
+
+								return deferred.promise;
+
+							}
+
 							// SCT only or Alternative study arm, false=SCT,
 							// true=Alternative
 							$scope.scenario = false;
 							$scope.scenarioSwitch = false;
 							$scope.changeScenario = function(switchTo) {
 								console.log("changeScenario " + switchTo)
-								if($scope.bindingForm.$dirty) {
-									alert("Save or cancel before switching");
-									return;
+								if ($scope.bindingForm.$dirty) {
+									var saveP = $scope.saveModal();
+									console.log(saveP);
+									$q.when(saveP).then(function() {
+										alert("save");
+									}, function() {
+										alert("cancel");
+									});
+									alert("done");
 								}
-								if(switchTo == null)
-									$scope.scenario = ! $scope.scenario;
-								else if(switchTo == true)
+								if (switchTo == null)
+									$scope.scenario = !$scope.scenario;
+								else if (switchTo == true)
 									$scope.scenario = true;
 								else
 									$scope.scenario = false;
@@ -176,7 +216,7 @@ angular
 
 							$scope.showCase = function($index) {
 
-								if($scope.bindingForm.$dirty) {
+								if ($scope.bindingForm.$dirty) {
 									alert("Save or cancel before switching");
 									return;
 								}
