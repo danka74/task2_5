@@ -33,37 +33,4 @@ router.get('/gentoken', function(req, res, next) {
 
 });
 
-router.get('/stats', function(req, res, next) {
-    res.writeHead(200, {'Content-Type': 'text/csv'});
-	Binding.find().exec(
-			function(err, bindings) {
-				if (err) {
-					return err;
-				}
-				res.write('user\tscenario\tsource\tassessment\ttarget\n')
-				for (b in bindings) {
-					var binding = bindings[b];
-					var user = binding.user.uid;
-					var scenario = binding.scenario;
-					res.write(user + '\t' + scenario + '\t'
-							+ binding.lhsBinding.source + '\t'
-							+ binding.lhsBinding.assessment + '\t'
-							+ binding.lhsBinding.target + '\n');
-					res.write(user + '\t' + scenario + '\t'
-							+ binding.lhsBinding.source + '-overall\t'
-							+ binding.rhsOverall.assessment + '\t'
-							+ binding.rhsOverall.target + '\n');
-					for (var r = 0; r < binding.rhsBindings.length; r++) {
-						res.write(user + '\t' + scenario + '\t'
-								+ binding.rhsBindings[r].source + '\t'
-								+ binding.rhsBindings[r].assessment + '\t'
-								+ binding.rhsBindings[r].target + '\n');
-					}
-				}
-				res.end();
-			});
-	//res.end();
-
-});
-
 module.exports = router;

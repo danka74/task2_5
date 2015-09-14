@@ -97,46 +97,20 @@ angular
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
 							$scope.selectedCase = null;
-							$scope.terminologies = [ [ {
-								name : "SNOMED CT - precoordinated",
-								regexp : "/[1-9]\d*(|[^|]|)?/"
-							}, {
-								name : "SNOMED CT - postcoordinated"
-							} ], [ {
-								name : "ICD10"
-							}, {
-								name : "ATC"
-							}, {
-								name : "LOINC"
-							}, {
-								name : "MeSH"
-							} ] ]; // add regexp for validation?
-
-							// Save unsaved changes modal
-							$scope.saveModal = function() {
-								var deferred = $q.defer();
-
-								var modalInstance = $modal.open({
-									animation : true,
-									templateUrl : 'saveModalContent.html',
-									controller : 'ModalInstanceCtrl',
-									resolve : {
-										items : function() {
-											return $scope.items;
-										}
-									}
-								});
-
-								modalInstance.result.then(
-										function(selectedItem) {
-											deferred.resolve('save');
-										}, function() {
-											deferred.reject('cancel');
-										});
-
-								return deferred.promise;
-
-							}
+//							$scope.terminologies = [ [ {
+//								name : "SNOMED CT - precoordinated",
+//								regexp : "/[1-9]\d*(|[^|]|)?/"
+//							}, {
+//								name : "SNOMED CT - postcoordinated"
+//							} ], [ {
+//								name : "ICD10"
+//							}, {
+//								name : "ATC"
+//							}, {
+//								name : "LOINC"
+//							}, {
+//								name : "MeSH"
+//							} ] ]; // add regexp for validation?
 
 							// SCT only or Alternative study arm, false=SCT,
 							// true=Alternative
@@ -145,14 +119,8 @@ angular
 							$scope.changeScenario = function(switchTo) {
 								console.log("changeScenario " + switchTo)
 								if ($scope.bindingForm.$dirty) {
-									var saveP = $scope.saveModal();
-									console.log(saveP);
-									$q.when(saveP).then(function() {
-										alert("save");
-									}, function() {
-										alert("cancel");
-									});
-									alert("done");
+									alert("Save or cancel changes before switching!");
+									return;
 								}
 								if (switchTo == null)
 									$scope.scenario = !$scope.scenario;
@@ -256,6 +224,7 @@ angular
 									$scope.currentCaseBinding.rhsBindings[i].source = $scope.currentCaseTemplate.rhs[i].name;
 									$scope.currentCaseBinding.rhsBindings[i].sourceTemplatePart = $scope.currentCaseTemplate.rhs[i]._id;
 								}
+								delete $scope.currentCaseBinding.date;
 							}
 
 							$scope.save = function() {
