@@ -1,0 +1,35 @@
+{
+	"templateURL" : "non_coded_template.html",
+	"title" : "Spirometry",
+
+	"description" : "Spirometry section of Danish COPD examination program\n\n![COPD Examination](images/spirometry.png)",
+	"rhs" : [
+		{
+			"name" : "FEV1 without bronchodilator"
+		},
+		{
+			"name" : "FEV1 reference value"
+		},
+		{
+			"name" : "FEV1 without bronchdilator % of expected"
+		},
+		{
+			"name" : "FVC without bronchodilator"
+		},
+		{
+			"name" : "FVC without bronchdilator % of expected"
+		},
+		{
+			"name" : "FEV1/FVC without bronchdilator"
+		},
+		{
+			"name" : "FVC after beta 2 antagonist"
+		},
+		{
+			"name" : "FVC after beta 2 antagonist"
+		},
+		{
+			"name" : "FEV1/FVC after beta 2 antagonist"
+		}
+	]
+}

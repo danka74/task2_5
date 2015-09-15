@@ -1,0 +1,34 @@
+  {
+    "description": "Extract from different value sets from the [Blood pressure Detailed Clinical Model](https://github.com/DetailedClinicalModels/Detailed-Clinical-Models/blob/master/Bloodpressure-Bloeddruk/BloodPressurev1.04DCM.pdf)\n\n![Blood pressure model](images/bt_dcm.png)",
+    "templateURL": "pure_valueset_template.html",
+    "title": "Blood pressure",
+    "rhs": [
+      {
+        "name": "Body position - Standing"
+      },
+      {
+        "name": "Body position - Position with tilt"
+      },
+      {
+        "name": "Cuff size - Large"
+      },
+      {
+        "name": "Cuff size - For children"
+      },
+      {
+        "name": "Measurement site - Left upper arm"
+      },
+      {
+        "name": "Measurement site - Left ankle"
+      },
+      {
+        "name": "Method - Palpation"
+      },
+      {
+        "name": "Method - Invasive"
+      },
+      {
+        "name": "Origin - Self measurement or home measurement"
+      }
+    ]
+  }

@@ -1,0 +1,36 @@
+{
+	"templateURL": "default_template.html",
+	"title": "Headache location",
+	"description": "History of presenting illness - Headache location\n\n![Headache location](images/headache1.png)",
+	"lhs":
+	{
+		"name": "Headache location"
+	},
+
+	"rhs":
+	[
+		{
+			"name": "Ocular right"
+		},
+
+		{
+			"name": "Entire head"
+		},
+
+		{
+			"name": "Temporal right"
+		},
+
+		{
+			"name": "Frontal left"
+		},
+
+		{
+			"name": "Parietal left"
+		},
+
+		{
+			"name": "Occipital"
+		}
+	]
+}
