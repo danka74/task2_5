@@ -1,0 +1,48 @@
+{
+	"description": "Extract from SemanticHealthNet Heart Failure summary [template](http://openehr.org/ckm/#showTemplate_1013.26.14).\n\n![Heart failure symptoms](images/symptoms1.png) ![Heart failure symptoms](images/symptoms2.png)",
+	"lhs": 
+	{
+		"name": "Symptoms"
+	},
+
+	"templateURL": "default_template.html",
+	"title": "Heart failure symptoms",
+	"rhs": 
+	[
+		{
+			"name": "Breathlessness on mild exercise"
+		},
+
+		{
+			"name": "Breathlessness on moderate exercise"
+		},
+
+		{
+			"name": "Breathlessness lying flat"
+		},
+
+		{
+			"name": "Breathlessness at rest"
+		},
+
+		{
+			"name": "Chest pain"
+		},
+
+		{
+			"name": "Fatigue"
+		},
+
+		{
+			"name": "Ankle swelling"
+		},
+
+		{
+			"name": "Palpitations"
+		},
+
+		{
+			"name": "Blackout/Syncope"
+		}
+	]
+}
