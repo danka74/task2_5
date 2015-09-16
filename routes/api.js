@@ -61,6 +61,35 @@ router.delete('/case_templates/:template', function(req, res) {
 	res.json(req.case_template);
 });
 
+router.get('/bindings', function(req, res, next) {
+	console.log("bindings count");
+	Binding.find({
+		user : { uid: req.user.uid }
+	}, function (err, bindings) {
+	    if (err) {
+	        next(err);
+	        return 0;
+	    } else {
+	    	var count = 0;
+	    	console.log("bindings length " + bindings.length);
+	    	for (var b = 0; b < bindings.length; b++) {
+				var binding = bindings[b];
+				if(binding.lhsBinding.assessment != undefined)
+					count++;
+				if(binding.rhsOverall.assessment != undefined)
+					count++;
+
+				for(var rhsB = 0; rhsB < binding.rhsBindings.length; rhsB++) {
+					if(binding.rhsBindings[rhsB].assessment != undefined)
+						count++;
+				}
+	    	}
+	    	console.log(count);
+	    	res.json(count);
+	    }
+	});
+});
+
 router.get('/bindings/:template/:scenario', function(req, res, next) {
 	console.log("get, user = " + JSON.stringify(req.user));
 	console.log("template = " + req.params.template);
@@ -133,7 +162,7 @@ router.get('/stats', function(req, res, next) {
 				if (err) {
 					return err;
 				}
-				res.write('user\tscenario\tsource\tassessment\ttarget\n')
+				res.write('date\tuser\tscenario\tsource\tassessment\ttarget\n')
 				for (b in bindings) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
@@ -156,7 +185,7 @@ router.get('/stats', function(req, res, next) {
 				}
 				res.end();
 			});
-	//res.end();
+	// res.end();
 
 });
 

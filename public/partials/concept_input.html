@@ -2,13 +2,13 @@
 	<div class="row-fluid row-centered">
 		<label class="control-label col-sm-4" popover="{{partDescription}}"
 			popover-trigger="mouseenter">{{name}}</label>
-<!-- 		<div class="col-sm-2"> -->
-<!-- 			<select class="form-control" ng-model="partBinding.codeSystem" -->
-<!-- 				popover="Select the code system, or leave empty if unknown" -->
-<!-- 				popover-trigger="mouseenter"> -->
-<!-- 				<option ng-repeat="t in terminologies">{{t.name}}</option> -->
-<!-- 			</select> -->
-<!-- 		</div> -->
+		<div class="col-sm-2">
+			<select class="form-control" ng-model="partBinding.codeSystem"
+				popover="Select the source terminology, code system, or classicication"
+				popover-trigger="mouseenter">
+				<option ng-repeat="t in terminologies">{{t.name}}</option>
+			</select>
+		</div>
 		<div class="col-sm-2">
 			<select class="form-control" ng-model="partBinding.assessment"
 				popover="Select your rating of the binding"
@@ -20,7 +20,7 @@
 				<option value="5">5 Out of scope</option>
 			</select>
 		</div>
-		<div class="col-sm-5">
+		<div class="col-sm-3">
 			<input class="form-control col-sm-3" type="text" placeholder="Code"
 				ng-model="partBinding.target" ng-pattern="/[1-9]\d*(|[^|]|)?/"
 				popover="Enter the code or codes, separate multiple codes with a semicolon (';')"

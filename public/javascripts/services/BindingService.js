@@ -9,13 +9,18 @@ angular.module('BindingServiceModule', []).factory(
 						get: function(template, scenario) {
 							return $http.get('/api/bindings/' + template + '/' + scenario);
 						},
-						
+
+						// get number of bindings for the current user
+						get: function() {
+							return $http.get('/api/bindings');
+						},
+
 						// save binding
 						save: function(binding) {
 							console.log("save: " + JSON.stringify(binding));
 							return $http.post('/api/bindings/', binding);
 						},
-						
+
 						// update binding
 						update: function(id, binding) {
 							return $http.put('/api/bindings/' + id, binding);

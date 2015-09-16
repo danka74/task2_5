@@ -97,23 +97,23 @@ angular
 							$scope.currentCaseTemplate = null;
 							$scope.currentCaseBinding = null;
 							$scope.selectedCase = null;
-//							$scope.terminologies = [ [ {
-//								name : "SNOMED CT - precoordinated",
-//								regexp : "/[1-9]\d*(|[^|]|)?/"
-//							}, {
-//								name : "SNOMED CT - postcoordinated"
-//							} ], [ {
-//								name : "ICD10"
-//							}, {
-//								name : "ATC"
-//							}, {
-//								name : "LOINC"
-//							}, {
-//								name : "MeSH"
-//							} ] ]; // add regexp for validation?
+							$scope.terminologies = [ [ {
+								name : "Precoord. SNOMED CT",
+								regexp : "/[1-9]\d*(|[^|]|)?/"
+							}, {
+								name : "Grouping SNOMED CT"
+							} ], [ {
+								name : "ICD10"
+							}, {
+								name : "ATC"
+							}, {
+								name : "LOINC"
+							}, {
+								name : "MeSH"
+							} ] ]; // add regexp for validation?
 
-							// SCT only or Alternative study arm, false=SCT,
-							// true=Alternative
+//							// SCT only or Alternative study arm, false=SCT,
+//							// true=Alternative
 							$scope.scenario = false;
 							$scope.scenarioSwitch = false;
 							$scope.changeScenario = function(switchTo) {
@@ -145,6 +145,8 @@ angular
 								$window.sessionStorage.token = token;
 								$scope.user = jwtHelper.decodeToken(token);
 							}
+
+							var bindingsCount = bindingService.get();
 
 							templateService
 									.get()
