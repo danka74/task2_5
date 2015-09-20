@@ -174,39 +174,41 @@
 								</p></li>
 							<li
 								onmouseout="document.getElementById('b3').style.display = 'none';"
-								onmouseover="document.getElementById('b3').style.display = 'block';">the
-								assessment of the binding coverage.
-								<table border="1">
-									<tr>
-										<td>Full coverage</td>
-										<td>The meaning of the information model part fully
-											corresponds to the terminology/classification part</td>
-									</tr>
+								onmouseover="document.getElementById('b3').style.display = 'block';"><p>the
+								assessment of the binding coverage.</p>
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>1 Full coverage</td>
+											<td>The meaning of the information model part fully
+												corresponds to the terminology/classification part</td>
+										</tr>
 
-									<tr>
-										<td>Inferred coverage</td>
-										<td>The full meaning of the information model part is
-											given only by the context provided by the information model,
-											and that meaning fully corresponds to the
-											terminology/classification part</td>
-									</tr>
-									<tr>
-										<td>Partial coverage</td>
-										<td>The meaning of the information model part comes close
-											to the meaning of the concept</td>
-									</tr>
-									<tr>
-										<td>No coverage</td>
-										<td>There is terminology/classification part that comes
-											close to the meaning of the information model part</td>
-									</tr>
-									<tr>
-										<td>Out of scope</td>
-										<td>The meaning of the text is not in any of the
-											categories selected for this study The information model
-											parts selected should all be in scope of this study, thus
-											this category is not applicable.</td>
-									</tr>
+										<tr>
+											<td>2 Inferred coverage</td>
+											<td>The full meaning of the information model part is
+												given only by the context provided by the information model,
+												and that meaning fully corresponds to the
+												terminology/classification part</td>
+										</tr>
+										<tr>
+											<td>3 Partial coverage</td>
+											<td>The meaning of the information model part comes
+												close to the meaning of the concept</td>
+										</tr>
+										<tr>
+											<td>4 No coverage</td>
+											<td>There is terminology/classification part that comes
+												close to the meaning of the information model part</td>
+										</tr>
+										<tr>
+											<td>5 Out of scope</td>
+											<td>The meaning of the text is not in any of the
+												categories selected for this study The information model
+												parts selected should all be in scope of this study, thus
+												this category is not applicable.</td>
+										</tr>
+									</tbody>
 								</table>
 								<p>If the assessment of the binding is not full coverage, a
 									comment should preferably be given.</p>
@@ -232,7 +234,10 @@
 					<p>For some cases there is a row titled "Overall meaning of
 						value set". This is used if there is one code from the terminology
 						covers all codes of the value set, i.e. one concept subsuming
-						every other concept in the value set. which</p>
+						every other concept in the value set. If the codes bound to the
+						elements of the value set are from different terminologies, or if
+						no such single subsumer is found, then the assessment is "4 No
+						coverage".</p>
 				</div>
 			</div>
 
