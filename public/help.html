@@ -10,8 +10,258 @@
 <body>
 	<div class="container-fluid">
 
+		<h1>Help for ASSESS CT terminology binding study</h1>
+
 		<div class="row">
-			<h1>Help for ASSESS CT terminology binding study</h1>
+			<div class="panel panel-default">
+				<div class="panel-heading">Logging in</div>
+				<div class="panel-body">
+					<p>
+						An email will be sent to participants with a user-specific link.
+						Either save the email or bookmark the link (or both) to access the
+						terminology binding application. The link looks lite this:
+						<code>http://lincoln.imt.liu.se:8080/?token=eyJ0iwer8uUOIJerw8jerij...</code>
+						followed by several more characters. The stange characters
+						contains the user's ID and is signed to allow only persons with
+						the right link to access the application.
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Top row menu</div>
+				<div class="panel-body">
+
+					<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="58">
+					<image xmlns:xlink=http://www.w3.org/1999/xlink
+						xlink:href="images/top_menu.png" x="0" y="0" width="1080"
+						height="58" /> <rect id="tm1" x="65" y="10" height="30"
+						width="300" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="tm2" x="390" y="10"
+						height="30" width="150" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="tm3" x="560" y="10"
+						height="30" width="45" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="tm4" x="620" y="10"
+						height="30" width="210" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="tm5" x="900" y="10"
+						height="30" width="170" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> </svg>
+
+					<p>
+						From left to right, the menu contains (hold mouse over text)
+						<ul>
+							<li
+								onmouseout="document.getElementById('tm1').style.display = 'none';"
+								onmouseover="document.getElementById('tm1').style.display = 'block';">a
+								selector for binding to either SNOMED CT only or a set of
+								alternative terminologies. The set of terminolgies can be
+								selected either by toggling the switch or by selecting the
+								terminology set names ("SNOMED CT" and "Alternative").</li>
+							<li
+								onmouseout="document.getElementById('tm2').style.display = 'none';"
+								onmouseover="document.getElementById('tm2').style.display = 'block';">a
+								drop-down menu with links to source terminology browsers. Please
+								use these browsers to minimize variabililty as different
+								browsers may contain different sub- or supersets of the
+								terminlogies.</li>
+							<li
+								onmouseout="document.getElementById('tm3').style.display = 'none';"
+								onmouseover="document.getElementById('tm3').style.display = 'block';">a
+								link to this page.</li>
+							<li
+								onmouseout="document.getElementById('tm4').style.display = 'none';"
+								onmouseover="document.getElementById('tm4').style.display = 'block';">a
+								progress indicator showing the relative amount of elements bound
+								to codes from the two terminology sets. In this example, about
+								half of the elements are bound.</li>
+							<li
+								onmouseout="document.getElementById('tm5').style.display = 'none';"
+								onmouseover="document.getElementById('tm5').style.display = 'block';">an
+								indicator showing who's currently logged in.</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Selecting cases</div>
+				<div class="panel-body">
+					<p>
+						<img src="images/cases.png" />
+					</p>
+					<p>Select a case by clicking on the case title in the panel to
+						the left. If there are unsaved changes you will be asked to save
+						or cancel the changes before switching case.</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Cases</div>
+				<div class="panel-body">
+					<p>Each case has a description which could help interpreting
+						the elements which are to be bound to the terminologies.</p>
+
+					<p>
+						There are some different type of cases which include different
+						elements for binding.
+						<ul>
+							<li>Some cases consist of an information model attribute and
+								a correspondonding coded value set. Example: Smoking status</li>
+							<li>Some cases only contain a coded value set and no
+								information model attribute. Example: Heart failure registry
+								medications</li>
+							<li>Other cases contain only a set of information model
+								attributes. Example: Emergency room protocol...</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Binding</div>
+				<div class="panel-body">
+					<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="58">
+					<image xmlns:xlink=http://www.w3.org/1999/xlink
+						xlink:href="images/binding.png" x="0" y="0" width="1080"
+						height="58" /> <rect id="b1" x="35" y="14" height="30"
+						width="180" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="b2" x="230" y="14"
+						height="30" width="210" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="b3" x="460" y="14"
+						height="30" width="210" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="b4" x="690" y="14"
+						height="30" width="330" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> <rect id="b5" x="1040" y="14"
+						height="30" width="20" stroke="red" stroke-width="4"
+						style="fill: none; display:none" /> </svg>
+
+					<p>
+						For each element in a case there is a row consiting of (hold mouse
+						over text)
+						<ul>
+							<li
+								onmouseout="document.getElementById('b1').style.display = 'none';"
+								onmouseover="document.getElementById('b1').style.display = 'block';">the
+								name of the element.</li>
+							<li
+								onmouseout="document.getElementById('b2').style.display = 'none';"
+								onmouseover="document.getElementById('b2').style.display = 'block';"><p>the
+									type or source of the code. For SNOMED CT, this is indicating
+									that a precoordinated or a grouping of codes is used. For the
+									alternative terminologies, this is the actual terminology used
+									(ICD10, ATC, etc.).</p>
+								<p>
+									For the alternative terminologies, the following order of
+									priority applies:
+									<ol>
+										<li>ICD 10 for conditions</li>
+										<li>ATC for drugs</li>
+										<li>LOINC for observations/observables</li>
+										<li>MeSH for anything not in the other
+											terminologies/classifications</li>
+									</ol>
+								</p></li>
+							<li
+								onmouseout="document.getElementById('b3').style.display = 'none';"
+								onmouseover="document.getElementById('b3').style.display = 'block';">the
+								assessment of the binding coverage.
+								<table border="1">
+									<tr>
+										<td>Full coverage</td>
+										<td>The meaning of the information model part fully
+											corresponds to the terminology/classification part</td>
+									</tr>
+
+									<tr>
+										<td>Inferred coverage</td>
+										<td>The full meaning of the information model part is
+											given only by the context provided by the information model,
+											and that meaning fully corresponds to the
+											terminology/classification part</td>
+									</tr>
+									<tr>
+										<td>Partial coverage</td>
+										<td>The meaning of the information model part comes close
+											to the meaning of the concept</td>
+									</tr>
+									<tr>
+										<td>No coverage</td>
+										<td>There is terminology/classification part that comes
+											close to the meaning of the information model part</td>
+									</tr>
+									<tr>
+										<td>Out of scope</td>
+										<td>The meaning of the text is not in any of the
+											categories selected for this study The information model
+											parts selected should all be in scope of this study, thus
+											this category is not applicable.</td>
+									</tr>
+								</table>
+								<p>If the assessment of the binding is not full coverage, a
+									comment should preferably be given.</p>
+							</li>
+							<li
+								onmouseout="document.getElementById('b4').style.display = 'none';"
+								onmouseover="document.getElementById('b4').style.display = 'block';">the
+								code. Use ';' to seprate multiple codes in a grouping of codes.</li>
+							<li
+								onmouseout="document.getElementById('b5').style.display = 'none';"
+								onmouseover="document.getElementById('b5').style.display = 'block';">element-level
+								comments. By clicking the symbol, comments can be viewed, added
+								or deleted. If the symbol is inverted with a blue background,
+								there are existing comments.</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Comments</div>
+				<div class="panel-body">
+					<p>
+						<img src="images/comment.png" />
+					</p>
+					<p>
+						Comments can be case wide or element specific. Case-wide comments
+						are provided in the box under the case elements. Element-specific
+						comments are provided by clicking the comment symbol (<span
+							class="glyphicon glyphicon-comment"></span>) to the right in the
+						element row. The "Add" button must be clicked to add the comment.
+						To save the comment the whole case must also be saved.
+					</p>
+					<p>Comments can be deleted by clicking on the &times; button to
+						the right of the comment.</p>
+					<p>It is recommended to provide comments whenever there is some
+						unclarity on how to bind an element.</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading">Saving</div>
+				<div class="panel-body">
+					<p>The case must be saved by clicking the "Save" button below
+						the case-wide comment box. Any unsaved changes may be discarded by
+						clicking the "Cancel" button.</p>
+				</div>
+			</div>
 
 		</div>
 
