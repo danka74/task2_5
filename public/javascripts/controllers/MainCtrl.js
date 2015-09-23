@@ -156,7 +156,7 @@ angular
 							$scope.countElements = function() {
 								var count = 0;
 								for(caseIndex = 0; caseIndex < $scope.caseTemplates.length; caseIndex++) {
-									
+
 									var _case = $scope.caseTemplates[caseIndex];
 									count += _case.rhs.length;
 									if(_case.lhs != undefined)
