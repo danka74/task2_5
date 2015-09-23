@@ -1,0 +1,65 @@
+{
+	"description": "From Dutch project on Generic Data for Patient Transfer, organized by the joint University Medical Centers and the Dutch ICT Institute in Healthcare (NITCIZ)",
+	"lhs": 
+	{
+		"name": "Biological relation",
+		"_type": "tb"
+	},
+
+	"templateURL": "default_template.html",
+	"title": "Biological relation",
+	"rhs": 
+	[
+		{
+			"name": "Natural brother"
+		},
+
+		{
+			"name": "Cousin"
+		},
+
+		{
+			"name": "Greatgrandparent"
+		},
+
+		{
+			"name": "PaternalGreatgrandparent"
+		},
+
+		{
+			"name": "Family Member"
+		},
+
+		{
+			"name": "Uncle"
+		},
+
+		{
+			"name": "Significant other"
+		},
+
+		{
+			"name": "Niece/nephew"
+		},
+
+		{
+			"name": "Grandchild"
+		},
+
+		{
+			"name": "PaternalUncle"
+		},
+
+		{
+			"name": "Natural sister"
+		},
+
+		{
+			"name": "Natural son"
+		},
+
+		{
+			"name": "Natural daugther"
+		}
+	]
+}

@@ -146,12 +146,32 @@ angular
 								$scope.user = jwtHelper.decodeToken(token);
 							}
 
-							var bindingsCount = bindingService.get();
+							bindingService.getCount().success(function(data) {
+								$scope.bindingCount = data;
+							})
+							.error(function() {
+								$scope.bindingCount = 0;
+							});
 
+							$scope.countElements = function() {
+								var count = 0;
+								for(caseIndex = 0; caseIndex < $scope.caseTemplates.length; caseIndex++) {
+									
+									var _case = $scope.caseTemplates[caseIndex];
+									count += _case.rhs.length;
+									if(_case.lhs != undefined)
+										count++;
+									if(_case.templateURL == "default_template.html")
+										count++;
+								}
+								// times 2 for SNOMED CT and Alternative
+								return count * 2;
+							}
 							templateService
 									.get()
 									.success(function(data) {
 										$scope.caseTemplates = data;
+										$scope.totalElements = $scope.countElements();
 									})
 									.error(
 											function(data, status) {
@@ -247,6 +267,9 @@ angular
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
+														bindingService.getCount().success(function(data) {
+															$scope.bindingCount = data;
+														})
 													});
 								} else {
 									$scope.createBasicStructure();
@@ -258,6 +281,9 @@ angular
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
+														bindingService.getCount().success(function(data) {
+															$scope.bindingCount = data;
+														})
 													});
 								}
 							}
@@ -272,7 +298,8 @@ angular
 												function(data) {
 													if (data) {
 														console
-																.log("Found binding");
+																.log("Found binding  ");
+														console.log(data);
 														// if last saved is
 														// available
 														$scope.currentCaseBinding = data;

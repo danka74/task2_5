@@ -11,7 +11,8 @@ angular.module('BindingServiceModule', []).factory(
 						},
 
 						// get number of bindings for the current user
-						get: function() {
+						getCount: function() {
+							console.log("get number of bindings");
 							return $http.get('/api/bindings');
 						},
 
