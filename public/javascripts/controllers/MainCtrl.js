@@ -226,7 +226,7 @@ angular
 									$scope.currentCaseBinding.rhsBindings[i].source = $scope.currentCaseTemplate.rhs[i].name;
 									$scope.currentCaseBinding.rhsBindings[i].sourceTemplatePart = $scope.currentCaseTemplate.rhs[i]._id;
 								}
-								delete $scope.currentCaseBinding.date;
+								$scope.currentCaseBinding.date = Date.now();
 							}
 
 							$scope.save = function() {
