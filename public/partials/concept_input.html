@@ -3,14 +3,17 @@
 		<label class="control-label col-sm-4" popover="{{partDescription}}"
 			popover-trigger="mouseenter">{{name}}</label>
 		<div class="col-sm-2">
-			<select class="form-control" ng-model="partBinding.codeSystem"
+			<select class="form-control selectwidthauto"
+				ng-model="partBinding.codeSystem"
 				popover="Select the source terminology, code system, or classicication"
 				popover-trigger="mouseenter">
 				<option ng-repeat="t in terminologies">{{t.name}}</option>
 			</select>
+
 		</div>
 		<div class="col-sm-2">
-			<select class="form-control" ng-model="partBinding.assessment"
+			<select class="form-control selectwidthauto"
+				ng-model="partBinding.assessment"
 				popover="Select your rating of the binding"
 				popover-trigger="mouseenter">
 				<option value="1">1 Full coverage</option>
@@ -19,6 +22,7 @@
 				<option value="4">4 No coverage</option>
 				<option value="5">5 Out of scope</option>
 			</select>
+
 		</div>
 		<div class="col-sm-3">
 			<input class="form-control col-sm-3" type="text" placeholder="Code"
@@ -27,9 +31,12 @@
 				popover-trigger="mouseenter" />
 		</div>
 		<div class="col-sm-1">
+			<button class="close" type="button"
+				ng-click="partBinding.target=null;partBinding.assessment=null;partBinding.codeSystem=null;$parent.bindingForm.$setDirty();"
+				popover="Click to clear row" popover-trigger="mouseenter">&times;</button>
 			<span class="glyphicon glyphicon-comment" style="padding: 5px"
 				ng-class="{'bg-primary': partBinding.comments.length > 0}"
-				popover="Click to add or view comments" popover-trigger="mouseenter"/>
+				popover="Click to add or view comments" popover-trigger="mouseenter" />
 		</div>
 	</div>
 	<div class="row">

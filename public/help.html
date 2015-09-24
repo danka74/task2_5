@@ -143,20 +143,22 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Binding</div>
 				<div class="panel-body">
-					<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="58">
+					<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="42">
 					<image xmlns:xlink=http://www.w3.org/1999/xlink
-						xlink:href="images/binding.png" x="0" y="0" width="1080"
-						height="58" /> <rect id="b1" x="35" y="14" height="30"
-						width="180" stroke="red" stroke-width="4"
-						style="fill: none; display:none" /> <rect id="b2" x="230" y="14"
-						height="30" width="210" stroke="red" stroke-width="4"
-						style="fill: none; display:none" /> <rect id="b3" x="460" y="14"
-						height="30" width="210" stroke="red" stroke-width="4"
-						style="fill: none; display:none" /> <rect id="b4" x="690" y="14"
-						height="30" width="330" stroke="red" stroke-width="4"
-						style="fill: none; display:none" /> <rect id="b5" x="1040" y="14"
-						height="30" width="20" stroke="red" stroke-width="4"
-						style="fill: none; display:none" /> </svg>
+						xlink:href="images/binding.png" x="0" y="0" width="1100"
+						height="42" /> <rect id="b1" x="2" y="6" height="30" width="70"
+						stroke="red" stroke-width="4" style="fill: none; display:none" />
+
+					<rect id="b2" x="90" y="6" height="30" width="230" stroke="red"
+						stroke-width="4" style="fill: none; display:none" /> <rect
+						id="b3" x="348" y="6" height="30" width="230" stroke="red"
+						stroke-width="4" style="fill: none; display:none" /> <rect
+						id="b4" x="608" y="6" height="30" width="358" stroke="red"
+						stroke-width="4" style="fill: none; display:none" /> <rect
+						id="b5" x="995" y="6" height="30" width="30" stroke="red"
+						stroke-width="4" style="fill: none; display:none" /> <rect
+						id="b6" x="1078" y="6" height="30" width="20" stroke="red"
+						stroke-width="4" style="fill: none; display:none" /> </svg>
 
 					<p>
 						For each element in a case there is a row consiting of (hold mouse
@@ -240,6 +242,11 @@
 								comments. By clicking the symbol, comments can be viewed, added
 								or deleted. If the symbol is inverted with a blue background,
 								there are existing comments.</li>
+							<li
+								onmouseout="document.getElementById('b6').style.display = 'none';"
+								onmouseover="document.getElementById('b6').style.display = 'block';">The
+								&times button at the end of the row will clear the selection of
+								terminology and assessment as well as the selected code.</li>
 						</ul>
 					</p>
 					<p>For some cases there is a row titled "Overall meaning of

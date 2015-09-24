@@ -8,6 +8,8 @@ a {
 	color: #00B7FF;
 }
 
+
+
 .blue {
 	color: blue;
 }
@@ -27,7 +29,7 @@ a {
 }
 
 html, body, .full-height {
-    height: 100%;
+	height: 100%;
 }
 
 .commentXXX {
@@ -42,8 +44,8 @@ html, body, .full-height {
 
 .scrollable {
 	height: 90%;
-    margin-bottom: 5px;
-    overflow-y: scroll;
+	margin-bottom: 5px;
+	overflow-y: scroll;
 }
 
 .switch {

@@ -61,6 +61,7 @@ angular
 										.indexOf(comment.comment);
 								console.log("index = " + index);
 								$scope.partBinding.comments.splice(index, 1);
+								$scope.$parent.bindingForm.$setDirty();
 							}
 						},
 						link : function(scope, element, attrs) {
@@ -112,8 +113,8 @@ angular
 								name : "MeSH"
 							} ] ]; // add regexp for validation?
 
-//							// SCT only or Alternative study arm, false=SCT,
-//							// true=Alternative
+							// // SCT only or Alternative study arm, false=SCT,
+							// // true=Alternative
 							$scope.scenario = false;
 							$scope.scenarioSwitch = false;
 							$scope.changeScenario = function(switchTo) {
@@ -148,20 +149,19 @@ angular
 
 							bindingService.getCount().success(function(data) {
 								$scope.bindingCount = data;
-							})
-							.error(function() {
+							}).error(function() {
 								$scope.bindingCount = 0;
 							});
 
 							$scope.countElements = function() {
 								var count = 0;
-								for(caseIndex = 0; caseIndex < $scope.caseTemplates.length; caseIndex++) {
+								for (caseIndex = 0; caseIndex < $scope.caseTemplates.length; caseIndex++) {
 
 									var _case = $scope.caseTemplates[caseIndex];
 									count += _case.rhs.length;
-									if(_case.lhs != undefined)
+									if (_case.lhs != undefined)
 										count++;
-									if(_case.templateURL == "default_template.html")
+									if (_case.templateURL == "default_template.html")
 										count++;
 								}
 								// times 2 for SNOMED CT and Alternative
@@ -169,10 +169,12 @@ angular
 							}
 							templateService
 									.get()
-									.success(function(data) {
-										$scope.caseTemplates = data;
-										$scope.totalElements = $scope.countElements();
-									})
+									.success(
+											function(data) {
+												$scope.caseTemplates = data;
+												$scope.totalElements = $scope
+														.countElements();
+											})
 									.error(
 											function(data, status) {
 												$scope.caseTemplates = [];
@@ -267,9 +269,13 @@ angular
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
-														bindingService.getCount().success(function(data) {
-															$scope.bindingCount = data;
-														})
+														bindingService
+																.getCount()
+																.success(
+																		function(
+																				data) {
+																			$scope.bindingCount = data;
+																		})
 													});
 								} else {
 									$scope.createBasicStructure();
@@ -281,9 +287,13 @@ angular
 														$scope.currentCaseBinding = data;
 														$scope.bindingForm
 																.$setPristine();
-														bindingService.getCount().success(function(data) {
-															$scope.bindingCount = data;
-														})
+														bindingService
+																.getCount()
+																.success(
+																		function(
+																				data) {
+																			$scope.bindingCount = data;
+																		})
 													});
 								}
 							}
