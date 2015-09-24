@@ -166,21 +166,24 @@ router.get('/stats', function(req, res, next) {
 				for (b in bindings) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
-					var scenario = binding.scenario;
+					var scenario = binding.scenario ? "ALT" : "SCT";
 					var date = binding.date;
-					res.write(date + '\t' + user + '\t' + scenario + '\t'
-							+ binding.lhsBinding.source + '\t'
-							+ binding.lhsBinding.assessment + '\t'
-							+ binding.lhsBinding.target + '\n');
-					res.write(date + '\t' + user + '\t' + scenario + '\t'
-							+ binding.lhsBinding.source + '-overall\t'
-							+ binding.rhsOverall.assessment + '\t'
-							+ binding.rhsOverall.target + '\n');
-					for (var r = 0; r < binding.rhsBindings.length; r++) {
+					if(binding.lhsBinding.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
-								+ binding.rhsBindings[r].source + '\t'
-								+ binding.rhsBindings[r].assessment + '\t'
-								+ binding.rhsBindings[r].target + '\n');
+								+ binding.lhsBinding.source + '\t'
+								+ binding.lhsBinding.assessment + '\t'
+								+ binding.lhsBinding.target + '\n');
+					if(binding.rhsOverall.assessment != undefined)
+						res.write(date + '\t' + user + '\t' + scenario + '\t'
+								+ binding.lhsBinding.source + '-overall\t'
+								+ binding.rhsOverall.assessment + '\t'
+								+ binding.rhsOverall.target + '\n');
+					for (var r = 0; r < binding.rhsBindings.length; r++) {
+						if(binding.rhsBindings[r].assessment != undefined)
+							res.write(date + '\t' + user + '\t' + scenario + '\t'
+									+ binding.rhsBindings[r].source + '\t'
+									+ binding.rhsBindings[r].assessment + '\t'
+									+ binding.rhsBindings[r].target + '\n');
 					}
 				}
 				res.end();
