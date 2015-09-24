@@ -192,5 +192,39 @@ router.get('/stats', function(req, res, next) {
 
 });
 
+router.get('/comments', function(req, res, next) {
+    res.writeHead(200, {'Content-Type': 'text/csv'});
+	Binding.find().exec(
+			function(err, bindings) {
+				if (err) {
+					return err;
+				}
+				res.write('date\tuser\tscenario\tcomment\n')
+				for (b in bindings) {
+					var binding = bindings[b];
+					var user = binding.user.uid;
+					var scenario = binding.scenario ? "ALT" : "SCT";
+					var printComments = function(source, comments) {
+						for(var c = 0; c < comments.length; c++) {
+							ct = comments[c];
+							res.write(ct.date + '\t' + user + '\t' + scenario + '\t' + source + '\t' + ct.text + '\n');
+						}
+					}
+					printComments(binding.template, binding.comments);
+					if(binding.lhsBinding.comments != undefined)
+						printComments(binding.lhsBinding.source, binding.lhsBinding.comments);
+					if(binding.rhsOverall.comments != undefined)
+						printComments(binding.rhsOverall.source, binding.rhsOverall.comments);
+					for (var r = 0; r < binding.rhsBindings.length; r++) {
+						if(binding.rhsBindings[r].comments != undefined)
+							printComments(binding.rhsBindings[r].source, binding.rhsBindings[r].comments);
+					}
+				}
+				res.end();
+			});
+	// res.end();
+
+});
+
 
 module.exports = router;
