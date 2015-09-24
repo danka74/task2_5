@@ -207,7 +207,7 @@ router.get('/comments', function(req, res, next) {
 					var printComments = function(source, comments) {
 						for(var c = 0; c < comments.length; c++) {
 							ct = comments[c];
-							res.write(ct.date + '\t' + user + '\t' + scenario + '\t' + source + '\t' + ct.text + '\n');
+							res.write(ct.date + '\t' + user + '\t' + scenario + '\t' + source + '\t' + JSON.stringify(ct.text) + '\n');
 						}
 					}
 					printComments(binding.template, binding.comments);
