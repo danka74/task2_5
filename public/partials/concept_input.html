@@ -33,7 +33,9 @@
 		<div class="col-sm-1">
 			<button class="close" type="button"
 				ng-click="partBinding.target=null;partBinding.assessment=null;partBinding.codeSystem=null;$parent.bindingForm.$setDirty();"
-				popover="Click to clear row" popover-trigger="mouseenter">&times;</button>
+				popover="Click to clear row" popover-trigger="mouseenter">
+				<span class="glyphicon glyphicon-trash"></span>
+			</button>
 			<span class="glyphicon glyphicon-comment" style="padding: 5px"
 				ng-class="{'bg-primary': partBinding.comments.length > 0}"
 				popover="Click to add or view comments" popover-trigger="mouseenter" />
@@ -47,7 +49,10 @@
 					<h6 class="list-group-item-heading">
 						{{comment.date | date:'short'}}
 						<button class="close pull-right" type="button"
-							ng-click="_delete(this)">&times;</button>
+							ng-click="_delete(this)" popover="Click to delete comment"
+							popover-trigger="mouseenter">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
 					</h6>
 					<p class="list-group-item-text">{{comment.text}}</p>
 				</li>
