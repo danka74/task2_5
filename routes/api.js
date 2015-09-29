@@ -167,7 +167,7 @@ router.get('/stats', function(req, res, next) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
 					var scenario = binding.scenario ? "ALT" : "SCT";
-					var date = binding.date;
+					var date = binding.date.toISOString();
 					if(binding.lhsBinding.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
 								+ binding.lhsBinding.source + '\t'
@@ -207,7 +207,7 @@ router.get('/comments', function(req, res, next) {
 					var printComments = function(source, comments) {
 						for(var c = 0; c < comments.length; c++) {
 							ct = comments[c];
-							res.write(ct.date + '\t' + user + '\t' + scenario + '\t' + source + '\t' + JSON.stringify(ct.text) + '\n');
+							res.write(ct.date.toISOString() + '\t' + user + '\t' + scenario + '\t' + source + '\t' + JSON.stringify(ct.text) + '\n');
 						}
 					}
 					printComments(binding.template, binding.comments);
