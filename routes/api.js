@@ -226,5 +226,36 @@ router.get('/comments', function(req, res, next) {
 
 });
 
+router.get('/dashboard1', function(req, res, next) {
+
+	var o = {};
+
+	o.map = function() {
+		var scenario = this.scenario ? "ALT" : "SCT";
+		emit({ scenario: scenario, assessment: this.lhsBinding.assessment}, 1);
+		emit({ scenario: scenario, assessment: this.rhsOverall.assessment}, 1);
+		for(b in this.rhsBindings) {
+				emit({ scenario: scenario, assessment: this.rhsBindings[b].assessment}, 1);
+			};
+	};
+
+	o.reduce = function(key, values) {
+		return values.length;
+	};
+
+	o.out = {inline: 1};
+
+	Binding.mapReduce(o, function (err, results) {
+		if(err) {
+			console.log(err);
+			res.json({error: 1});
+		}
+
+		console.log(results);
+		res.json(results);
+	});
+
+
+});
 
 module.exports = router;
