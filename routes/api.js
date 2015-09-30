@@ -156,7 +156,7 @@ router.post('/bindings', function(req, res, next) {
 });
 
 router.get('/stats', function(req, res, next) {
-    res.writeHead(200, {'Content-Type': 'text/csv'});
+    res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
 	Binding.find().exec(
 			function(err, bindings) {
 				if (err) {
