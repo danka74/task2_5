@@ -156,7 +156,7 @@ router.post('/bindings', function(req, res, next) {
 });
 
 router.get('/stats', function(req, res, next) {
-    res.writeHead(200, {'Content-Type': 'text/csv'});
+    res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
 	Binding.find().exec(
 			function(err, bindings) {
 				if (err) {
@@ -167,7 +167,7 @@ router.get('/stats', function(req, res, next) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
 					var scenario = binding.scenario ? "ALT" : "SCT";
-					var date = binding.date;
+					var date = binding.date.toISOString();
 					if(binding.lhsBinding.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
 								+ binding.lhsBinding.source + '\t'
@@ -207,7 +207,7 @@ router.get('/comments', function(req, res, next) {
 					var printComments = function(source, comments) {
 						for(var c = 0; c < comments.length; c++) {
 							ct = comments[c];
-							res.write(ct.date + '\t' + user + '\t' + scenario + '\t' + source + '\t' + JSON.stringify(ct.text) + '\n');
+							res.write(ct.date.toISOString() + '\t' + user + '\t' + scenario + '\t' + source + '\t' + JSON.stringify(ct.text) + '\n');
 						}
 					}
 					printComments(binding.template, binding.comments);
@@ -226,5 +226,36 @@ router.get('/comments', function(req, res, next) {
 
 });
 
+router.get('/dashboard1', function(req, res, next) {
+
+	var o = {};
+
+	o.map = function() {
+		var scenario = this.scenario ? "ALT" : "SCT";
+		emit({ scenario: scenario, assessment: this.lhsBinding.assessment}, 1);
+		emit({ scenario: scenario, assessment: this.rhsOverall.assessment}, 1);
+		for(b in this.rhsBindings) {
+				emit({ scenario: scenario, assessment: this.rhsBindings[b].assessment}, 1);
+			};
+	};
+
+	o.reduce = function(key, values) {
+		return values.length;
+	};
+
+	o.out = {inline: 1};
+
+	Binding.mapReduce(o, function (err, results) {
+		if(err) {
+			console.log(err);
+			res.json({error: 1});
+		}
+
+		console.log(results);
+		res.json(results);
+	});
+
+
+});
 
 module.exports = router;
