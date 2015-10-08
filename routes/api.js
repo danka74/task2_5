@@ -196,7 +196,7 @@ router.get('/stats', function(req, res, next) {
 					if (err) {
 						return err;
 					}
-					
+
 					res.json(bindings);
 				});
 	}
@@ -275,27 +275,27 @@ router.get('/dashboard2', function(req, res, next) {
 
 	o.map = function() {
 		var scenario = this.scenario ? "ALT" : "SCT";
-		var date = this.date.toISOString();
-		var user = this.user.uid;
+		var date = this.date ? this.date.toISOString() : {};
+		var user = this.user ? this.user.uid : {};
 		if(this.lhsBinding.assessment != undefined)
-			emit({date: date, 
-				user: user, 
-				scenario: scenario, 
+			emit({date: date,
+				user: user,
+				scenario: scenario,
 				source: this.lhsBinding.source,
 				assessment: this.lhsBinding.assessment,
 				target: this.lhsBinding.target}, 1);
 		if(this.rhsOverall.assessment != undefined)
-			emit({date: date, 
-				user: user, 
-				scenario: scenario, 
+			emit({date: date,
+				user: user,
+				scenario: scenario,
 				source: this.rhsOverall.source,
 				assessment: this.rhsOverall.assessment,
 				target: this.rhsOverall.target}, 1);
 		for(b in this.rhsBindings) {
 				if(this.rhsBindings[b].assessment != undefined)
-					emit({date: date, 
-						user: user, 
-						scenario: scenario, 
+					emit({date: date,
+						user: user,
+						scenario: scenario,
 						source: this.rhsBindings[b].source,
 						assessment: this.rhsBindings[b].assessment,
 						target: this.rhsBindings[b].target}, 1);
@@ -311,7 +311,7 @@ router.get('/dashboard2', function(req, res, next) {
 	Binding.mapReduce(o, function (err, results) {
 		if(err) {
 			console.log(err);
-			res.json({error: 1});
+			res.json({error: err});
 		}
 
 		res.json(results);

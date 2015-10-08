@@ -52,10 +52,32 @@ angular
 														assessmentCount.sct,
 														assessmentCount.alt ];
 
+												console.log($scope.chi2(assessmentCount.sct,
+														assessmentCount.alt));
 												console.log(assessmentCount);
 
 											}).error(function() {
 										$scope.results = [];
 									});
+
+							$scope.chi2 = function (data1, data2) {
+								var len = Math.min(data1.length, data2.length);
+
+								if(len < 2)
+									return 0;
+
+								var criticalValue = 0.0;
+								for(var i = 0; i < len; i++) {
+									var xSqr = data1[i] - data2[i];
+									console.log(xSqr);
+									criticalValue += xSqr*xSqr / data2[i];
+								}
+								if(criticalValue <= 0.0)
+									return 0;
+								var dof = len - 1; // len - 1 = degrees of freedom
+
+								return criticalValue;
+
+							}
 
 						} ]);
