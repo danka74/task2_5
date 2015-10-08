@@ -163,7 +163,7 @@ router.get('/stats', function(req, res, next) {
 				if (err) {
 					return err;
 				}
-				res.write('date\tuser\tscenario\tsource\tassessment\ttarget\n')
+				res.write('date\tuser\tscenario\tsource\tcode-system\tassessment\ttarget\n')
 				for (b in bindings) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
@@ -172,17 +172,20 @@ router.get('/stats', function(req, res, next) {
 					if(binding.lhsBinding.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
 								+ binding.lhsBinding.source + '\t'
+								+ binding.lhsBinding.codeSystem + '\t'
 								+ binding.lhsBinding.assessment + '\t'
 								+ binding.lhsBinding.target + '\n');
 					if(binding.rhsOverall.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
 								+ binding.lhsBinding.source + '-overall\t'
+								+ binding.rhsOverall.codeSystem + '\t'
 								+ binding.rhsOverall.assessment + '\t'
 								+ binding.rhsOverall.target + '\n');
 					for (var r = 0; r < binding.rhsBindings.length; r++) {
 						if(binding.rhsBindings[r].assessment != undefined)
 							res.write(date + '\t' + user + '\t' + scenario + '\t'
 									+ binding.rhsBindings[r].source + '\t'
+									+ binding.rhsBindings[r].codeSystem + '\t'
 									+ binding.rhsBindings[r].assessment + '\t'
 									+ binding.rhsBindings[r].target + '\n');
 					}
@@ -282,6 +285,7 @@ router.get('/dashboard2', function(req, res, next) {
 				user: user,
 				scenario: scenario,
 				source: this.lhsBinding.source,
+				codeSystem: this.lhsBinding.codeSystem,
 				assessment: this.lhsBinding.assessment,
 				target: this.lhsBinding.target}, 1);
 		if(this.rhsOverall.assessment != undefined)
@@ -289,6 +293,7 @@ router.get('/dashboard2', function(req, res, next) {
 				user: user,
 				scenario: scenario,
 				source: this.rhsOverall.source,
+				codeSystem: this.rhsOverall.codeSystem,
 				assessment: this.rhsOverall.assessment,
 				target: this.rhsOverall.target}, 1);
 		for(b in this.rhsBindings) {
@@ -297,6 +302,7 @@ router.get('/dashboard2', function(req, res, next) {
 						user: user,
 						scenario: scenario,
 						source: this.rhsBindings[b].source,
+						codeSystem: this.rhsBindings[b].codeSystem,
 						assessment: this.rhsBindings[b].assessment,
 						target: this.rhsBindings[b].target}, 1);
 			};
