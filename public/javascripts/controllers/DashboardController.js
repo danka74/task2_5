@@ -28,11 +28,28 @@ angular
 							$scope.maxChart = 4;
 
 							$scope.nextChart = function() {
-								if (!$scope.dataLoaded)
-									return;
-
 								console.log("next chart");
 
+								$scope.chartNo++;
+								if ($scope.chartNo >= $scope.maxChart)
+									$scope.chartNo = 0;
+								$scope.showChart();
+							}
+
+							$scope.prevChart = function() {
+								console.log("prev chart");
+
+								$scope.chartNo--;
+								if ($scope.chartNo < 0)
+									$scope.chartNo = $scope.maxChart - 1;
+								$scope.showChart();
+							}
+
+							$scope.showChart = function() {
+								console.log("show chart");
+								if (!$scope.dataLoaded)
+									return;
+								
 								switch ($scope.chartNo) {
 								case 0: {
 									var totCount = [ 0, 0 ];
@@ -51,13 +68,12 @@ angular
 											users.push(binding.user);
 										}
 									}
-									$scope.series = [ 'SCT', 'ALT' ];
+									$scope.series = [ 'SNOMED CT', 'Alternative' ];
 									$scope.labels = [ 'Total' ];
 									$scope.data = [ [ totCount[0] ],
 											[ totCount[1] ] ];
 									$scope.statistics = "total count = "
-											+ (totCount[0]
-											+ totCount[1])
+											+ (totCount[0] + totCount[1])
 											+ ", no. of users = "
 											+ users.length;
 									$scope.title = "Total count";
@@ -69,22 +85,23 @@ angular
 										sct : [],
 										alt : []
 									};
-									for (var i = 0; i < 5; i++) {
+									for (var i = 0; i < 4; i++) {
 										assessmentCount.sct[i] = 0;
 										assessmentCount.alt[i] = 0;
 									}
 
 									for (b in $scope.results) {
 										var binding = $scope.results[b]._id;
-										if (binding.scenario == "SCT")
-											assessmentCount.sct[binding.assessment - 1]++;
-										else
-											assessmentCount.alt[binding.assessment - 1]++;
+										if (binding.assessment != 5)
+											if (binding.scenario == "SCT")
+												assessmentCount.sct[binding.assessment - 1]++;
+											else
+												assessmentCount.alt[binding.assessment - 1]++;
 									}
 
 									$scope.labels = [ 'Full', 'Inferred',
-											'Partial', 'No', 'OOS' ];
-									$scope.series = [ 'SCT', 'ALT' ];
+											'Partial', 'No' ];
+									$scope.series = [ 'SNOMED CT', 'Alternative' ];
 
 									$scope.data = [ assessmentCount.sct,
 											assessmentCount.alt ];
@@ -97,7 +114,7 @@ angular
 									var df = 1 * (assessmentCount.sct.length - 1);
 
 									$scope.statistics = "df = " + df
-											+ ", chi2 = " + chi2;
+											+ ", chi2 = " + chi2.toFixed(2);
 									$scope.title = "Coverge";
 									break;
 								}
@@ -114,7 +131,6 @@ angular
 										}
 									}
 									$scope.labels = [ 'Single code', 'Grouped' ];
-									$scope.series = [ 'SCT', 'ALT' ];
 									$scope.data = groupCount;
 									var groupings = (100 * (groupCount[1] / (groupCount[0] + groupCount[1])))
 											.toFixed(2);
@@ -136,18 +152,17 @@ angular
 													groupCount[1]++;
 										}
 									}
+									$scope.labels = [ 'Single code', 'Grouped' ];
 									$scope.data = groupCount;
 									var groupings = (100 * (groupCount[1] / (groupCount[0] + groupCount[1])))
 											.toFixed(2);
 									$scope.statistics = "groupings "
 											+ groupings + " %";
 									$scope.title = "Grouping (Alternative)";
-
+									$scope.type = 'Pie';
+									break;
 								}
 								}
-								$scope.chartNo++;
-								if ($scope.chartNo == $scope.maxChart)
-									$scope.chartNo = 0;
 							}
 
 							bindingService.getStats().success(function(data) {
@@ -155,7 +170,7 @@ angular
 
 								$scope.dataLoaded = true;
 
-								$scope.nextChart();
+								$scope.showChart();
 
 							}).error(function() {
 								$scope.results = [];
@@ -167,9 +182,6 @@ angular
 									return Math.min(a.length, b.length);
 								});
 
-								console.log(data);
-								console.log(lenX);
-								console.log(lenY);
 
 								var expected = [];
 								var sumX = [];
@@ -187,10 +199,6 @@ angular
 									total += sumY[iX];
 								}
 
-								console.log(total);
-								console.log(sumX);
-								console.log(sumY);
-
 								for (var iX = 0; iX < lenX; iX++) {
 									expected[iX] = [];
 									for (var iY = 0; iY < lenY; iY++) {
@@ -198,8 +206,6 @@ angular
 												/ total;
 									}
 								}
-
-								console.log(expected);
 
 								var criticalValue = 0.0;
 								for (var iX = 0; iX < lenX; iX++) {

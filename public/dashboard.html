@@ -59,11 +59,17 @@
 			chart-legend="true" chart-colours="['#9c9d9f','#D22125',]"
 			chart-options="{scaleFontSize: 18, animationSteps: 40}"> </canvas>
 		<div class="row" style="font-size: 200%">
-			<div class="col-md-10">{{statistics}}</div>
-			<div class="col-md-2 ">
-				<span class="glyphicon glyphicon-step-forward pull-right"
-					ng-click="nextChart();"></span>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-step-backward "
+						ng-click="prevChart();"></span>
+				</button>
 			</div>
+			<div class="col-md-10">{{statistics}}</div>
+			<div class="col-md-1"><button type="button" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-step-forward "
+						ng-click="nextChart();"></span>
+				</button></div>
 		</div>
 	</div>
 </body>
