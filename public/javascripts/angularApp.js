@@ -1,8 +1,8 @@
 angular
 		.module(
 				'BindingApp',
-				[ 'ngRoute', 'ui.bootstrap', 'MainControllerModule',
-						'TemplateServiceModule', 'BindingServiceModule', /* 'uiSwitch', */
+				[ 'ngRoute', 'ui.bootstrap', 'MainControllerModule', 'DashboardControllerModule',
+						'TemplateServiceModule', 'BindingServiceModule', 
 						'angular-jwt', 'hc.marked', 'sticky' ])
 		.factory(
 				'authInterceptor',

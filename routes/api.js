@@ -156,6 +156,7 @@ router.post('/bindings', function(req, res, next) {
 });
 
 router.get('/stats', function(req, res, next) {
+	if(req.accepts('text/csv')) {
     res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
 	Binding.find().exec(
 			function(err, bindings) {
@@ -188,7 +189,17 @@ router.get('/stats', function(req, res, next) {
 				}
 				res.end();
 			});
-	// res.end();
+	}
+	else if(req.accepts('json')) {
+		Binding.find().exec(
+				function(err, bindings) {
+					if (err) {
+						return err;
+					}
+					
+					res.json(bindings);
+				});
+	}
 
 });
 
@@ -257,5 +268,57 @@ router.get('/dashboard1', function(req, res, next) {
 
 
 });
+
+router.get('/dashboard2', function(req, res, next) {
+
+	var o = {};
+
+	o.map = function() {
+		var scenario = this.scenario ? "ALT" : "SCT";
+		var date = this.date.toISOString();
+		var user = this.user.uid;
+		if(this.lhsBinding.assessment != undefined)
+			emit({date: date, 
+				user: user, 
+				scenario: scenario, 
+				source: this.lhsBinding.source,
+				assessment: this.lhsBinding.assessment,
+				target: this.lhsBinding.target}, 1);
+		if(this.rhsOverall.assessment != undefined)
+			emit({date: date, 
+				user: user, 
+				scenario: scenario, 
+				source: this.rhsOverall.source,
+				assessment: this.rhsOverall.assessment,
+				target: this.rhsOverall.target}, 1);
+		for(b in this.rhsBindings) {
+				if(this.rhsBindings[b].assessment != undefined)
+					emit({date: date, 
+						user: user, 
+						scenario: scenario, 
+						source: this.rhsBindings[b].source,
+						assessment: this.rhsBindings[b].assessment,
+						target: this.rhsBindings[b].target}, 1);
+			};
+	};
+
+	o.reduce = function(key, values) {
+		return values;
+	};
+
+	o.out = {inline: 1};
+
+	Binding.mapReduce(o, function (err, results) {
+		if(err) {
+			console.log(err);
+			res.json({error: 1});
+		}
+
+		res.json(results);
+	});
+
+
+});
+
 
 module.exports = router;

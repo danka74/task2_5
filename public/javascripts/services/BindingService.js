@@ -25,6 +25,11 @@ angular.module('BindingServiceModule', []).factory(
 						// update binding
 						update: function(id, binding) {
 							return $http.put('/api/bindings/' + id, binding);
+						},
+						
+						// get stats
+						getStats: function() {
+							return $http.get('/api/dashboard2');
 						}
 					}
 
