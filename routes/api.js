@@ -303,7 +303,7 @@ router.get('/dashboard2', function(req, res, next) {
 	};
 
 	o.reduce = function(key, values) {
-		return values;
+		return values[0];
 	};
 
 	o.out = {inline: 1};
