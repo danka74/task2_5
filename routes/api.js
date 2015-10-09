@@ -163,7 +163,7 @@ router.get('/stats', function(req, res, next) {
 				if (err) {
 					return err;
 				}
-				res.write('date\tuser\tscenario\tsource\tcode-system\tassessment\ttarget\n')
+				res.write('date\tuser\tscenario\ttemplate\tsource\tcode-system\tassessment\ttarget\n');
 				for (b in bindings) {
 					var binding = bindings[b];
 					var user = binding.user.uid;
@@ -171,12 +171,14 @@ router.get('/stats', function(req, res, next) {
 					var date = binding.date.toISOString();
 					if(binding.lhsBinding.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
+								+ binding.template + '\t'
 								+ binding.lhsBinding.source + '\t'
 								+ binding.lhsBinding.codeSystem + '\t'
 								+ binding.lhsBinding.assessment + '\t'
 								+ binding.lhsBinding.target + '\n');
 					if(binding.rhsOverall.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
+								+ binding.template + '\t'
 								+ binding.lhsBinding.source + '-overall\t'
 								+ binding.rhsOverall.codeSystem + '\t'
 								+ binding.rhsOverall.assessment + '\t'
@@ -184,6 +186,7 @@ router.get('/stats', function(req, res, next) {
 					for (var r = 0; r < binding.rhsBindings.length; r++) {
 						if(binding.rhsBindings[r].assessment != undefined)
 							res.write(date + '\t' + user + '\t' + scenario + '\t'
+									+ binding.template + '\t'
 									+ binding.rhsBindings[r].source + '\t'
 									+ binding.rhsBindings[r].codeSystem + '\t'
 									+ binding.rhsBindings[r].assessment + '\t'
@@ -284,6 +287,7 @@ router.get('/dashboard2', function(req, res, next) {
 			emit({date: date,
 				user: user,
 				scenario: scenario,
+				template: this.template,
 				source: this.lhsBinding.source,
 				codeSystem: this.lhsBinding.codeSystem,
 				assessment: this.lhsBinding.assessment,
@@ -292,6 +296,7 @@ router.get('/dashboard2', function(req, res, next) {
 			emit({date: date,
 				user: user,
 				scenario: scenario,
+				template: this.template,
 				source: this.rhsOverall.source,
 				codeSystem: this.rhsOverall.codeSystem,
 				assessment: this.rhsOverall.assessment,
@@ -301,6 +306,7 @@ router.get('/dashboard2', function(req, res, next) {
 					emit({date: date,
 						user: user,
 						scenario: scenario,
+						template: this.template,
 						source: this.rhsBindings[b].source,
 						codeSystem: this.rhsBindings[b].codeSystem,
 						assessment: this.rhsBindings[b].assessment,
