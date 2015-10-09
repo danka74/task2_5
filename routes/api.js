@@ -328,7 +328,121 @@ router.get('/dashboard2', function(req, res, next) {
 
 		res.json(results);
 	});
+});
 
+var trim = function(string) {
+	if(typeof string !== "string")
+		return string;
+
+	var vb = string.indexOf("|");
+	if(vb == -1)
+		return string;
+
+	return string.substring(0, vb).trim();
+};
+
+router.get('/agreestat1/:scenario/:item', function(req, res, next) {
+	res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
+	Binding.find().exec(
+			function(err, bindings) {
+				if (err) {
+					return err;
+				}
+				var users = [];
+				var elements = [];
+				var data = [];
+
+				for (b in bindings) {
+					var binding = bindings[b];
+
+					// check to see if it's the right scenario
+					var scenario = binding.scenario ? "ALT" : "SCT";
+					if(scenario !== req.params.scenario)
+						continue;
+
+					// get user index
+					var userIndex = users.indexOf(binding.user.uid);
+					if(userIndex == -1) {
+						userIndex = users.push(binding.user.uid) - 1;
+						data.push([]);
+					}
+//					console.log(userIndex, binding.user.uid);
+
+					// lhs binding
+					if(binding.lhsBinding.assessment != undefined) {
+						// get the index of the source element
+						var elementIndex = elements.indexOf(binding.lhsBinding.source);
+						if(elementIndex == -1) {
+							elementIndex = elements.push(binding.lhsBinding.source) - 1;
+//							data[userIndex].push("Y");
+						}
+//						console.log(elementIndex, binding.lhsBinding.source);
+
+						if(req.params.item == "target")
+							data[userIndex][elementIndex] = trim(binding.lhsBinding.target);
+						else if(req.params.item == "assessment")
+							data[userIndex][elementIndex] = binding.lhsBinding.assessment;
+						else if(req.params.item == "codeSystem")
+							data[userIndex][elementIndex] = binding.lhsBinding.codeSystem;
+						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
+
+					}
+
+					// rhs overall
+					if(binding.rhsOverall.assessment != undefined) {
+						// get the index of the source element
+						var elementIndex = elements.indexOf(binding.lhsBinding.source + '-overall');
+						if(elementIndex == -1) {
+							elementIndex = elements.push(binding.lhsBinding.source + '-overall') - 1;
+//							data[userIndex].push("Z");
+						}
+
+						if(req.params.item == "target")
+							data[userIndex][elementIndex] = trim(binding.rhsOverall.target);
+						else if(req.params.item == "assessment")
+							data[userIndex][elementIndex] = binding.rhsOverall.assessment;
+						else if(req.params.item == "codeSystem")
+							data[userIndex][elementIndex] = binding.rhsOverall.codeSystem;
+
+					}
+
+					// rhs bindings
+					for(b in binding.rhsBindings) {
+						if(binding.rhsBindings[b].assessment != undefined) {
+							// get the index of the source element
+							var elementIndex = elements.indexOf(binding.rhsBindings[b].source);
+							if(elementIndex == -1) {
+								elementIndex = elements.push(binding.rhsBindings[b].source) - 1;
+//								data[userIndex].push("U");
+							}
+
+							if(req.params.item == "target")
+								data[userIndex][elementIndex] = trim(binding.rhsBindings[b].target);
+							else if(req.params.item == "assessment")
+								data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
+							else if(req.params.item == "codeSystem")
+								data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
+						}
+					}
+				}
+				var usersLen = users.length;
+				var elementsLen = elements.length;
+
+				// output heading with users
+				for(var usersI = 0; usersI < usersLen; usersI++) {
+					res.write('\t' + users[usersI]);
+				}
+				res.write('\n');
+
+				for(var elementsI = 0; elementsI < elementsLen; elementsI++) {
+					res.write(elements[elementsI]);
+					for(var usersI = 0; usersI < usersLen; usersI++) {
+						res.write('\t' + data[usersI][elementsI]);
+					}
+					res.write('\n');
+				}
+				res.end();
+			});
 
 });
 
