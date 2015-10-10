@@ -385,8 +385,8 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.lhsBinding.codeSystem;
 						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
-						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-							data[userIndex][elementIndex] = " ";
+//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
+//							data[userIndex][elementIndex] = " ";
 
 
 					}
@@ -406,8 +406,8 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 							data[userIndex][elementIndex] = binding.rhsOverall.assessment;
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.rhsOverall.codeSystem;
-						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-							data[userIndex][elementIndex] = " ";
+//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
+//							data[userIndex][elementIndex] = " ";
 
 					}
 
@@ -427,8 +427,8 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 								data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
 							else if(req.params.item == "codeSystem")
 								data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
-						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-								data[userIndex][elementIndex] = " ";
+//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
+//								data[userIndex][elementIndex] = " ";
 
 						}
 					}
@@ -445,7 +445,10 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 				for(var elementsI = 0; elementsI < elementsLen; elementsI++) {
 					res.write(elements[elementsI]);
 					for(var usersI = 0; usersI < usersLen; usersI++) {
-						res.write('\t' + data[usersI][elementsI]);
+						if(data[usersI][elementsI] === undefined || data[usersI][elementsI] == "undefined")
+							res.write('\t ');
+						else
+							res.write('\t' + data[usersI][elementsI]);
 					}
 					res.write('\n');
 				}
