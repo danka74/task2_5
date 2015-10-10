@@ -385,7 +385,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.lhsBinding.codeSystem;
 						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
-						if(data[userIndex][elementIndex] == undefined)
+						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
 							data[userIndex][elementIndex] = " ";
 
 
@@ -406,7 +406,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 							data[userIndex][elementIndex] = binding.rhsOverall.assessment;
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.rhsOverall.codeSystem;
-						if(data[userIndex][elementIndex] == undefined)
+						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
 							data[userIndex][elementIndex] = " ";
 
 					}
@@ -427,7 +427,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 								data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
 							else if(req.params.item == "codeSystem")
 								data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
-							if(data[userIndex][elementIndex] == undefined)
+						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
 								data[userIndex][elementIndex] = " ";
 
 						}
