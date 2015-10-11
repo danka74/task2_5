@@ -384,7 +384,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 							data[userIndex][elementIndex] = binding.lhsBinding.assessment;
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.lhsBinding.codeSystem;
-						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
+//						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
 //						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
 //							data[userIndex][elementIndex] = " ";
 
@@ -438,17 +438,17 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 
 				// output heading with users
 				for(var usersI = 0; usersI < usersLen; usersI++) {
-					res.write('\t' + users[usersI]);
+					res.write(',"' + users[usersI] + '"');
 				}
 				res.write('\n');
 
 				for(var elementsI = 0; elementsI < elementsLen; elementsI++) {
-					res.write(elements[elementsI]);
+					res.write('"' + elements[elementsI] + '"');
 					for(var usersI = 0; usersI < usersLen; usersI++) {
 						if(data[usersI][elementsI] === undefined || data[usersI][elementsI] == "undefined")
-							res.write('\t ');
+							res.write(',');
 						else
-							res.write('\t' + data[usersI][elementsI]);
+							res.write(',"' + data[usersI][elementsI] + '"');
 					}
 					res.write('\n');
 				}
