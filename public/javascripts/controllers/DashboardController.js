@@ -56,7 +56,7 @@ angular
 									var users = [];
 									for (b in $scope.results) {
 										var binding = $scope.results[b]._id;
-										if (binding.target != undefined) {
+										if (binding.assessment != undefined) {
 											if (binding.scenario == "SCT")
 												totCount[0]++;
 											else

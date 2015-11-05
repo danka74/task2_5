@@ -60,16 +60,18 @@
 			chart-options="{scaleFontSize: 18, animationSteps: 40}"> </canvas>
 		<div class="row" style="font-size: 200%">
 			<div class="col-md-1">
-				<button type="button" class="btn btn-default pull-right">
-					<span class="glyphicon glyphicon-step-backward "
-						ng-click="prevChart();"></span>
+				<button type="button" class="btn btn-default pull-right"
+					ng-click="prevChart();">
+					<span class="glyphicon glyphicon-step-backward "></span>
 				</button>
 			</div>
 			<div class="col-md-10">{{statistics}}</div>
-			<div class="col-md-1"><button type="button" class="btn btn-default pull-right">
-					<span class="glyphicon glyphicon-step-forward "
-						ng-click="nextChart();"></span>
-				</button></div>
+			<div class="col-md-1">
+				<button type="button" class="btn btn-default pull-right"
+					ng-click="nextChart();">
+					<span class="glyphicon glyphicon-step-forward "></span>
+				</button>
+			</div>
 		</div>
 	</div>
 </body>
