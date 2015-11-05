@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
+var md5 = require('md5');
 
 var mongoose = require('mongoose');
 var CaseTemplate = mongoose.model('CaseTemplate');
@@ -166,7 +167,7 @@ router.get('/stats', function(req, res, next) {
 				res.write('date\tuser\tscenario\ttemplate\tsource\tcode-system\tassessment\ttarget\n');
 				for (b in bindings) {
 					var binding = bindings[b];
-					var user = binding.user.uid;
+					var user = md5(binding.user.uid);
 					var scenario = binding.scenario ? "ALT" : "SCT";
 					var date = binding.date.toISOString();
 					if(binding.lhsBinding.assessment != undefined)
@@ -216,10 +217,10 @@ router.get('/comments', function(req, res, next) {
 				if (err) {
 					return err;
 				}
-				res.write('date\tuser\tscenario\tcomment\n')
+				res.write('date\tuser\tscenario\telement\tcomment\n')
 				for (b in bindings) {
 					var binding = bindings[b];
-					var user = binding.user.uid;
+					var user = md5(binding.user.uid);
 					var scenario = binding.scenario ? "ALT" : "SCT";
 					var printComments = function(source, comments) {
 						for(var c = 0; c < comments.length; c++) {
@@ -282,7 +283,7 @@ router.get('/dashboard2', function(req, res, next) {
 	o.map = function() {
 		var scenario = this.scenario ? "ALT" : "SCT";
 		var date = this.date ? this.date.toISOString() : {};
-		var user = this.user ? this.user.uid : {};
+		var user = this.user ? md5(this.user.uid) : {};
 		if(this.lhsBinding.assessment != undefined)
 			emit({date: date,
 				user: user,
@@ -355,15 +356,17 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 				for (b in bindings) {
 					var binding = bindings[b];
 
+					var user = md5(binding.user.uid);
+					
 					// check to see if it's the right scenario
 					var scenario = binding.scenario ? "ALT" : "SCT";
 					if(scenario !== req.params.scenario)
 						continue;
 
 					// get user index
-					var userIndex = users.indexOf(binding.user.uid);
+					var userIndex = users.indexOf(user);
 					if(userIndex == -1) {
-						userIndex = users.push(binding.user.uid) - 1;
+						userIndex = users.push(user) - 1;
 						data.push([]);
 					}
 //					console.log(userIndex, binding.user.uid);
