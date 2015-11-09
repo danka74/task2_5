@@ -283,19 +283,19 @@ router.get('/dashboard2', function(req, res, next) {
 	o.map = function() {
 		var scenario = this.scenario ? "ALT" : "SCT";
 		var date = this.date ? this.date.toISOString() : {};
-		var user = this.user ? md5(this.user.uid) : {};
+		//var user = this.user ? md5(this.user.uid) : {};
 		if(this.lhsBinding.assessment != undefined)
 			emit({date: date,
-				user: user,
+				//user: user,
 				scenario: scenario,
 				template: this.template,
 				source: this.lhsBinding.source,
 				codeSystem: this.lhsBinding.codeSystem,
 				assessment: this.lhsBinding.assessment,
 				target: this.lhsBinding.target}, 1);
-		if(this.rhsOverall.assessment != undefined)
+		if(this.rhsOverall.assessment != undefined) 	 	
 			emit({date: date,
-				user: user,
+				//user: user,
 				scenario: scenario,
 				template: this.template,
 				source: this.rhsOverall.source,
@@ -305,7 +305,7 @@ router.get('/dashboard2', function(req, res, next) {
 		for(b in this.rhsBindings) {
 				if(this.rhsBindings[b].assessment != undefined)
 					emit({date: date,
-						user: user,
+						//user: user,
 						scenario: scenario,
 						template: this.template,
 						source: this.rhsBindings[b].source,
