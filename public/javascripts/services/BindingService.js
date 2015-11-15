@@ -30,6 +30,11 @@ angular.module('BindingServiceModule', []).factory(
 						// get stats
 						getStats: function() {
 							return $http.get('/api/dashboard2');
+						},
+						
+						// get all bindings
+						getAll: function(scenario) {
+							return $http.get('/api/allbindings/' + scenario);
 						}
 					}
 

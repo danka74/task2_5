@@ -106,6 +106,91 @@ router.get('/bindings/:template/:scenario', function(req, res, next) {
 	});
 });
 
+
+router.get('/allbindings/:scenario', function(req, res, next) {
+	CaseTemplate.find(function(err, templates) {
+		if (err) {
+			return next(err);
+		}
+		Binding.find({
+			scenario : req.params.scenario
+		}, function(err, bindings) {
+			if (err) {
+				return next(err);
+			}
+			
+			console.log(bindings.length);
+			
+			var result = [];
+			for(var t = 0; t < templates.length; t++) {
+				var template = templates[t];
+				var case_template = {
+					_id: template._id,
+					title: template.title,
+					lhs: template.lhs ? { name: template.lhs.name, bindings: [] } : null,
+					overall: { bindings: [] },
+					rhs: [],
+					comments: []
+				};
+				for(var b = 0; b < template.rhs.length; b++) {
+					console.log(template.rhs[b]);
+					case_template.rhs.push({
+						_id: template.rhs[b]._id,
+						name: template.rhs[b].name,
+						bindings: []
+					});
+				}
+				result.push(case_template);
+				
+			}
+						
+			for(b in bindings) {
+				var binding = bindings[b];
+				
+				//console.log("----------------------------");
+
+				// find index of template
+				var caseIndex = -1;
+				for(t in result) {
+					if(binding.template.equals(result[t]._id)) {
+						caseIndex = t;
+						break;
+					}
+				}
+				
+				if(caseIndex !== -1) {
+				
+					for(var c = 0; c < binding.comments.length; c++) {
+						result[caseIndex].comments.push(binding.comments[c]);
+					}
+				
+					if(binding.lhsBinding) 
+						result[caseIndex].lhs.bindings.push(binding.lhsBinding);
+						
+					if(binding.rhsOverall)
+						result[caseIndex].overall.bindings.push(binding.rhsOverall);
+						
+					for(var r = 0; r < binding.rhsBindings.length; r++) {
+						var rhsBinding = binding.rhsBindings[r];
+						var rhsIndex = -1;
+						for(var ri = 0; ri < result[caseIndex].rhs.length; ri++) {
+							if(rhsBinding.sourceTemplatePart ? rhsBinding.sourceTemplatePart.equals(result[caseIndex].rhs[ri]._id) : false) {
+								rhsIndex = ri;
+								break;
+							}
+						}
+						if(rhsIndex !== -1)
+							result[caseIndex].rhs[rhsIndex].bindings.push(rhsBinding);
+						
+					}
+					console.log(result[caseIndex].rhs);
+				}					
+			}
+			res.json(result);
+		});
+	});
+});
+
 router.put('/bindings/:id', function(req, res, next) {
 
 	Binding.findById(req.params.id, function(err, persistBinding) {
@@ -272,7 +357,6 @@ router.get('/dashboard1', function(req, res, next) {
 		console.log(results);
 		res.json(results);
 	});
-
 
 });
 
@@ -459,6 +543,5 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 			});
 
 });
-
 
 module.exports = router;

@@ -1,7 +1,7 @@
 angular
 		.module(
 				'BindingApp',
-				[ 'ngRoute', 'ui.bootstrap', 'MainControllerModule', 'DashboardControllerModule',
+				[ 'ngRoute', 'ui.bootstrap', 'MainControllerModule', 'DashboardControllerModule', 'ResultsControllerModule',
 						'TemplateServiceModule', 'BindingServiceModule',
 						'angular-jwt', 'hc.marked', 'sticky' ])
 		.factory(
