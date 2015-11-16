@@ -159,7 +159,7 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 					}
 				}
 				
-				//result[caseIndex].bindings.push(binding);
+				result[caseIndex].bindings.push(binding);
 				
 				if(caseIndex !== -1) {
 				
@@ -167,10 +167,10 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 						result[caseIndex].comments.push(binding.comments[c]);
 					}
 				
-					if(binding.lhsBinding) 
+					if(binding.lhsBinding.assessment) 
 						result[caseIndex].lhs.bindings.push(binding.lhsBinding);
 						
-					if(binding.rhsOverall)
+					if(binding.rhsOverall.assessment)
 						result[caseIndex].overall.bindings.push(binding.rhsOverall);
 						
 					for(var r = 0; r < binding.rhsBindings.length; r++) {

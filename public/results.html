@@ -69,7 +69,7 @@
 	<div class="container-fluid">
 		<div ng-repeat="template in case_templates" class="well">
 			<h1>Case: {{template.title}}</h1>
-			<div class="panel panel-default">
+			<div class="panel panel-default" ng-if="template.lhs.name">
 				<div class="panel-heading">
 					Information model attribute: <b>{{template.lhs.name}}</b>
 				</div>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			<div class="panel panel-default" ng-if="template.lhs.name">
 				<div class="panel-heading">Overall meaning of value set</div>
 				<div class="panel-body">
 					<div class="row" ng-repeat="binding in template.overall.bindings"
@@ -105,7 +105,7 @@
 			<div ng-repeat="rhsElement in template.rhs">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Information model attribute: <b>{{rhsElement.name}}</b>
+						Element: <b>{{rhsElement.name}}</b>
 					</div>
 					<div class="panel-body">
 						<div class="row" ng-repeat="binding in rhsElement.bindings"
