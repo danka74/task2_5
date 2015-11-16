@@ -21,9 +21,30 @@ angular
 								$scope.user = jwtHelper.decodeToken(token);
 							}
 							
-							$scope.assessments = [ "0", "Full", "inferred", "Partial", "No coverage", "N/A" ]; 
+							$scope.assessments = [ "0", "Full", "Inferred", "Partial", "No", "N/A" ]; 
 							
-							bindingService.getAll(false).success(function(data) {
+							// // SCT only or Alternative study arm, false=SCT,
+							// // true=Alternative
+							$scope.scenario = false;
+							$scope.scenarioSwitch = false;
+							$scope.changeScenario = function(switchTo) {
+								console.log("changeScenario " + switchTo)
+								if (switchTo == null)
+									$scope.scenario = !$scope.scenario;
+								else if (switchTo == true)
+									$scope.scenario = true;
+								else
+									$scope.scenario = false;
+								$scope.scenarioSwitch = $scope.scenario;
+								bindingService.getAll($scope.scenario).success(function(data) {
+									$scope.case_templates = data;
+									console.log(data);
+								}).error(function() {
+									$scope.case_templates = [];
+								});
+							};
+							
+							bindingService.getAll($scope.scenario).success(function(data) {
 								$scope.case_templates = data;
 								console.log(data);
 							}).error(function() {

@@ -8,7 +8,19 @@ a {
 	color: #00B7FF;
 }
 
+.grey-row {
+	background: #eeeeee;
+	border-top: solid thin #dddddd;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
 
+.white-row {
+	background: white;
+	border-top: solid thin #dddddd;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
 
 .blue {
 	color: blue;

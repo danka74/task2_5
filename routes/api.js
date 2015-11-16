@@ -130,7 +130,8 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 					lhs: template.lhs ? { name: template.lhs.name, bindings: [] } : null,
 					overall: { bindings: [] },
 					rhs: [],
-					comments: []
+					comments: [],
+					bindings: []
 				};
 				for(var b = 0; b < template.rhs.length; b++) {
 					console.log(template.rhs[b]);
@@ -158,6 +159,8 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 					}
 				}
 				
+				//result[caseIndex].bindings.push(binding);
+				
 				if(caseIndex !== -1) {
 				
 					for(var c = 0; c < binding.comments.length; c++) {
@@ -174,7 +177,7 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 						var rhsBinding = binding.rhsBindings[r];
 						var rhsIndex = -1;
 						for(var ri = 0; ri < result[caseIndex].rhs.length; ri++) {
-							if(rhsBinding.sourceTemplatePart ? rhsBinding.sourceTemplatePart.equals(result[caseIndex].rhs[ri]._id) : false) {
+							if(rhsBinding.source == result[caseIndex].rhs[ri].name) {
 								rhsIndex = ri;
 								break;
 							}
@@ -183,7 +186,6 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 							result[caseIndex].rhs[rhsIndex].bindings.push(rhsBinding);
 						
 					}
-					console.log(result[caseIndex].rhs);
 				}					
 			}
 			res.json(result);
@@ -426,7 +428,7 @@ var trim = function(string) {
 	return string.substring(0, vb).trim();
 };
 
-router.get('/agreestat1/:scenario/:item', function(req, res, next) {
+router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 	res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
 	Binding.find().exec(
 			function(err, bindings) {
@@ -439,6 +441,8 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 
 				for (b in bindings) {
 					var binding = bindings[b];
+					
+					var selection = req.params.selection;
 
 					var user = md5(binding.user.uid);
 					
@@ -456,7 +460,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 //					console.log(userIndex, binding.user.uid);
 
 					// lhs binding
-					if(binding.lhsBinding.assessment != undefined) {
+					if(selection.indexOf('l') > -1 && binding.lhsBinding.assessment != undefined) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source);
 						if(elementIndex == -1) {
@@ -479,7 +483,7 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 					}
 
 					// rhs overall
-					if(binding.rhsOverall.assessment != undefined) {
+					if(selection.indexOf('o') > -1 && binding.rhsOverall.assessment != undefined) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source + '-overall');
 						if(elementIndex == -1) {
@@ -499,26 +503,27 @@ router.get('/agreestat1/:scenario/:item', function(req, res, next) {
 					}
 
 					// rhs bindings
-					for(b in binding.rhsBindings) {
-						if(binding.rhsBindings[b].assessment != undefined) {
-							// get the index of the source element
-							var elementIndex = elements.indexOf(binding.rhsBindings[b].source);
-							if(elementIndex == -1) {
-								elementIndex = elements.push(binding.rhsBindings[b].source) - 1;
-//								data[userIndex].push("U");
+					if(selection.indexOf('r') > -1) 
+						for(b in binding.rhsBindings) {
+							if(binding.rhsBindings[b].assessment != undefined) {
+								// get the index of the source element
+								var elementIndex = elements.indexOf(binding.rhsBindings[b].source);
+								if(elementIndex == -1) {
+									elementIndex = elements.push(binding.rhsBindings[b].source) - 1;
+	//								data[userIndex].push("U");
+								}
+	
+								if(req.params.item == "target")
+									data[userIndex][elementIndex] = trim(binding.rhsBindings[b].target);
+								else if(req.params.item == "assessment")
+									data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
+								else if(req.params.item == "codeSystem")
+									data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
+	//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
+	//								data[userIndex][elementIndex] = " ";
+	
 							}
-
-							if(req.params.item == "target")
-								data[userIndex][elementIndex] = trim(binding.rhsBindings[b].target);
-							else if(req.params.item == "assessment")
-								data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
-							else if(req.params.item == "codeSystem")
-								data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
-//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-//								data[userIndex][elementIndex] = " ";
-
 						}
-					}
 				}
 				var usersLen = users.length;
 				var elementsLen = elements.length;
