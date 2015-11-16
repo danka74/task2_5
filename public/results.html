@@ -58,6 +58,10 @@
 						type="checkbox" style="display: none" /></span>
 			</a></li>
 			<li><a href="#" ng-click="changeScenario(true);">Alternative</a></li>
+			<ul class="nav navbar-nav navbar-right" hidden-sm>
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+							{{user === undefined ? "Not logged in" : user.uid}}</a></li>
+				</ul>
 		</ul>
 	</div>
 	</nav>
