@@ -8,8 +8,9 @@ angular
 						'$window',
 						'jwtHelper',
 						'BindingService',
+						'TemplateService',
 						function($scope, $location, $window, jwtHelper,
-								bindingService) {
+								bindingService, templateService) {
 
 							var url = $location.$$absUrl;
 							var tokenIndex = url.indexOf("?token=");
@@ -26,6 +27,8 @@ angular
 							$scope.statistics = "";
 							$scope.title = "";
 							$scope.maxChart = 4;
+							$scope.elementTypeFilter = "";
+							$scope.templateFilter = "";
 
 							$scope.nextChart = function() {
 								console.log("next chart");
@@ -44,6 +47,16 @@ angular
 									$scope.chartNo = $scope.maxChart - 1;
 								$scope.showChart();
 							}
+							
+							$scope.$watch('elementTypeFilter', function() {
+								console.log("watch");
+								$scope.showChart();
+							});
+							
+							$scope.$watch('templateFilter', function() {
+								console.log("watch");
+								$scope.showChart();
+							});
 
 							$scope.showChart = function() {
 								console.log("show chart");
@@ -56,6 +69,16 @@ angular
 									var users = [];
 									for (b in $scope.results) {
 										var binding = $scope.results[b]._id;
+										
+										// filter by element type
+										if($scope.elementTypeFilter != "" && binding.elementType != $scope.elementTypeFilter)
+											continue;
+										
+										// filter by case
+										if($scope.templateFilter != "" && binding.template != $scope.templateFilter)
+											continue;
+										
+										// count bindings unless assessment is undefined
 										if (binding.assessment != undefined) {
 											if (binding.scenario == "SCT")
 												totCount[0]++;
@@ -63,6 +86,7 @@ angular
 												totCount[1]++;
 										}
 
+										// collect users in users array
 										var user = users.indexOf(binding.user);
 										if (user == -1) {
 											users.push(binding.user);
@@ -92,6 +116,15 @@ angular
 
 									for (b in $scope.results) {
 										var binding = $scope.results[b]._id;
+										
+										// filter by element type
+										if($scope.elementTypeFilter != "" && binding.elementType != $scope.elementTypeFilter)
+											continue;
+										
+										// filter by case
+										if($scope.templateFilter != "" && binding.template != $scope.templateFilter)
+											continue;
+										
 										if (binding.assessment != 5)
 											if (binding.scenario == "SCT")
 												assessmentCount.sct[binding.assessment - 1]++;
@@ -175,6 +208,13 @@ angular
 							}).error(function() {
 								$scope.results = [];
 							});
+							
+							templateService.get().success(function(data) {
+								$scope.templates = data;
+							}).error(function() {
+								$scope.templates = [];
+							})
+							
 
 							$scope.chi2 = function(data) { // an n x m array
 								var lenX = data.length;

@@ -371,7 +371,8 @@ router.get('/dashboard2', function(req, res, next) {
 		var date = this.date ? this.date.toISOString() : {};
 		var user = this.user ? this.user.uid : {};
 		if(this.lhsBinding.assessment != undefined)
-			emit({date: date,
+			emit({elementType: 'lhs',
+				date: date,
 				user: user,
 				scenario: scenario,
 				template: this.template,
@@ -380,7 +381,8 @@ router.get('/dashboard2', function(req, res, next) {
 				assessment: this.lhsBinding.assessment,
 				target: this.lhsBinding.target}, 1);
 		if(this.rhsOverall.assessment != undefined) 	 	
-			emit({date: date,
+			emit({elementType: 'overall',
+				date: date,
 				user: user,
 				scenario: scenario,
 				template: this.template,
@@ -390,7 +392,8 @@ router.get('/dashboard2', function(req, res, next) {
 				target: this.rhsOverall.target}, 1);
 		for(b in this.rhsBindings) {
 				if(this.rhsBindings[b].assessment != undefined)
-					emit({date: date,
+					emit({elementType: 'rhs',
+						date: date,
 						user: user,
 						scenario: scenario,
 						template: this.template,
