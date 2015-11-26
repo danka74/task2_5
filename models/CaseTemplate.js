@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var CaseTemplateSchema = new mongoose.Schema({
 	title : String, // case template title
+	type : String, // the semantic type of the rhs
 	templateURL : String, // url to case template
 	lhs : {
 		name : String,

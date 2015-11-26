@@ -1,0 +1,35 @@
+{
+	"templateURL": "pure_valueset_template.html",
+	"title": "Diseases under surveillance",
+	"description": "Diseases and special health issues under EU surveillance from the [ECDC](http://ecdc.europa.eu/en/activities/surveillance/Pages/list_diseases.aspx).",
+	"rhs":
+	[
+		{
+			"name": "Infections with haemophilus influenzae group B"
+		},
+
+		{
+			"name": "Invasive meningococcal disease"
+		},
+
+		{
+			"name": "Poliomyelitis"
+		},
+
+		{
+			"name": "Invasive pneumococcal disease"
+		},
+
+		{
+			"name": "Cryptosporidiosis"
+		},
+
+		{
+			"name": "Variant Creutzfeldt–Jakob’s disease"
+		},
+
+		{
+			"name": "Infection with enterohaemorrhagic E. coli"
+		}
+	]
+}
