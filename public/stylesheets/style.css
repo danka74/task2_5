@@ -9,7 +9,8 @@ a {
 }
 
 .dropdown-selected {
-	background: #D22125;
+	background: #f6d2d3;
+	color: white;
 }
 .dropdown-submenu {
     position: relative;

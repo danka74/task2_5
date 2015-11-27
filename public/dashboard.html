@@ -1,116 +1,109 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<link rel="shortcut icon" type="image/png" href="favicon.ico" />
-<!-- CSS -->
-<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="libs/angular-chart.js/dist/angular-chart.min.css" />
-<link rel="stylesheet" href="stylesheets/style.css" />
+	<link rel="shortcut icon" type="image/png" href="favicon.ico" />
+	<!-- CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/angular-chart.js/dist/angular-chart.min.css" />
+	<link rel="stylesheet" href="stylesheets/style.css" />
 
-<!-- JS -->
-<script src="libs/angular/angular.min.js" type="text/javascript"></script>
-<script src="libs/angular-route/angular-route.min.js"
-	type="text/javascript"></script>
-<script src="libs/angular-resource/angular-resource.min.js"
-	type="text/javascript"></script>
-<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"
-	type="text/javascript"></script>
-<script src="libs/angular-jwt/dist/angular-jwt.min.js"
-	type="text/javascript"></script>
-<script src="libs/marked/marked.min.js" type="text/javascript"></script>
-<script src="libs/angular-marked/angular-marked.min.js"
-	type="text/javascript"></script>
-<script src="libs/ngSticky/dist/sticky.min.js" type="text/javascript"></script>
-<script src="libs/Chart.js/Chart.min.js"></script>
-<script src="libs/angular-chart.js/dist/angular-chart.min.js"></script>
+	<!-- JS -->
+	<script src="libs/angular/angular.min.js" type="text/javascript"></script>
+	<script src="libs/angular-route/angular-route.min.js" type="text/javascript"></script>
+	<script src="libs/angular-resource/angular-resource.min.js" type="text/javascript"></script>
+	<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+	<script src="libs/angular-jwt/dist/angular-jwt.min.js" type="text/javascript"></script>
+	<script src="libs/marked/marked.min.js" type="text/javascript"></script>
+	<script src="libs/angular-marked/angular-marked.min.js" type="text/javascript"></script>
+	<script src="libs/ngSticky/dist/sticky.min.js" type="text/javascript"></script>
+	<script src="libs/Chart.js/Chart.min.js"></script>
+	<script src="libs/angular-chart.js/dist/angular-chart.min.js"></script>
 
-<!-- ANGULAR CUSTOM -->
-<script src="javascripts/services/BindingService.js"
-	type="text/javascript"></script>
-<script src="javascripts/services/TemplateService.js"
-	type="text/javascript"></script>
-<script src="javascripts/controllers/MainCtrl.js" type="text/javascript"></script>
-<script src="javascripts/controllers/DashboardController.js"
-	type="text/javascript"></script>
-<script src="javascripts/controllers/ResultsController.js"
-	type="text/javascript"></script>
-<!--     <script src="javascripts/appRoutes.js"></script> -->
-<script src="javascripts/angularApp.js" type="text/javascript"></script>
+	<!-- ANGULAR CUSTOM -->
+	<script src="javascripts/services/BindingService.js" type="text/javascript"></script>
+	<script src="javascripts/services/TemplateService.js" type="text/javascript"></script>
+	<script src="javascripts/controllers/MainCtrl.js" type="text/javascript"></script>
+	<script src="javascripts/controllers/DashboardController.js" type="text/javascript"></script>
+	<script src="javascripts/controllers/ResultsController.js" type="text/javascript"></script>
+	<!--     <script src="javascripts/appRoutes.js"></script> -->
+	<script src="javascripts/angularApp.js" type="text/javascript"></script>
 
-<title>ASSESS CT terminology binding study help</title>
+	<title>ASSESS CT terminology binding study help</title>
 </head>
+
 <body ng-app="BindingApp" ng-controller="DashboardController">
 	<div class="container-fluid">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#"><img src="favicon.ico"
-				height="22" /></a>
-		</div>
-		<div class="nav navbar-text">ASSESS CT WP2 Task 2.5 Structured
-			data</div>
-		<ul class="nav navbar-nav">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><img src="favicon.ico" height="22" /></a>
+			</div>
+			<div class="nav navbar-text">ASSESS CT WP2 Task 2.5 Structured data
+			</div>
+			<ul class="nav navbar-nav">
 
-			<li class="dropdown" dropdown><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#" dropdown-toggle
-				ng-class="elementTypeFilter!=''||templateFilter!=''?'dropdown-selected':''">Filters<span
+				<li class="dropdown" dropdown><a class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle ng-class="elementTypeFilter!=''||templateFilter!=''||typeFilter!=''?'dropdown-selected':''">Filters<span
 					class="caret"></span></a>
-				<ul class="dropdown-menu">
+					<ul class="dropdown-menu">
 
-					<li class="dropdown-submenu"><a href="#">Element type</a>
-						<ul class="dropdown-menu">
-							<li><a href="#" ng-click="elementTypeFilter='lhs'"
-								ng-class="elementTypeFilter=='lhs'?'dropdown-selected':''">Left-hand
+						<li class="dropdown-submenu"><a href="#">Element type</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" ng-click="elementTypeFilter='lhs'" ng-class="elementTypeFilter=='lhs'?'dropdown-selected':''">Left-hand
 									side only</a></li>
-							<li><a href="#" ng-click="elementTypeFilter='overall'"
-								ng-class="elementTypeFilter=='overall'?'dropdown-selected':''">Overall
+								<li><a href="#" ng-click="elementTypeFilter='overall'" ng-class="elementTypeFilter=='overall'?'dropdown-selected':''">Overall
 									only</a></li>
-							<li><a href="#" ng-click="elementTypeFilter='rhs'"
-								ng-class="elementTypeFilter=='rhs'?'dropdown-selected':''">Right-hand
+								<li><a href="#" ng-click="elementTypeFilter='rhs'" ng-class="elementTypeFilter=='rhs'?'dropdown-selected':''">Right-hand
 									side only</a></li>
 
-						</ul></li>
+							</ul>
+						</li>
 
-					<li class="dropdown-submenu"><a href="#">Case</a>
-						<ul class="dropdown-menu">
-							<li ng-repeat="template in templates"><a href="#"
-								ng-click="$parent.templateFilter=template._id"
-								ng-class="$parent.templateFilter==template._id?'dropdown-selected':''">{{template.title}}</a></li>
+						<li class="dropdown-submenu"><a href="#">Case</a>
+							<ul class="dropdown-menu">
+								<li ng-repeat="template in templates"><a href="#" ng-click="$parent.templateFilter=template._id" ng-class="$parent.templateFilter==template._id?'dropdown-selected':''">{{template.title}}</a></li>
 
 
-						</ul></li>
+							</ul>
+						</li>
 
-					<li><a href="#" ng-click="elementTypeFilter='';templateFilter=''">Clear</a></li>
+						<li class="dropdown-submenu"><a href="#">Semantic type</a>
+							<ul class="dropdown-menu">
+								<li ng-repeat="type in typeFilters"><a href="#" ng-click="$parent.typeFilter=type[0]" ng-class="$parent.typeFilter==type[0]?'dropdown-selected':''">{{type[0]}}</a></li>
 
-				</ul></li>
 
-		</ul>
+							</ul>
+						</li>
+						<li><a href="#" ng-click="elementTypeFilter='';templateFilter='';typeFilter=''">Clear</a></li>
+
+					</ul>
+				</li>
+
+			</ul>
+<!-- 			<div class="nav navbar-text">{{elementTypeFilter}} {{templateFilter}} {{typeFilter}} -->
+<!-- 			</div> -->
 		</nav>
 	</div>
 	<div class="container">
 		<h1>{{title}}</h1>
 
-		<canvas id="bar" class="chart chart-base" chart-type="type"
-			chart-data="data" chart-labels="labels" chart-series="series"
-			chart-legend="true" chart-colours="['#9c9d9f','#D22125',]"
-			chart-options="{scaleFontSize: 18, animationSteps: 40}"> </canvas>
+		<canvas id="bar" class="chart chart-base" chart-type="type" chart-data="data" chart-labels="labels" chart-series="series"
+		chart-legend="true" chart-colours="['#9c9d9f','#D22125',]" chart-options="{scaleFontSize: 18, animationSteps: 40}"> </canvas>
 		<div class="row" style="font-size: 200%">
 			<div class="col-md-1">
-				<button type="button" class="btn btn-default pull-right"
-					ng-click="prevChart();">
+				<button type="button" class="btn btn-default pull-right" ng-click="prevChart();">
 					<span class="glyphicon glyphicon-step-backward "></span>
 				</button>
 			</div>
 			<div class="col-md-10">{{statistics}}</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-default pull-right"
-					ng-click="nextChart();">
+				<button type="button" class="btn btn-default pull-right" ng-click="nextChart();">
 					<span class="glyphicon glyphicon-step-forward "></span>
 				</button>
 			</div>
 		</div>
 	</div>
 </body>
+
 </html>
