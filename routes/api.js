@@ -148,7 +148,7 @@ router.get('/allbindings/:scenario', function(req, res, next) {
 			for(b in bindings) {
 				var binding = bindings[b];
 				
-				//console.log("----------------------------");
+				// console.log("----------------------------");
 
 				// find index of template
 				var caseIndex = -1;
@@ -431,9 +431,40 @@ var trim = function(string) {
 	return string.substring(0, vb).trim();
 };
 
-router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
+router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, next) {
 	res.writeHead(200, {'Content-Type': 'text/csv', 'Cache-Control': 'no-cache'});
-	Binding.find().exec(
+	
+	var caseTemplates = [];
+	var typeFilters = [];
+	
+	var getType = function(elem, array) {
+		for(var i = 0; i < array.length; i++) {
+			if(array[i][0] == elem)
+				return i;
+		}
+		return -1;
+	}
+	
+	CaseTemplate.find(function(err, cases) {
+		if (err) {
+			return next(err);
+		}
+		caseTemplates = cases;
+		
+		for(var i = 0; i < caseTemplates.length; i++) {
+			var template = caseTemplates[i];
+			console.log(template);
+			if(getType(template.type, typeFilters) == -1) {
+				var newType = typeFilters.push([template.type]);
+				typeFilters[newType - 1].push(template._id);
+			}
+			else
+				typeFilters[getType(template.type, typeFilters)].push(template._id);
+		}
+	
+		console.log(typeFilters[getType(req.params.type, typeFilters)]);
+		
+		Binding.find().exec(
 			function(err, bindings) {
 				if (err) {
 					return err;
@@ -446,6 +477,10 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 					var binding = bindings[b];
 					
 					var selection = req.params.selection;
+					if(selection === undefined)
+						selection = "lor";
+					
+					var templateFilter = req.params.type !== undefined ? typeFilters[getType(req.params.type, typeFilters)] : null;
 
 					var user = md5(binding.user.uid);
 					
@@ -460,17 +495,14 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 						userIndex = users.push(user) - 1;
 						data.push([]);
 					}
-//					console.log(userIndex, binding.user.uid);
-
+					
 					// lhs binding
-					if(selection.indexOf('l') > -1 && binding.lhsBinding.assessment != undefined) {
+					if(selection.indexOf('l') > -1 && binding.lhsBinding.assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.lhsBinding.template) > -1) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source);
 						if(elementIndex == -1) {
 							elementIndex = elements.push(binding.lhsBinding.source) - 1;
-//							data[userIndex].push("Y");
 						}
-//						console.log(elementIndex, binding.lhsBinding.source);
 
 						if(req.params.item == "target")
 							data[userIndex][elementIndex] = trim(binding.lhsBinding.target);
@@ -478,20 +510,14 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 							data[userIndex][elementIndex] = binding.lhsBinding.assessment;
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.lhsBinding.codeSystem;
-//						console.log(binding.lhsBinding.target, data[userIndex][elementIndex]);
-//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-//							data[userIndex][elementIndex] = " ";
-
-
 					}
 
 					// rhs overall
-					if(selection.indexOf('o') > -1 && binding.rhsOverall.assessment != undefined) {
+					if(selection.indexOf('o') > -1 && binding.rhsOverall.assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.rhsOverall.template) > -1) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source + '-overall');
 						if(elementIndex == -1) {
 							elementIndex = elements.push(binding.lhsBinding.source + '-overall') - 1;
-//							data[userIndex].push("Z");
 						}
 
 						if(req.params.item == "target")
@@ -500,20 +526,16 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 							data[userIndex][elementIndex] = binding.rhsOverall.assessment;
 						else if(req.params.item == "codeSystem")
 							data[userIndex][elementIndex] = binding.rhsOverall.codeSystem;
-//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-//							data[userIndex][elementIndex] = " ";
-
 					}
 
 					// rhs bindings
 					if(selection.indexOf('r') > -1) 
 						for(b in binding.rhsBindings) {
-							if(binding.rhsBindings[b].assessment != undefined) {
+							if(binding.rhsBindings[b].assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.rhsBindings[b].template) > -1) {
 								// get the index of the source element
 								var elementIndex = elements.indexOf(binding.rhsBindings[b].source);
 								if(elementIndex == -1) {
 									elementIndex = elements.push(binding.rhsBindings[b].source) - 1;
-	//								data[userIndex].push("U");
 								}
 	
 								if(req.params.item == "target")
@@ -522,9 +544,6 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 									data[userIndex][elementIndex] = binding.rhsBindings[b].assessment;
 								else if(req.params.item == "codeSystem")
 									data[userIndex][elementIndex] = binding.rhsBindings[b].codeSystem;
-	//						if(data[userIndex][elementIndex] === undefined || data[userIndex][elementIndex] == "undefined")
-	//								data[userIndex][elementIndex] = " ";
-	
 							}
 						}
 				}
@@ -549,6 +568,7 @@ router.get('/agreestat1/:scenario/:item/:selection', function(req, res, next) {
 				}
 				res.end();
 			});
+	});
 
 });
 
