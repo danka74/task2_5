@@ -453,7 +453,6 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 		
 		for(var i = 0; i < caseTemplates.length; i++) {
 			var template = caseTemplates[i];
-			console.log(template);
 			if(getType(template.type, typeFilters) == -1) {
 				var newType = typeFilters.push([template.type]);
 				typeFilters[newType - 1].push(template._id);
@@ -461,9 +460,7 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 			else
 				typeFilters[getType(template.type, typeFilters)].push(template._id);
 		}
-	
-		console.log(typeFilters[getType(req.params.type, typeFilters)]);
-		
+			
 		Binding.find().exec(
 			function(err, bindings) {
 				if (err) {
@@ -472,16 +469,27 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 				var users = [];
 				var elements = [];
 				var data = [];
+				
+				var templateFilter = null;
+				if(req.params.type !== undefined) {
+					var typeIndex = getType(req.params.type, typeFilters);
+					templateFilter = typeIndex !== -1 ? typeFilters[typeIndex] : [];
+				}
+				
+				console.log(templateFilter);
+				
+				var selection = req.params.selection;
+				if(selection === undefined)
+					selection = "lor";
 
 				for (b in bindings) {
 					var binding = bindings[b];
 					
-					var selection = req.params.selection;
-					if(selection === undefined)
-						selection = "lor";
+					if(templateFilter !== null && !templateFilter.some(function (x) {
+						return binding.template.equals(x);
+					}))
+						continue;					
 					
-					var templateFilter = req.params.type !== undefined ? typeFilters[getType(req.params.type, typeFilters)] : null;
-
 					var user = md5(binding.user.uid);
 					
 					// check to see if it's the right scenario
@@ -497,7 +505,7 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 					}
 					
 					// lhs binding
-					if(selection.indexOf('l') > -1 && binding.lhsBinding.assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.lhsBinding.template) > -1) {
+					if(selection.indexOf('l') > -1 && binding.lhsBinding.assessment != undefined) { // && (templateFilter == null || (templateFilter != null && templateFilter.indexOf(binding.lhsBinding.template) > -1))) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source);
 						if(elementIndex == -1) {
@@ -513,7 +521,7 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 					}
 
 					// rhs overall
-					if(selection.indexOf('o') > -1 && binding.rhsOverall.assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.rhsOverall.template) > -1) {
+					if(selection.indexOf('o') > -1 && binding.rhsOverall.assessment != undefined) { // && (templateFilter == null || (templateFilter != null && templateFilter.indexOf(binding.rhsOverall.template) > -1))) {
 						// get the index of the source element
 						var elementIndex = elements.indexOf(binding.lhsBinding.source + '-overall');
 						if(elementIndex == -1) {
@@ -531,7 +539,7 @@ router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, 
 					// rhs bindings
 					if(selection.indexOf('r') > -1) 
 						for(b in binding.rhsBindings) {
-							if(binding.rhsBindings[b].assessment != undefined && templateFilter != null && templateFilter.indexOf(binding.rhsBindings[b].template) > -1) {
+							if(binding.rhsBindings[b].assessment != undefined) { // && (templateFilter == null || (templateFilter != null && templateFilter.indexOf(binding.rhsBindings[b].template) > -1))) {
 								// get the index of the source element
 								var elementIndex = elements.indexOf(binding.rhsBindings[b].source);
 								if(elementIndex == -1) {
