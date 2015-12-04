@@ -120,7 +120,7 @@ angular
 								sct: [],
 								alt: []
 							};
-							for (var i = 0; i < 4; i++) {
+							for (var i = 0; i < 3; i++) {
 								assessmentCount.sct[i] = 0;
 								assessmentCount.alt[i] = 0;
 							}
@@ -140,14 +140,23 @@ angular
 								if ($scope.typeFilter != "" && $scope.typeFilters[getType($scope.typeFilter, $scope.typeFilters)].indexOf(binding.template) == -1)
 									continue;
 
-								if (binding.assessment != 5)
+								if (binding.assessment != 5) {
+									var index = binding.assessment;
+									
+									if(index > 2)
+										index = index - 2;
+									else										
+										index = index - 1;
 									if (binding.scenario == "SCT")
-										assessmentCount.sct[binding.assessment - 1]++;
+										assessmentCount.sct[index]++;
 									else
-										assessmentCount.alt[binding.assessment - 1]++;
+										assessmentCount.alt[index]++;
+								}
 							}
+							
+							
 
-							$scope.labels = ['Full', 'Inferred',
+							$scope.labels = ['Full+Inferred',
 								'Partial', 'No'];
 							$scope.series = ['SNOMED CT', 'Alternative'];
 
