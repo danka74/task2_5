@@ -263,6 +263,7 @@ router.get('/stats', function(req, res, next) {
 								+ binding.lhsBinding.source + '\t'
 								+ binding.lhsBinding.codeSystem + '\t'
 								+ binding.lhsBinding.assessment + '\t'
+								+ trim(binding.lhsBinding.target) + '\t'
 								+ binding.lhsBinding.target + '\n');
 					if(binding.rhsOverall.assessment != undefined)
 						res.write(date + '\t' + user + '\t' + scenario + '\t'
@@ -270,6 +271,7 @@ router.get('/stats', function(req, res, next) {
 								+ binding.lhsBinding.source + '-overall\t'
 								+ binding.rhsOverall.codeSystem + '\t'
 								+ binding.rhsOverall.assessment + '\t'
+								+ trim(binding.rhsOverall.target) + '\t'
 								+ binding.rhsOverall.target + '\n');
 					for (var r = 0; r < binding.rhsBindings.length; r++) {
 						if(binding.rhsBindings[r].assessment != undefined)
@@ -278,7 +280,9 @@ router.get('/stats', function(req, res, next) {
 									+ binding.rhsBindings[r].source + '\t'
 									+ binding.rhsBindings[r].codeSystem + '\t'
 									+ binding.rhsBindings[r].assessment + '\t'
+									+ trim(binding.rhsBindings[r].target) + '\t'
 									+ binding.rhsBindings[r].target + '\n');
+
 					}
 				}
 				res.end();
@@ -421,14 +425,20 @@ router.get('/dashboard2', function(req, res, next) {
 });
 
 var trim = function(string) {
+	if(string === undefined)
+		return "";
+	
 	if(typeof string !== "string")
 		return string;
 
+	if(string == "undefined")
+		return "";
+	
 	var vb = string.indexOf("|");
 	if(vb == -1)
-		return string;
+		return string.replace(/\s+/g, "");
 
-	return string.substring(0, vb).trim();
+	return string.substring(0, vb).replace(/\s+/g, "");
 };
 
 router.get('/agreestat1/:scenario/:item/:selection?/:type?', function(req, res, next) {
