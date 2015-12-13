@@ -120,7 +120,7 @@ angular
 								sct: [],
 								alt: []
 							};
-							for (var i = 0; i < 3; i++) {
+							for (var i = 0; i < 4; i++) {
 								assessmentCount.sct[i] = 0;
 								assessmentCount.alt[i] = 0;
 							}
@@ -132,7 +132,7 @@ angular
 								if ($scope.elementTypeFilter != "" && binding.elementType != $scope.elementTypeFilter)
 									continue;
 										
-								// filter by case
+								// filter by cas
 								if ($scope.templateFilter != "" && binding.template != $scope.templateFilter)
 									continue;
 								
@@ -140,10 +140,10 @@ angular
 								if ($scope.typeFilter != "" && $scope.typeFilters[getType($scope.typeFilter, $scope.typeFilters)].indexOf(binding.template) == -1)
 									continue;
 
-								if (binding.assessment != 5) {
+								if (binding.assessment <= 5) {
 									var index = binding.assessment;
 									
-									if(index > 2)
+									if(index > 1)
 										index = index - 2;
 									else										
 										index = index - 1;
@@ -157,7 +157,7 @@ angular
 							
 
 							$scope.labels = ['Full+Inferred',
-								'Partial', 'No'];
+								'Partial', 'No', 'OOS'];
 							$scope.series = ['SNOMED CT', 'Alternative'];
 
 							$scope.data = [assessmentCount.sct,
