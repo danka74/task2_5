@@ -132,7 +132,7 @@ angular
 								if ($scope.elementTypeFilter != "" && binding.elementType != $scope.elementTypeFilter)
 									continue;
 										
-								// filter by case
+								// filter by cas
 								if ($scope.templateFilter != "" && binding.template != $scope.templateFilter)
 									continue;
 								
@@ -143,7 +143,7 @@ angular
 								if (binding.assessment != 5) {
 									var index = binding.assessment;
 									
-									if(index > 2)
+									if(index > 1)
 										index = index - 2;
 									else										
 										index = index - 1;
