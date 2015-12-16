@@ -172,7 +172,7 @@ angular
 
 							$scope.statistics = "df = " + df
 							+ ", chi2 = " + chi2.toFixed(2);
-							$scope.title = "Coverge";
+							$scope.title = "Coverage";
 							break;
 						}
 						case 2: {
